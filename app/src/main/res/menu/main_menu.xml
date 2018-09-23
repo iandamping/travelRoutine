@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/InputMenu"
+        android:enabled="true"
+        android:icon="@drawable/ic_add_circle_black_24dp"
+        android:title="Input Items"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/NewsMenu"
+        android:enabled="true"
+        android:icon="@drawable/ic_markunread_mailbox_black_24dp"
+        android:title="News Today"
+        app:showAsAction="ifRoom" />
+
+</menu>
