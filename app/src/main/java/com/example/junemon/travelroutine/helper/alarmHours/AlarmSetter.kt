@@ -15,9 +15,9 @@ class AlarmSetter {
 
     fun startAlarm(ctx: Context, targetCal: Calendar, data: PersonalItems?) {
         var cal: Calendar = Calendar.getInstance()
-        cal.time = data?.arrivalDate
-        data?.arrivalSelectedHour?.let { cal.set(Calendar.HOUR_OF_DAY, it) }
-        data?.arrivalSelectedMinute?.let { cal.set(Calendar.MINUTE, it) }
+        cal.time = data?.selectedDate
+        data?.selectedHour?.let { cal.set(Calendar.HOUR_OF_DAY, it) }
+        data?.selectedMinute?.let { cal.set(Calendar.MINUTE, it) }
 
         val receiver = ComponentName(ctx, AlarmReceiver::class.java)
         ctx.getPackageManager().setComponentEnabledSetting(receiver,

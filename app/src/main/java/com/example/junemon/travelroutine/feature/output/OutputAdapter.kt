@@ -28,7 +28,7 @@ class OutputAdapter(val ctx: Context?, var listData: List<PersonalItems>, val li
         fun bindViews(item: PersonalItems, listener: (PersonalItems) -> Unit) {
             tvDestination.text = item.destination
             tvItems.text = item.items
-            if (item.arrivalSelectedHour == 0) {
+            if (item.selectedHour == 0) {
                 llTimer.visibility = View.GONE
             } else llTimer.visibility = View.VISIBLE
             itemView.setOnClickListener {

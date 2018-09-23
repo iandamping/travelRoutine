@@ -35,14 +35,10 @@ class InputActivity : AppCompatActivity(), InputView {
     private lateinit var presenter: InputPresenter
     private var itemName: String? = null
     private var destinantion: String? = null
-    private var actualDepartDate: String? = null
-    private var actualArrivalDate: String? = null
-    private var arrivalActualHour: Int? = null
-    private var arrivalActualMinutes: Int? = null
-    private var departActualHour: Int? = null
-    private var departActualMinutes: Int? = null
+    private var actualSelectedDate: String? = null
+    private var actualSelectedHour: Int? = null
+    private var actualSelectedMinute: Int? = null
     private var departDate: Date? = null
-    private var arrivalDate: Date? = null
     private var states: Boolean = false
     private var getData: PersonalItems? = PersonalItems()
     private lateinit var composite: CompositeDisposable
@@ -60,8 +56,7 @@ class InputActivity : AppCompatActivity(), InputView {
     override fun showData(data: PersonalItems?) {
         etBarang.text = Editable.Factory.getInstance().newEditable(data?.items)
         etDestination.text = Editable.Factory.getInstance().newEditable(data?.destination)
-        etArrivalDates.text = Editable.Factory.getInstance().newEditable(dateFormat.format(data?.arrivalDate))
-        etDepartDates.text = Editable.Factory.getInstance().newEditable(dateFormat.format(data?.departureDate))
+        etDepartDates.text = Editable.Factory.getInstance().newEditable(dateFormat.format(data?.selectedDate))
         states = true
     }
 
@@ -78,14 +73,13 @@ class InputActivity : AppCompatActivity(), InputView {
 
     override fun initListener() {
 
-        etDepartDates.setOnClickListener { view -> pickDepartDate(etDepartDates) }
-        etArrivalDates.setOnClickListener { view -> pickArrivalDate(etArrivalDates) }
+        etDepartDates.setOnClickListener { view -> pickRemindedDate(etDepartDates) }
         swDepartReminder.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 val mTimePicker: TimePickerDialog
                 mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, hours, minutes ->
-                    Observable.just(hours).subscribe { results -> departActualHour = results }
-                    Observable.just(minutes).subscribe { results -> departActualMinutes = results }
+                    Observable.just(hours).subscribe { results -> actualSelectedHour = results }
+                    Observable.just(minutes).subscribe { results -> actualSelectedMinute = results }
                     etDepartDateslReminderViews.visibility = View.VISIBLE
                     etDepartDateslReminderViews.text = Editable.Factory.getInstance()
                             .newEditable(resources.getString(R.string.reminded_info) + " ${hours} : ${minutes}")
@@ -97,45 +91,14 @@ class InputActivity : AppCompatActivity(), InputView {
                 mTimePicker.setTitle("Select Time")
                 mTimePicker.show()
             } else if (!b) {
-                departActualHour = null
-                departActualMinutes = null
+                actualSelectedHour = null
+                actualSelectedMinute = null
                 etDepartDateslReminderViews.visibility = View.GONE
                 etDepartDateslReminderViews.text = Editable.Factory.getInstance()
                         .newEditable("")
             }
         }
 
-        swArrivalReminder.setOnCheckedChangeListener { compoundButton, status ->
-            if (status) {
-                val mTimePicker: TimePickerDialog
-                mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, TpHours, TpMinutes ->
-                    Observable.just(TpHours).subscribe { results -> arrivalActualHour = results }
-                    Observable.just(TpMinutes).subscribe { results -> arrivalActualMinutes = results }
-                    etArrivalReminderViews.visibility = View.VISIBLE
-                    etArrivalReminderViews.text = Editable.Factory.getInstance()
-                            .newEditable(resources.getString(R.string.reminded_info) + " ${TpHours} : ${TpMinutes}")
-                }, hours, minutes, true)
-
-//                mTimePicker = TimePickerDialog(this, { timePicker, hours, minutes ->
-//                    Observable.just(hours).subscribe { results -> getData?.arrivalSelectedHour }
-//                    Observable.just(minutes).subscribe { results -> getData?.arrivalSelectedMinute }
-//                }, hours, minutes, true)
-//                mTimePicker.setButton(DialogInterface.BUTTON_POSITIVE, "Oke") { dialogInterface, i ->
-//                }
-                mTimePicker.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel") { dialogInterface, i ->
-                    mTimePicker.dismiss()
-                }
-
-                mTimePicker.setTitle("Select Time")
-                mTimePicker.show()
-            } else if (!status) {
-                arrivalActualHour = null
-                arrivalActualMinutes = null
-                etArrivalReminderViews.visibility = View.GONE
-                etArrivalReminderViews.text = Editable.Factory.getInstance()
-                        .newEditable("")
-            }
-        }
         btnSave.setOnClickListener {
             if (!ValidateEditTextHelper.validates(this, etDestination, ValidateEditTextHelper.Type.EMPTY)) {
                 destinantion = etDestination.text.toString().trim()
@@ -146,20 +109,13 @@ class InputActivity : AppCompatActivity(), InputView {
                 getData?.items = itemName
 
             }
-            if (!ValidateEditTextHelper.validates(this, etArrivalDates, ValidateEditTextHelper.Type.EMPTY)) {
-                var dateExtract: String = etArrivalDates.text.toString().trim()
-                arrivalDate = dateFormat.parse(dateExtract)
-                getData?.arrivalDate = arrivalDate
-            }
             if (!ValidateEditTextHelper.validates(this, etDepartDates, ValidateEditTextHelper.Type.EMPTY)) {
                 var dateExtract: String = etDepartDates.text.toString().trim()
                 departDate = dateFormat.parse(dateExtract)
-                getData?.departureDate = departDate
+                getData?.selectedDate = departDate
             }
-            getData?.arrivalSelectedHour = arrivalActualHour
-            getData?.arrivalSelectedMinute = arrivalActualMinutes
-            getData?.departSelectedHour = departActualHour
-            getData?.departSelectedMinute = departActualMinutes
+            getData?.selectedHour = actualSelectedHour
+            getData?.selectedMinute = actualSelectedMinute
             insertData(getData)
 
         }
@@ -167,20 +123,11 @@ class InputActivity : AppCompatActivity(), InputView {
 
     }
 
-    fun pickArrivalDate(onFocus: EditText) {
-        KeyboardCloser.hideKeyboard(this)
-        val datePicker = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, Year, MonthOfYear, Day ->
-            onFocus.text = Editable.Factory.getInstance().newEditable(presenter.formatedDate(Year, MonthOfYear, Day))
-            Observable.just(onFocus.text.toString().trim()).subscribe({ results -> actualArrivalDate })
-        }, years, month, days)
-        datePicker.show()
-    }
-
-    fun pickDepartDate(onFocus: EditText) {
+    fun pickRemindedDate(onFocus: EditText) {
         KeyboardCloser.hideKeyboard(this)
         val datePicks = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, Year, MonthOfYear, Day ->
             onFocus.text = Editable.Factory.getInstance().newEditable(presenter.formatedDate(Year, MonthOfYear, Day))
-            Observable.just(onFocus.text.toString().trim()).subscribe({ results -> actualDepartDate })
+            Observable.just(onFocus.text.toString().trim()).subscribe({ results -> actualSelectedDate })
         }, years, month, days)
         datePicks.show()
     }
@@ -194,7 +141,6 @@ class InputActivity : AppCompatActivity(), InputView {
     fun clearEditText() {
         etDestination.text = Editable.Factory.getInstance().newEditable("")
         etBarang.text = Editable.Factory.getInstance().newEditable("")
-        etArrivalDates.text = Editable.Factory.getInstance().newEditable("")
         etDepartDates.text = Editable.Factory.getInstance().newEditable("")
     }
 

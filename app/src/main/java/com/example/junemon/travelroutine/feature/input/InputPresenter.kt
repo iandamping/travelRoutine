@@ -4,9 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.support.v4.app.FragmentActivity
-import android.text.Editable
 import com.example.junemon.travelroutine.MainApplication
-import com.example.junemon.travelroutine.R.id.*
 import com.example.junemon.travelroutine.base.BasePresenters
 import com.example.junemon.travelroutine.database.model.PersonalItems
 import com.example.junemon.travelroutine.repositories.Items.LoadDataByIds
@@ -15,7 +13,6 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_input.*
 
 class InputPresenter(var mView: InputView) : BasePresenters {
     private lateinit var ctx: Context

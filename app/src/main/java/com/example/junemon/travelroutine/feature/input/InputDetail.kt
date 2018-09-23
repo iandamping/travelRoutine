@@ -25,11 +25,10 @@ class InputDetail : AppCompatActivity(), InputView {
     override fun showData(data: PersonalItems?) {
         tvTujuan.text = data?.destination ?: "no data yet"
         tvBarang.text = data?.items ?: "no data yet"
-        tvArrival.text = df.format(data?.arrivalDate) ?: "no data yet"
-        tvDepart.text = df.format(data?.departureDate) ?: "no data yet"
-        if (data?.arrivalSelectedHour == 0) {
+        tvDepart.text = df.format(data?.selectedDate) ?: "no data yet"
+        if (data?.selectedHour != null) {
             llAlarm.visibility = View.VISIBLE
-            tvAlarmHours.text = "${data.arrivalSelectedHour} : ${data.arrivalSelectedMinute}"
+            tvAlarmHours.text = "${data.selectedHour} : ${data.selectedMinute}"
         }
     }
 
@@ -42,8 +41,6 @@ class InputDetail : AppCompatActivity(), InputView {
     }
 
     override fun initListener() {
-//        fabEdit.setOnClickListener {
-//            startActivity(intentFor<InputActivity>(InputActivity.INPUT_ACTIVITY_KEY to data))
-//        }
+
     }
 }

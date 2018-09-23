@@ -12,13 +12,10 @@ import java.util.*
 data class PersonalItems(@PrimaryKey(autoGenerate = true) var ID: Int?,
                          @ColumnInfo(name = "input_item") var items: String?,
                          @ColumnInfo(name = "input_destination") var destination: String?,
-                         @ColumnInfo(name = "input_departure_date") var departureDate: Date?,
-                         @ColumnInfo(name = "input_arrival_date") var arrivalDate: Date?,
-                         @ColumnInfo(name = "input_arrival_selected_hour") var arrivalSelectedHour: Int?,
-                         @ColumnInfo(name = "input_arrival_selected_minute") var arrivalSelectedMinute: Int?,
-                         @ColumnInfo(name = "input_depart_selected_hour") var departSelectedHour: Int?,
-                         @ColumnInfo(name = "input_depart_selected_minute") var departSelectedMinute: Int?) : Parcelable {
-    constructor() : this(null, null, null, null, null,
-            null, null, null, null)
+                         @ColumnInfo(name = "input_departure_date") var selectedDate: Date?,
+                         @ColumnInfo(name = "input_arrival_selected_hour") var selectedHour: Int?,
+                         @ColumnInfo(name = "input_arrival_selected_minute") var selectedMinute: Int?) : Parcelable {
+    constructor() : this(null, null, null, null,
+            null, null)
 
 }
