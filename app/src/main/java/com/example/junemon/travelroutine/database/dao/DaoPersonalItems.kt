@@ -21,7 +21,7 @@ interface DaoPersonalItems {
     fun insertData(insertData: PersonalItems?)
 
     @Delete
-    fun deleteData(deleteData: PersonalItems)
+    fun deleteData(deleteData: PersonalItems?)
 
     @Query("DELETE FROM personal_belongings")
     fun deleteAllData()

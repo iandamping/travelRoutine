@@ -3,16 +3,24 @@ package com.example.junemon.travelroutine.feature.input
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.example.junemon.travelroutine.MainApplication
 import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalItems
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.item_output_detail.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.noButton
+import org.jetbrains.anko.yesButton
 import java.text.DateFormat
 
 class InputDetail : AppCompatActivity(), InputView {
     private var data: PersonalItems? = null
     lateinit var presenter: InputPresenter
+    private var menuItem: Menu? = null
+    private var states: Boolean = false
     private val df: DateFormat = MainApplication.dateFormat
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,21 +30,48 @@ class InputDetail : AppCompatActivity(), InputView {
         initListener()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.delete_menu, menu)
+        menuItem = menu
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            R.id.deleteMenu -> {
+                alert("Are you sure want to delete ? ") {
+                    yesButton {
+                        Observable.just(data).subscribe({ results -> presenter.deleteData(results) })
+                        finish()
+                    }
+                    noButton { }
+                }.show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun showData(data: PersonalItems?) {
-        tvTujuan.text = data?.destination ?: "no data yet"
-        tvBarang.text = data?.items ?: "no data yet"
-        tvDepart.text = df.format(data?.selectedDate) ?: "no data yet"
+        tvTujuan.text = data?.destination
+        tvBarang.text = data?.items
+        tvDepart.text = df.format(data?.selectedDate)
         if (data?.selectedHour != null) {
             llAlarm.visibility = View.VISIBLE
             tvAlarmHours.text = "${data.selectedHour} : ${data.selectedMinute}"
         }
     }
 
+
     override fun initView() {
         val i: Intent = intent
         if (i != null && i.hasExtra(InputActivity.INPUT_ACTIVITY_KEY)) {
             data = i.getParcelableExtra(InputActivity.INPUT_ACTIVITY_KEY)
-            presenter.getDataById(this, data?.ID)
+            presenter.getData(data)
         }
     }
 

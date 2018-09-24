@@ -36,4 +36,5 @@ class OutputAdapter(val ctx: Context?, var listData: List<PersonalItems>, val li
             }
         }
     }
+
 }

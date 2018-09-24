@@ -45,6 +45,10 @@ class InputPresenter(var mView: InputView) : BasePresenters {
         return formatDay + "-" + formatMonth + "-" + years.toString()
     }
 
+    fun getData(data: PersonalItems?) {
+        mView.showData(data)
+    }
+
     fun getDataById(targetActivity: FragmentActivity, targetId: Int?) {
         loadDataFactory = LoadDataFactories(MainApplication.mDBAccess, targetId!!)
         loadDataById = ViewModelProviders.of(targetActivity, loadDataFactory).get(LoadDataByIds::class.java)
@@ -69,6 +73,17 @@ class InputPresenter(var mView: InputView) : BasePresenters {
         }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe({
         }))
     }
+
+    fun deleteData(data: PersonalItems?) {
+        var ID: Int? = data?.ID
+        composite.add(Observable.fromCallable {
+            Runnable {
+                MainApplication.mDBAccess?.personal_dao()?.deleteData(data)
+            }.run()
+        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe({
+        }))
+    }
+
 
     fun finishObserving() {
         composite.clear()

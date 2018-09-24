@@ -19,6 +19,7 @@ import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalItems
 import com.example.junemon.travelroutine.helper.KeyboardCloser
 import com.example.junemon.travelroutine.helper.ValidateEditTextHelper
+import com.example.junemon.travelroutine.helper.alarmHours.AlarmSetter
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_input.*
@@ -72,7 +73,6 @@ class InputActivity : AppCompatActivity(), InputView {
     }
 
     override fun initListener() {
-
         etDepartDates.setOnClickListener { view -> pickRemindedDate(etDepartDates) }
         swDepartReminder.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
@@ -134,6 +134,7 @@ class InputActivity : AppCompatActivity(), InputView {
 
     fun insertData(data: PersonalItems?) {
         presenter.insertData(data)
+        AlarmSetter.startAlarm(this, data)
         finish()
         clearEditText()
     }
