@@ -1,4 +1,4 @@
-package com.example.junemon.travelroutine.feature.output
+package com.example.junemon.travelroutine.feature.items.output
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

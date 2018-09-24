@@ -7,9 +7,11 @@ import android.arch.persistence.room.TypeConverters
 import android.content.Context
 import com.example.junemon.travelroutine.database.converter.DateConverts
 import com.example.junemon.travelroutine.database.dao.DaoPersonalItems
+import com.example.junemon.travelroutine.database.dao.DaoPersonalRoutines
 import com.example.junemon.travelroutine.database.model.PersonalItems
+import com.example.junemon.travelroutine.database.model.PersonalRoutines
 
-@Database(entities = arrayOf(PersonalItems::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(PersonalItems::class, PersonalRoutines::class), version = 1, exportSchema = false)
 @TypeConverters(DateConverts::class)
 abstract class MainDatabase : RoomDatabase() {
     companion object {
@@ -26,5 +28,6 @@ abstract class MainDatabase : RoomDatabase() {
         }
     }
 
-    abstract fun personal_dao(): DaoPersonalItems
+    abstract fun personalItem_dao(): DaoPersonalItems
+    abstract fun personalRoutine_dao(): DaoPersonalRoutines
 }

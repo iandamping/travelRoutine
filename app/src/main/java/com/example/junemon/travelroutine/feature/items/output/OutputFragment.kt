@@ -1,4 +1,4 @@
-package com.example.junemon.travelroutine.feature.output
+package com.example.junemon.travelroutine.feature.items.output
 
 import android.content.Context
 import android.os.Bundle
@@ -9,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalItems
-import com.example.junemon.travelroutine.feature.input.InputActivity
-import com.example.junemon.travelroutine.feature.input.InputDetail
-import kotlinx.android.synthetic.main.activity_output.view.*
+import com.example.junemon.travelroutine.feature.items.input.InputActivity
+import com.example.junemon.travelroutine.feature.items.input.InputDetail
+import kotlinx.android.synthetic.main.activity_output_items.view.*
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.startActivity
 
@@ -37,7 +37,7 @@ class OutputFragment : Fragment(), OutputView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val views: View = inflater.inflate(R.layout.activity_output, container, false)
+        val views: View = inflater.inflate(R.layout.activity_output_items, container, false)
         presenter.onCreateView(views)
         return views
     }
@@ -52,7 +52,7 @@ class OutputFragment : Fragment(), OutputView {
     override fun showData(data: List<PersonalItems>?) {
         actualView?.rvInput?.layoutManager = LinearLayoutManager(ctx)
         actualView?.rvInput?.adapter = OutputAdapter(ctx, data!!) {
-            startActivity(intentFor<InputDetail>(InputActivity.INPUT_ACTIVITY_KEY to it))
+            startActivity(intentFor<InputDetail>(InputActivity.INPUT_ITEMS_ACTIVITY_KEY to it))
         }
         actualView?.rvInput?.adapter?.notifyDataSetChanged()
     }

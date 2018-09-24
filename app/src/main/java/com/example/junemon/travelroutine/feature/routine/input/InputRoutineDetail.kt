@@ -1,4 +1,4 @@
-package com.example.junemon.travelroutine.feature.input
+package com.example.junemon.travelroutine.feature.routine.input
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,24 +8,25 @@ import android.view.MenuItem
 import android.view.View
 import com.example.junemon.travelroutine.MainApplication
 import com.example.junemon.travelroutine.R
-import com.example.junemon.travelroutine.database.model.PersonalItems
+import com.example.junemon.travelroutine.database.model.PersonalRoutines
 import io.reactivex.Observable
-import kotlinx.android.synthetic.main.item_output_detail.*
+import kotlinx.android.synthetic.main.item_output_detail_routines.*
+import kotlinx.android.synthetic.main.notification_template_lines_media.view.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.yesButton
 import java.text.DateFormat
 
-class InputDetail : AppCompatActivity(), InputView {
-    private var data: PersonalItems? = null
-    lateinit var presenter: InputPresenter
+class InputRoutineDetail : AppCompatActivity(), InputRoutineView {
+    private var data: PersonalRoutines? = null
+    lateinit var presenter: InputRoutinePresenter
     private var menuItem: Menu? = null
-    private var states: Boolean = false
     private val df: DateFormat = MainApplication.dateFormat
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.item_output_detail)
-        presenter = InputPresenter(this)
+        setContentView(R.layout.item_output_detail_routines)
+        presenter = InputRoutinePresenter(this)
         presenter.onCreate(this)
         initListener()
     }
@@ -56,26 +57,25 @@ class InputDetail : AppCompatActivity(), InputView {
         }
     }
 
-    override fun showData(data: PersonalItems?) {
-        tvTujuan.text = data?.destination
-        tvBarang.text = data?.items
-        tvDepart.text = df.format(data?.selectedDate)
+    override fun showData(data: PersonalRoutines?) {
+        tvRoutineDetails.text = data?.routine
+        tvRoutineDescriptionDetails.text = data?.description
+        tvRoutineDate.text = df.format(data?.selectedDate)
         if (data?.selectedHour != null) {
-            llAlarm.visibility = View.VISIBLE
-            tvAlarmHours.text = "${data.selectedHour} : ${data.selectedMinute}"
+            llRoutineAlarm.visibility = View.VISIBLE
+            tvAlarmRoutineHours.text = "${data.selectedHour} : ${data.selectedMinute}"
+
         }
     }
 
-
     override fun initView() {
         val i: Intent = intent
-        if (i != null && i.hasExtra(InputActivity.INPUT_ACTIVITY_KEY)) {
-            data = i.getParcelableExtra(InputActivity.INPUT_ACTIVITY_KEY)
+        if (i != null && i.hasExtra(InputRoutineActivity.INPUT_ROUTINE_ITEM_KEYS)) {
+            data = i.getParcelableExtra(InputRoutineActivity.INPUT_ROUTINE_ITEM_KEYS)
             presenter.getData(data)
         }
     }
 
     override fun initListener() {
-
     }
 }

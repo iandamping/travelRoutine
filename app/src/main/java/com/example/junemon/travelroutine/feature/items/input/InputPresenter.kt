@@ -1,4 +1,4 @@
-package com.example.junemon.travelroutine.feature.input
+package com.example.junemon.travelroutine.feature.items.input
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -26,6 +26,7 @@ class InputPresenter(var mView: InputView) : BasePresenters {
     override fun onCreate(context: Context) {
         ctx = context
         mView.initView()
+        mView.initListener()
         composite = CompositeDisposable()
     }
 
@@ -58,36 +59,33 @@ class InputPresenter(var mView: InputView) : BasePresenters {
     fun insertData(data: PersonalItems?) {
         composite.add(Observable.fromCallable {
             Runnable {
-                MainApplication.mDBAccess?.personal_dao()?.insertData(data)
+                MainApplication.mDBAccess?.personalItem_dao()?.insertData(data)
             }.run()
-        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe({
-        }))
+        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
+        })
 
     }
 
     fun updateData(data: PersonalItems?) {
         composite.add(Observable.fromCallable {
             Runnable {
-                MainApplication.mDBAccess?.personal_dao()?.insertData(data)
+                MainApplication.mDBAccess?.personalItem_dao()?.insertData(data)
             }.run()
-        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe({
-        }))
+        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
+        })
     }
 
     fun deleteData(data: PersonalItems?) {
         var ID: Int? = data?.ID
         composite.add(Observable.fromCallable {
             Runnable {
-                MainApplication.mDBAccess?.personal_dao()?.deleteData(data)
+                MainApplication.mDBAccess?.personalItem_dao()?.deleteData(data)
             }.run()
-        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe({
-        }))
+        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
+        })
     }
-
 
     fun finishObserving() {
         composite.clear()
     }
-
-
 }

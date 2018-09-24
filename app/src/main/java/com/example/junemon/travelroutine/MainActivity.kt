@@ -2,7 +2,8 @@ package com.example.junemon.travelroutine
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.example.junemon.travelroutine.feature.output.OutputFragment
+import com.example.junemon.travelroutine.feature.items.output.OutputFragment
+import com.example.junemon.travelroutine.feature.routine.output.OutputRoutineFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,7 +14,11 @@ class MainActivity : AppCompatActivity() {
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.InputMenu -> {
-                    loadOutputFragment(savedInstanceState)
+                    loadOutputItemsFragment(savedInstanceState)
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.RoutineMenu -> {
+                    loadOutputRoutinesFragment(savedInstanceState)
                     return@setOnNavigationItemSelectedListener true
                 }
             }
@@ -23,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun loadOutputFragment(savedInstanceState: Bundle?) {
+    private fun loadOutputItemsFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager
                     .beginTransaction()
@@ -32,14 +37,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-//
-//    private fun loadTeamFragment(savedInstanceState: Bundle?) {
-//        if (savedInstanceState == null) {
-//            supportFragmentManager
-//                    .beginTransaction()
-//                    .replace(R.id.main_container, TeamFragment().newInstance(data.strLeague), LastMatchFragment::class.java.simpleName)
-//                    .commit()
-//        }
-//    }
+    private fun loadOutputRoutinesFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.main_container, OutputRoutineFragment(), OutputRoutineFragment::class.java.simpleName)
+                    .commit()
+        }
+    }
 }

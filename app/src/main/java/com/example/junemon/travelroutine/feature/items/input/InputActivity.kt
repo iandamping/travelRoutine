@@ -1,4 +1,4 @@
-package com.example.junemon.travelroutine.feature.input
+package com.example.junemon.travelroutine.feature.items.input
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -21,14 +21,13 @@ import com.example.junemon.travelroutine.helper.KeyboardCloser
 import com.example.junemon.travelroutine.helper.ValidateEditTextHelper
 import com.example.junemon.travelroutine.helper.alarmHours.AlarmSetter
 import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.activity_input.*
+import kotlinx.android.synthetic.main.activity_input_items.*
 import java.util.*
 
 
 class InputActivity : AppCompatActivity(), InputView {
     companion object {
-        val INPUT_ACTIVITY_KEY: String = "this is key"
+        val INPUT_ITEMS_ACTIVITY_KEY: String = "this is key"
     }
 
     private val DEFAULT_TASK_ID = -1
@@ -40,16 +39,13 @@ class InputActivity : AppCompatActivity(), InputView {
     private var actualSelectedHour: Int? = null
     private var actualSelectedMinute: Int? = null
     private var departDate: Date? = null
-    private var states: Boolean = false
     private var getData: PersonalItems? = PersonalItems()
-    private lateinit var composite: CompositeDisposable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_input)
+        setContentView(R.layout.activity_input_items)
         presenter = InputPresenter(this)
         presenter.onCreate(this)
-        composite = CompositeDisposable()
         initView()
 
     }
@@ -58,15 +54,14 @@ class InputActivity : AppCompatActivity(), InputView {
         etBarang.text = Editable.Factory.getInstance().newEditable(data?.items)
         etDestination.text = Editable.Factory.getInstance().newEditable(data?.destination)
         etDepartDates.text = Editable.Factory.getInstance().newEditable(dateFormat.format(data?.selectedDate))
-        states = true
     }
 
     override fun initView() {
-        initListener()
+//        initListener()
         val i: Intent = intent
-        if (i != null && i.hasExtra(INPUT_ACTIVITY_KEY)) {
+        if (i != null && i.hasExtra(INPUT_ITEMS_ACTIVITY_KEY)) {
             if (mTaskId == DEFAULT_TASK_ID) {
-                showData(i.getParcelableExtra(INPUT_ACTIVITY_KEY))
+                showData(i.getParcelableExtra(INPUT_ITEMS_ACTIVITY_KEY))
 
             }
         }
@@ -134,7 +129,7 @@ class InputActivity : AppCompatActivity(), InputView {
 
     fun insertData(data: PersonalItems?) {
         presenter.insertData(data)
-        AlarmSetter.startAlarm(this, data)
+        AlarmSetter.startItemsAlarm(this, data)
         finish()
         clearEditText()
     }

@@ -11,7 +11,7 @@ class ItemRepositories(application: Application) : AndroidViewModel(application)
 
     fun loadMainData(application: Application) {
         val mDb: MainDatabase? = MainDatabase.getInstances(this.getApplication())
-        tasks = mDb?.personal_dao()?.getLiveAllData()
+        tasks = mDb?.personalItem_dao()?.getLiveAllData()
     }
 
     fun getPersonalLiveData(): LiveData<List<PersonalItems>>? = tasks
