@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.example.junemon.travelroutine.feature.items.output.OutputFragment
 import com.example.junemon.travelroutine.feature.routine.output.OutputRoutineFragment
+import com.example.junemon.travelroutine.repositories.News.NewsRepositories
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        NewsRepositories.getAllNews(NewsRepositories.STATE_OF_PULLED, resources.getString(R.string.api_source_news), resources.getString(R.string.api_key_news))
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.InputMenu -> {

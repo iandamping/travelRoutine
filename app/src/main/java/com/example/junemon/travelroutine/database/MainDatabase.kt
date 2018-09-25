@@ -11,9 +11,9 @@ import com.example.junemon.travelroutine.database.dao.DaoPersonalNews
 import com.example.junemon.travelroutine.database.dao.DaoPersonalRoutines
 import com.example.junemon.travelroutine.database.model.PersonalItems
 import com.example.junemon.travelroutine.database.model.PersonalRoutines
-import com.example.junemon.travelroutine.network.model.NewsAll
+import com.example.junemon.travelroutine.network.model.PersonalNews
 
-@Database(entities = arrayOf(PersonalItems::class, PersonalRoutines::class, NewsAll.Article::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(PersonalItems::class, PersonalRoutines::class, PersonalNews.Article::class), version = 1, exportSchema = false)
 @TypeConverters(DateConverts::class)
 abstract class MainDatabase : RoomDatabase() {
     companion object {

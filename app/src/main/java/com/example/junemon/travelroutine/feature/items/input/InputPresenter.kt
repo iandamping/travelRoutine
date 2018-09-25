@@ -88,4 +88,5 @@ class InputPresenter(var mView: InputView) : BasePresenters {
     fun finishObserving() {
         composite.clear()
     }
+
 }

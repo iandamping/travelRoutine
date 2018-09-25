@@ -11,7 +11,6 @@ import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalRoutines
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.item_output_detail_routines.*
-import kotlinx.android.synthetic.main.notification_template_lines_media.view.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.yesButton

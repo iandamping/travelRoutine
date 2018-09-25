@@ -51,7 +51,7 @@ dependencies {
     //LIFECYCLER
     implementation 'android.arch.lifecycle:runtime:1.1.1'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
-    implementation 'android.arch.lifecycle:reactivestreams:1.1.1'
+//    implementation 'android.arch.lifecycle:reactivestreams:1.1.1'
     annotationProcessor 'android.arch.lifecycle:compiler:1.1.1'
     //jobdispatcher
     implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
@@ -59,4 +59,7 @@ dependencies {
     implementation "org.jetbrains.anko:anko-design:$anko_version"
 
     implementation 'com.squareup.picasso:picasso:2.71828'
+    //logging
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
 }

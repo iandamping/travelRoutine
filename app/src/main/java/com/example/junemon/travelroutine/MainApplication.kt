@@ -2,6 +2,7 @@ package com.example.junemon.travelroutine
 
 import android.app.Application
 import com.example.junemon.travelroutine.database.MainDatabase
+import com.example.junemon.travelroutine.network.ApiClient
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,6 +21,9 @@ class MainApplication : Application() {
         val days: Int = cal.get(Calendar.DAY_OF_MONTH)
         val hours: Int = cal.get(Calendar.HOUR_OF_DAY)
         val minutes: Int = cal.get(Calendar.MINUTE)
+        val getNewsData by lazy {
+            ApiClient.create()
+        }
     }
 
     override fun onCreate() {

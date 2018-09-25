@@ -6,7 +6,7 @@ import android.arch.persistence.room.PrimaryKey
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-class NewsAll(val article: List<Article>) {
+class PersonalNews(val articles: List<Article>?) {
     @Parcelize
     @Entity(tableName = "personal_news")
     data class Article(@PrimaryKey(autoGenerate = true) var ID: Int?,
