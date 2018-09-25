@@ -3,4 +3,6 @@
     <string name="reminded_info">You will Reminded at </string>
     <string name="api_key_news">25bd4439e7564164a9ab567975428415</string>
     <string name="api_source_news">bbc-news</string>
+    <string name="country_news">us</string>
+    <string name="category_news">business</string>
 </resources>

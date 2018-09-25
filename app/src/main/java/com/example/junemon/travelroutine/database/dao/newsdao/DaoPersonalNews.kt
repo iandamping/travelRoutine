@@ -1,4 +1,4 @@
-package com.example.junemon.travelroutine.database.dao
+package com.example.junemon.travelroutine.database.dao.newsdao
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
