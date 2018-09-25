@@ -14,5 +14,11 @@
         android:icon="@drawable/ic_markunread_mailbox_black_24dp"
         android:title="Routines"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/NewsMenu"
+        android:enabled="true"
+        android:icon="@drawable/ic_books_white_24dp"
+        android:title="News"
+        app:showAsAction="ifRoom" />
 
 </menu>

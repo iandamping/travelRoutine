@@ -21,7 +21,7 @@ class OutputFragment : Fragment(), OutputView {
     private var ctx: Context? = null
     private var actualView: View? = null
     lateinit var presenter: OutputPresenter
-    lateinit var data: List<PersonalItems>
+//    lateinit var data: List<PersonalItems>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

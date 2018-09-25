@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import com.example.junemon.travelroutine.feature.items.output.OutputFragment
 import com.example.junemon.travelroutine.feature.routine.output.OutputRoutineFragment
 import com.example.junemon.travelroutine.repositories.News.NewsRepositories
+import com.example.junemon.travelroutine.ui.MainPager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +23,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.RoutineMenu -> {
                     loadOutputRoutinesFragment(savedInstanceState)
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.NewsMenu -> {
+                    loadMainFragment(savedInstanceState)
                     return@setOnNavigationItemSelectedListener true
                 }
             }
@@ -45,6 +50,15 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.main_container, OutputRoutineFragment(), OutputRoutineFragment::class.java.simpleName)
+                    .commit()
+        }
+    }
+
+    private fun loadMainFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.main_container, MainPager(), MainPager::class.java.simpleName)
                     .commit()
         }
     }

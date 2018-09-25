@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 import com.example.junemon.travelroutine.network.model.PersonalNewsEntertainment
 import io.reactivex.Flowable
+
 @Dao
 interface DaoPersonalNewsEntertainment {
 
