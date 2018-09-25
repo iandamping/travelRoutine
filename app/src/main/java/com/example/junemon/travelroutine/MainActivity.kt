@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         NewsRepositories.getAllNews(
-                NewsRepositories.STATE_OF_PULLED, resources.getString(R.string.category_news), resources.getString(R.string.country_news)
+                NewsRepositories.STATE_OF_PULLED, resources.getString(R.string.category_entertainment), resources.getString(R.string.category_news), resources.getString(R.string.country_news)
                 , resources.getString(R.string.api_source_news), resources.getString(R.string.api_key_news))
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {

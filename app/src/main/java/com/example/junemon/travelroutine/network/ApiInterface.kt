@@ -2,6 +2,7 @@ package com.example.junemon.travelroutine.network
 
 import com.example.junemon.travelroutine.network.model.PersonalNews
 import com.example.junemon.travelroutine.network.model.PersonalNewsBussines
+import com.example.junemon.travelroutine.network.model.PersonalNewsEntertainment
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,4 +16,9 @@ interface ApiInterface {
     fun getTopHeadlineBussines(@Query("country") countries: String?,
                                @Query("category") categories: String?,
                                @Query("apiKey") keys: String?): Observable<PersonalNewsBussines>
+
+    @GET(ApiConfig.getTopHeadline)
+    fun getTopHeadlineEntertainment(@Query("country") countries: String?,
+                                    @Query("category") categories: String?,
+                                    @Query("apiKey") keys: String?): Observable<PersonalNewsEntertainment>
 }

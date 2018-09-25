@@ -5,4 +5,5 @@
     <string name="api_source_news">bbc-news</string>
     <string name="country_news">us</string>
     <string name="category_news">business</string>
+    <string name="category_entertainment">entertainment</string>
 </resources>
