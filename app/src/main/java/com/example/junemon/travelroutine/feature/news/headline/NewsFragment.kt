@@ -1,5 +1,9 @@
 package com.example.junemon.travelroutine.feature.news.headline
 
+import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.LifecycleRegistry
+import android.arch.lifecycle.OnLifecycleEvent
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,6 +15,7 @@ import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.network.model.PersonalNews
 import kotlinx.android.synthetic.main.activity_news_data.*
 
+
 class NewsFragment : Fragment(), NewsFragmentView {
     private var ctx: Context? = null
     var actualView: View? = null
@@ -18,7 +23,6 @@ class NewsFragment : Fragment(), NewsFragmentView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onAttach(context: Context?) {
@@ -26,6 +30,10 @@ class NewsFragment : Fragment(), NewsFragmentView {
         this.ctx = context
         presenter = NewsFragmentPresenter(this)
         presenter.onAttach(ctx)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         presenter.getLiveData(this)
     }
 
@@ -46,4 +54,7 @@ class NewsFragment : Fragment(), NewsFragmentView {
     override fun initView(view: View) {
         actualView = view
     }
+
+
+
 }

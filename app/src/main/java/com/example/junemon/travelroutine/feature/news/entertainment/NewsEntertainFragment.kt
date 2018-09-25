@@ -21,12 +21,16 @@ class NewsEntertainFragment : Fragment(), NewsEntertainView {
 
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        presenter.getLiveData(this)
+    }
+
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         this.ctx = context
         presenter = NewsEntertainPresenter(this)
         presenter.onAttach(ctx)
-        presenter.getLiveData(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -46,4 +50,5 @@ class NewsEntertainFragment : Fragment(), NewsEntertainView {
     override fun initView(view: View) {
         actualView = view
     }
+
 }

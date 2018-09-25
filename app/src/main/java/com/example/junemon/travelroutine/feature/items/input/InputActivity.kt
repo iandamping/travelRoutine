@@ -47,8 +47,8 @@ class InputActivity : AppCompatActivity(), InputView {
         presenter = InputPresenter(this)
         presenter.onCreate(this)
         initView()
-
     }
+
 
     override fun showData(data: PersonalItems?) {
         etBarang.text = Editable.Factory.getInstance().newEditable(data?.items)

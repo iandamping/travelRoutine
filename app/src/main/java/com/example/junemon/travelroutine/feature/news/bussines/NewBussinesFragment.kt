@@ -18,7 +18,11 @@ class NewBussinesFragment : Fragment(), NewBussinesView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        presenter.getLiveData(this)
     }
 
     override fun onAttach(context: Context?) {
@@ -26,7 +30,6 @@ class NewBussinesFragment : Fragment(), NewBussinesView {
         this.ctx = context
         presenter = NewBussinesPresenter(this)
         presenter.onAttach(ctx)
-        presenter.getLiveData(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -46,4 +49,6 @@ class NewBussinesFragment : Fragment(), NewBussinesView {
         }
         rvNewsBussiness.adapter.notifyDataSetChanged()
     }
+
+
 }
