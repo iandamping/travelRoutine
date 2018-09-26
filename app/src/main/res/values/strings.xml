@@ -6,6 +6,8 @@
     <string name="country_news">us</string>
     <string name="category_news">business</string>
     <string name="category_entertainment">entertainment</string>
+    <string name="item_reminder">Dont forget your items</string>
+    <string name="routine_reminder">Dont forget your routine</string>
 
     <string-array name="pick_some_tags">
         <item>Event Travel</item>

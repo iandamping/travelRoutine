@@ -44,7 +44,7 @@ class NewsEntertainFragment : Fragment(), NewsEntertainView {
         rvNewsEntertain.adapter = NewsEntertainAdapter(ctx, data!!) {
 
         }
-        rvNewsEntertain.adapter.notifyDataSetChanged()
+//        rvNewsEntertain.adapter.notifyDataSetChanged()
     }
 
     override fun initView(view: View) {

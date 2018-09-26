@@ -47,7 +47,7 @@ class NewBussinesFragment : Fragment(), NewBussinesView {
         rvNewsBussiness.adapter = NewBussinesAdapter(ctx, data!!) {
 
         }
-        rvNewsBussiness.adapter.notifyDataSetChanged()
+//        rvNewsBussiness.adapter.notifyDataSetChanged()
     }
 
 

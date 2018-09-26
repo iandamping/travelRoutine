@@ -28,7 +28,6 @@ class OutputAdapter(val ctx: Context?, var listData: List<PersonalItems>, val li
     class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bindViews(item: PersonalItems, listener: (PersonalItems) -> Unit) {
-            val name = listOf("Travel", "Visiting Friends", "Road Trip", "Volunteer Travel", "Bussiness Travel", "Group Tour")
             tvDestination.text = item.destination
             tvItems.text = item.items
             if (item.selectedHour != null) {
@@ -38,22 +37,19 @@ class OutputAdapter(val ctx: Context?, var listData: List<PersonalItems>, val li
                 tvDateReminder.text = dateFormat.format(item.selectedDate)
                 tvTimer.text = "${item.selectedHour} : ${item.selectedMinute}"
             }
-            if (item.tags == "Travel") {
-                ivCircluar.imageResource = R.drawable.ic_bar
-            }
-            if (item.tags == "Visiting Friends") {
-                ivCircluar.imageResource = R.drawable.ic_cityscape
-            }
-            if (item.tags == "Bussiness Travel") {
+            if (item.tags == null) {
                 ivCircluar.imageResource = R.drawable.ic_cofee_bean
-            }
-            if (item.tags == "Group Tour") {
+            } else if (item.tags?.contains("Travel")!!) {
+                ivCircluar.imageResource = R.drawable.ic_bar
+            } else if (item.tags?.contains("Visiting Friends")!!) {
+                ivCircluar.imageResource = R.drawable.ic_cityscape
+            } else if (item.tags?.contains("Bussiness Travel")!!) {
+                ivCircluar.imageResource = R.drawable.ic_train
+            } else if (item.tags?.contains("Group Tour")!!) {
                 ivCircluar.imageResource = R.drawable.ic_foodstall
-            }
-            if (item.tags == "Road Trip") {
+            } else if (item.tags?.contains("Road Trip")!!) {
                 ivCircluar.imageResource = R.drawable.ic_library
-            }
-            if (item.tags == "Volunteer Travel") {
+            } else if (item.tags?.contains("Volunteer Travel")!!) {
                 ivCircluar.imageResource = R.drawable.ic_vespa
             }
 

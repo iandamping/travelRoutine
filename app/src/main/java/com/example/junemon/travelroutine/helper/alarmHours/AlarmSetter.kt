@@ -29,6 +29,7 @@ class AlarmSetter {
                 val i = Intent(ctx, AlarmReceiver::class.java)
                 val pi = PendingIntent.getBroadcast(ctx.getApplicationContext(), 0, i, FLAG_CANCEL_CURRENT)
                 val am = ctx.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                AlarmReceiver.getItemData = data
                 am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, cal.timeInMillis, pi)
             }
         }
@@ -48,6 +49,7 @@ class AlarmSetter {
                 val i = Intent(ctx, AlarmReceiver::class.java)
                 val pi = PendingIntent.getBroadcast(ctx.getApplicationContext(), 0, i, FLAG_CANCEL_CURRENT)
                 val am = ctx.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                AlarmReceiver.getRoutineData = data
                 am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, cal.timeInMillis, pi)
             }
         }

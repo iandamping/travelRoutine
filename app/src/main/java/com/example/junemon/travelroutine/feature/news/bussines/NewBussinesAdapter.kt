@@ -23,7 +23,7 @@ class NewBussinesAdapter(val ctx: Context?, var listData: List<PersonalNewsBussi
         holder.bindData(listData.get(position), listener)
     }
 
-    class ViewHolder(override val containerView: View?) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+    class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bindData(data: PersonalNewsBussines.Article, listener: (PersonalNewsBussines.Article) -> Unit) {
             tvBussinesAuthor.text = data.author
             tvBussinesDate.text = data.publishedAt
