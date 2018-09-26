@@ -3,7 +3,6 @@ package com.example.junemon.travelroutine.network
 import com.example.junemon.travelroutine.network.model.PersonalNews
 import com.example.junemon.travelroutine.network.model.PersonalNewsBussines
 import com.example.junemon.travelroutine.network.model.PersonalNewsEntertainment
-import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

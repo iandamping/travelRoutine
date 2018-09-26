@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="16dp"
-    android:layout_marginTop="8dp"
+    android:layout_marginLeft="@dimen/spacing_medium"
+    android:layout_marginTop="@dimen/spacing_medium"
+    android:layout_marginRight="@dimen/spacing_medium"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
@@ -25,8 +25,7 @@
                 android:layout_height="56dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                />
+                android:layout_marginTop="16dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,6 +48,7 @@
                     android:id="@+id/tvItems"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
                     android:layout_marginBottom="10dp"
                     android:textSize="12sp"
                     tools:text="items" />
@@ -65,26 +65,31 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="visible">
 
                         <TextView
                             android:id="@+id/tvDateReminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/spacing_small"
-                            tools:text="19/03/2018"/>
+                            android:visibility="gone"
+                            tools:text="19/03/2018" />
 
                         <TextView
                             android:id="@+id/tvTimer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/letter_small"
+                            android:visibility="gone"
                             tools:text="13:90" />
 
                         <ImageView
                             android:id="@+id/ivAlarmClock"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:src="@drawable/ic_alarm_blue_24dp" />
                     </LinearLayout>
 
 

@@ -1,9 +1,5 @@
 package com.example.junemon.travelroutine.feature.news.headline
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LifecycleRegistry
-import android.arch.lifecycle.OnLifecycleEvent
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -54,7 +50,6 @@ class NewsFragment : Fragment(), NewsFragmentView {
     override fun initView(view: View) {
         actualView = view
     }
-
 
 
 }

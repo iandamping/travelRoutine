@@ -80,7 +80,9 @@ class InputActivity : AppCompatActivity(), InputView {
                     tvDepartDateslReminderViews.text = resources.getString(R.string.reminded_info) + " ${hours} : ${minutes}"
                 }, hours, minutes, true)
                 mTimePicker.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel") { dialogInterface, i ->
+                    swDepartReminder.isChecked = false
                     mTimePicker.dismiss()
+
                 }
 
                 mTimePicker.setTitle("Select Time")
