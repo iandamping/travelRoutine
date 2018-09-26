@@ -16,13 +16,13 @@ import com.example.junemon.travelroutine.MainApplication.Companion.minutes
 import com.example.junemon.travelroutine.MainApplication.Companion.month
 import com.example.junemon.travelroutine.MainApplication.Companion.years
 import com.example.junemon.travelroutine.R
-import com.example.junemon.travelroutine.R.id.*
 import com.example.junemon.travelroutine.database.model.PersonalItems
 import com.example.junemon.travelroutine.helper.KeyboardCloser
 import com.example.junemon.travelroutine.helper.ValidateEditTextHelper
 import com.example.junemon.travelroutine.helper.alarmHours.AlarmSetter
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_input_items.*
+import org.jetbrains.anko.selector
 import java.util.*
 
 
@@ -39,6 +39,7 @@ class InputActivity : AppCompatActivity(), InputView {
     private var actualSelectedDate: String? = null
     private var actualSelectedHour: Int? = null
     private var actualSelectedMinute: Int? = null
+    private var actualTags: String? = null
     private var departDate: Date? = null
     private var getData: PersonalItems? = PersonalItems()
 
@@ -58,7 +59,6 @@ class InputActivity : AppCompatActivity(), InputView {
     }
 
     override fun initView() {
-//        initListener()
         val i: Intent = intent
         if (i != null && i.hasExtra(INPUT_ITEMS_ACTIVITY_KEY)) {
             if (mTaskId == DEFAULT_TASK_ID) {
@@ -76,9 +76,8 @@ class InputActivity : AppCompatActivity(), InputView {
                 mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, hours, minutes ->
                     Observable.just(hours).subscribe { results -> actualSelectedHour = results }
                     Observable.just(minutes).subscribe { results -> actualSelectedMinute = results }
-                    etDepartDateslReminderViews.visibility = View.VISIBLE
-                    etDepartDateslReminderViews.text = Editable.Factory.getInstance()
-                            .newEditable(resources.getString(R.string.reminded_info) + " ${hours} : ${minutes}")
+                    tvDepartDateslReminderViews.visibility = View.VISIBLE
+                    tvDepartDateslReminderViews.text = resources.getString(R.string.reminded_info) + " ${hours} : ${minutes}"
                 }, hours, minutes, true)
                 mTimePicker.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel") { dialogInterface, i ->
                     mTimePicker.dismiss()
@@ -89,9 +88,8 @@ class InputActivity : AppCompatActivity(), InputView {
             } else if (!b) {
                 actualSelectedHour = null
                 actualSelectedMinute = null
-                etDepartDateslReminderViews.visibility = View.GONE
-                etDepartDateslReminderViews.text = Editable.Factory.getInstance()
-                        .newEditable("")
+                tvDepartDateslReminderViews.visibility = View.GONE
+                tvDepartDateslReminderViews.text = ""
             }
         }
 
@@ -112,7 +110,12 @@ class InputActivity : AppCompatActivity(), InputView {
             }
             getData?.selectedHour = actualSelectedHour
             getData?.selectedMinute = actualSelectedMinute
+            getData?.tags = actualTags
             insertData(getData)
+
+        }
+        btnPickTag.setOnClickListener {
+            initDialog()
 
         }
 
@@ -144,5 +147,15 @@ class InputActivity : AppCompatActivity(), InputView {
     override fun onDestroy() {
         super.onDestroy()
         presenter.finishObserving()
+    }
+
+    fun initDialog() {
+        val name = listOf("Travel", "Visiting Friends", "Road Trip", "Volunteer Travel", "Bussiness Travel", "Group Tour")
+        selector("Pick Tag", name) { dialogInterface, i ->
+            Observable.fromArray(name).subscribe { results ->
+                actualTags = results[i]
+                btnPickTag.text = name[i]
+            }
+        }
     }
 }

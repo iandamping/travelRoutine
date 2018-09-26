@@ -40,7 +40,7 @@ class NewsRepositories {
                         return@flatMap MainApplication.getNewsData.getTopHeadlineEntertainment(countries, categoriesEntertainment, key)
                     }
                     .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread()).subscribe({ }, { error -> Log.e("log error", error.localizedMessage) })
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe({ }, { error -> Log.e(MainApplication.TAG, error.localizedMessage) })
             )
             STATE_OF_PULLED = "Pulled"
 
@@ -64,6 +64,12 @@ class NewsRepositories {
             AppExecutor.getInstance()?.diskIO?.execute {
                 MainApplication.mDBAccess?.personalEntertainmentNews_dao()?.deleteAllData()
                 MainApplication.mDBAccess?.personalEntertainmentNews_dao()?.insertData(data?.articles)
+            }
+        }
+
+        fun onDestroy() {
+            if (compose != null && compose.isDisposed) {
+                compose.dispose()
             }
         }
     }

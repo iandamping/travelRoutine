@@ -4,9 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.example.junemon.travelroutine.feature.items.output.OutputFragment
 import com.example.junemon.travelroutine.feature.routine.output.OutputRoutineFragment
-import com.example.junemon.travelroutine.network.model.PersonalNews
-import com.example.junemon.travelroutine.network.model.PersonalNewsBussines
-import com.example.junemon.travelroutine.network.model.PersonalNewsEntertainment
 import com.example.junemon.travelroutine.repositories.News.NewsRepositories
 import com.example.junemon.travelroutine.ui.MainPager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -65,5 +62,10 @@ class MainActivity : AppCompatActivity() {
                     .replace(R.id.main_container, MainPager(), MainPager::class.java.simpleName)
                     .commit()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        NewsRepositories.onDestroy()
     }
 }

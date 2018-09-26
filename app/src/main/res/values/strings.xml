@@ -6,4 +6,22 @@
     <string name="country_news">us</string>
     <string name="category_news">business</string>
     <string name="category_entertainment">entertainment</string>
+
+    <string-array name="pick_some_tags">
+        <item>Event Travel</item>
+        <item>Visiting Friends</item>
+        <item>Road Trip</item>
+        <item>Volunteer Travel</item>
+        <item>Bussiness Travel</item>
+        <item>Group Tour</item>
+    </string-array>
+
+    <array name="pick_some_tag_image">
+        <item>@drawable/ic_bar</item>
+        <item>@drawable/ic_cityscape</item>
+        <item>@drawable/ic_foodstall</item>
+        <item>@drawable/ic_library</item>
+        <item>@drawable/ic_train</item>
+        <item>@drawable/ic_vespa</item>
+    </array>
 </resources>
