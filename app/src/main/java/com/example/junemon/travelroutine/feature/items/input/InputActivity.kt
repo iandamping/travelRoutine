@@ -16,6 +16,7 @@ import com.example.junemon.travelroutine.MainApplication.Companion.minutes
 import com.example.junemon.travelroutine.MainApplication.Companion.month
 import com.example.junemon.travelroutine.MainApplication.Companion.years
 import com.example.junemon.travelroutine.R
+import com.example.junemon.travelroutine.R.id.*
 import com.example.junemon.travelroutine.database.model.PersonalItems
 import com.example.junemon.travelroutine.helper.KeyboardCloser
 import com.example.junemon.travelroutine.helper.ValidateEditTextHelper
@@ -105,7 +106,7 @@ class InputActivity : AppCompatActivity(), InputView {
 
             }
             if (!ValidateEditTextHelper.validates(this, etDepartDates, ValidateEditTextHelper.Type.EMPTY)) {
-                var dateExtract: String = etDepartDates.text.toString().trim()
+                val dateExtract: String = etDepartDates.text.toString().trim()
                 departDate = dateFormat.parse(dateExtract)
                 getData?.selectedDate = departDate
             }
