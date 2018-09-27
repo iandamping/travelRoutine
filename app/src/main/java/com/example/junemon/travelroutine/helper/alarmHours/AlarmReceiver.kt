@@ -6,6 +6,7 @@ import android.content.Intent
 import com.example.junemon.travelroutine.database.model.PersonalItems
 import com.example.junemon.travelroutine.database.model.PersonalRoutines
 import com.example.junemon.travelroutine.helper.NotificationMaker
+import com.example.junemon.travelroutine.helper.NotificationRoutineMaker
 
 class AlarmReceiver : BroadcastReceiver() {
     companion object {
@@ -15,9 +16,11 @@ class AlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(p0: Context?, p1: Intent?) {
         if (p1?.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
-            NotificationMaker.reminderNotif(p0, getItemData, getRoutineData)
+            NotificationMaker.reminderNotif(p0, getItemData)
+            NotificationRoutineMaker.reminderRoutineNotif(p0, getRoutineData)
         }
-        NotificationMaker.reminderNotif(p0, getItemData, getRoutineData)
+        NotificationMaker.reminderNotif(p0, getItemData)
+        NotificationRoutineMaker.reminderRoutineNotif(p0, getRoutineData)
     }
 
 

@@ -11,24 +11,23 @@ import android.support.v4.app.NotificationCompat
 import android.support.v4.content.ContextCompat
 import com.example.junemon.travelroutine.MainActivity
 import com.example.junemon.travelroutine.R
-import com.example.junemon.travelroutine.database.model.PersonalItems
+import com.example.junemon.travelroutine.database.model.PersonalRoutines
 
-class NotificationMaker {
-
-
+class NotificationRoutineMaker {
     companion object {
         private val NOTIFICATION = "Notification"
-        private var REMINDER_NOTIFICATION_ID: Int = 23
-        private var OREO_NOTIF_CHANEL_ID: String = "item"
+        private var REMINDER_NOTIFICATION_ID: Int = 26
+        private var OREO_NOTIF_CHANEL_ID: String = "routines"
         private val PENDING_INTENT_ID = 3417
         private var contentTitle: String? = null
         private var contentText: String? = null
 
-        fun reminderNotif(context: Context?, getItemData: PersonalItems?) {
+        fun reminderRoutineNotif(context: Context?, getRoutineData: PersonalRoutines?) {
             val notif = context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            if (getItemData != null) {
-                contentTitle = context.resources.getString(R.string.item_reminder)
-                contentText = getItemData.items
+
+            if (getRoutineData != null) {
+                contentTitle = context.resources.getString(R.string.routine_reminder)
+                contentText = getRoutineData.description
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val channel = NotificationChannel(OREO_NOTIF_CHANEL_ID, NOTIFICATION, NotificationManager.IMPORTANCE_HIGH)
@@ -56,6 +55,5 @@ class NotificationMaker {
             return PendingIntent.getActivity(context, PENDING_INTENT_ID, i, PendingIntent.FLAG_UPDATE_CURRENT)
         }
     }
-
 
 }
