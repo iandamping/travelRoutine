@@ -1,4 +1,4 @@
-package com.example.junemon.travelroutine.helper.alarmHours
+package com.example.junemon.travelroutine.helper.alarms
 
 import android.app.AlarmManager
 import android.app.PendingIntent

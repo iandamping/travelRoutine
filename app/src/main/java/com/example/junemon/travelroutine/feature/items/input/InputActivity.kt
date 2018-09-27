@@ -19,7 +19,7 @@ import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalItems
 import com.example.junemon.travelroutine.helper.KeyboardCloser
 import com.example.junemon.travelroutine.helper.ValidateEditTextHelper
-import com.example.junemon.travelroutine.helper.alarmHours.AlarmSetter
+import com.example.junemon.travelroutine.helper.alarms.AlarmSetter
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_input_items.*
 import org.jetbrains.anko.selector

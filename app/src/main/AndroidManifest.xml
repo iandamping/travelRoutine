@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.junemon.travelroutine">
-
+    
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
@@ -31,7 +32,7 @@
         <activity android:name=".feature.routine.input.InputRoutineDetail" />
 
         <receiver
-            android:name=".helper.alarmHours.AlarmReceiver"
+            android:name=".helper.alarms.AlarmReceiver"
             android:enabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"></action>
