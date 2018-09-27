@@ -1,12 +1,14 @@
 package com.example.junemon.travelroutine.feature.news.headline
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.junemon.travelroutine.MainApplication.Companion.builder
 import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.network.model.PersonalNews
 import kotlinx.android.synthetic.main.activity_news_data.*
@@ -42,9 +44,9 @@ class NewsFragment : Fragment(), NewsFragmentView {
     override fun newsHeadline(data: List<PersonalNews.Article>?) {
         rvNewsData.layoutManager = LinearLayoutManager(ctx)
         rvNewsData.adapter = NewsFragmentAdapter(ctx, data!!) {
-
+            builder.launchUrl(ctx, Uri.parse(it.url))
         }
-//        rvNewsData.adapter.notifyDataSetChanged()
+
     }
 
     override fun initView(view: View) {

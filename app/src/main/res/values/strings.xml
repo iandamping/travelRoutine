@@ -8,6 +8,7 @@
     <string name="category_entertainment">entertainment</string>
     <string name="item_reminder">Dont forget your items</string>
     <string name="routine_reminder">Dont forget your routine</string>
+    <string name="google_api_key">AIzaSyDdTEiRbvcX3_83ZpZhmqY1f0fI7gZ47kI</string>
 
     <string-array name="pick_some_tags">
         <item>Event Travel</item>

@@ -36,6 +36,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     //circular image view
     implementation 'com.mikhaellopez:circularimageview:3.1.0'
+    //espresso
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //internet
@@ -57,9 +58,14 @@ dependencies {
     implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
     implementation "org.jetbrains.anko:anko:$anko_version"
     implementation "org.jetbrains.anko:anko-design:$anko_version"
-
+    //image downloader
     implementation 'com.squareup.picasso:picasso:2.71828'
     //logging
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    //custom chrome tab
+    implementation 'com.android.support:customtabs:27.1.1'
+    //places
+    implementation 'com.google.android.gms:play-services-places:15.0.1'
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
 }

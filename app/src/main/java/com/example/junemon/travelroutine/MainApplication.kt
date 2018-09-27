@@ -1,6 +1,8 @@
 package com.example.junemon.travelroutine
 
+import android.annotation.SuppressLint
 import android.app.Application
+import android.support.customtabs.CustomTabsIntent
 import com.example.junemon.travelroutine.database.MainDatabase
 import com.example.junemon.travelroutine.network.ApiClient
 import java.text.SimpleDateFormat
@@ -13,7 +15,9 @@ class MainApplication : Application() {
         private val cal: Calendar = Calendar.getInstance()
         val TAG: String = MainApplication::javaClass.name
         private const val DATE_FORMAT: String = "dd-MM-yyy"
+        @SuppressLint("ConstantLocale")
         val dateFormat: SimpleDateFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+        lateinit var builder: CustomTabsIntent
         var mDBAccess: MainDatabase? = null
         var MAIN_APPS: Application = Application()
         val years: Int = cal.get(Calendar.YEAR)
@@ -29,5 +33,6 @@ class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         mDBAccess = MainDatabase.getInstances(applicationContext)
+        builder = CustomTabsIntent.Builder().build()
     }
 }
