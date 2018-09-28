@@ -34,6 +34,7 @@ class OutputRoutineAdapter(val ctx: Context?, var listData: List<PersonalRoutine
                 ivAlarmRoutineClock.visibility = View.VISIBLE
                 tvDateRoutineReminder.visibility = View.VISIBLE
                 tvRoutineTimer.visibility = View.VISIBLE
+                ivAlarmRoutineClock.visibility = View.VISIBLE
                 tvDateRoutineReminder.text = dateFormat.format(data.selectedDate)
                 tvRoutineTimer.text = "${data.selectedHour} : ${data.selectedMinute}"
             }

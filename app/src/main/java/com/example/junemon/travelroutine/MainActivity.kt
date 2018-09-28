@@ -4,18 +4,27 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.example.junemon.travelroutine.feature.items.output.OutputFragment
 import com.example.junemon.travelroutine.feature.routine.output.OutputRoutineFragment
+import com.example.junemon.travelroutine.helper.networkchecker.NetworkChangeListener
 import com.example.junemon.travelroutine.repositories.News.NewsRepositories
 import com.example.junemon.travelroutine.ui.MainPager
-import com.google.android.gms.common.api.GoogleApiClient
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.noButton
+import org.jetbrains.anko.yesButton
 
 class MainActivity : AppCompatActivity() {
+    lateinit var networkChecker: NetworkChangeListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        NewsRepositories.getAllNews(
-                NewsRepositories.STATE_OF_PULLED, resources.getString(R.string.category_entertainment), resources.getString(R.string.category_news), resources.getString(R.string.country_news)
-                , resources.getString(R.string.api_source_news), resources.getString(R.string.api_key_news))
+        networkChecker = NetworkChangeListener()
+        networkChecker.register(this)
+        internetChecker()
+
+//        NewsRepositories.getAllNews(
+//                NewsRepositories.STATE_OF_PULLED, resources.getString(R.string.category_entertainment), resources.getString(R.string.category_news), resources.getString(R.string.country_news)
+//                , resources.getString(R.string.api_source_news), resources.getString(R.string.api_key_news))
+
 
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -63,6 +72,21 @@ class MainActivity : AppCompatActivity() {
                     .replace(R.id.main_container, MainPager(), MainPager::class.java.simpleName)
                     .commit()
         }
+    }
+
+    private fun internetChecker() {
+        if (networkChecker.isConnected(this) == false) {
+            alert("no Internet Connection") {
+                yesButton { }
+                noButton { }
+            }.show()
+        } else if (networkChecker.isConnected(this) == true) {
+            NewsRepositories.getAllNews(
+                    NewsRepositories.STATE_OF_PULLED, resources.getString(R.string.category_entertainment), resources.getString(R.string.category_news), resources.getString(R.string.country_news)
+                    , resources.getString(R.string.api_source_news), resources.getString(R.string.api_key_news))
+
+        }
+
     }
 
     override fun onDestroy() {

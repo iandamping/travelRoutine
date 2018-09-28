@@ -159,5 +159,6 @@ class InputActivity : AppCompatActivity(), InputView {
                 btnPickTag.text = name[i]
             }
         }
+
     }
 }

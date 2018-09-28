@@ -16,9 +16,6 @@ import com.example.junemon.travelroutine.network.model.PersonalNewsEntertainment
 class MainPager : Fragment() {
     lateinit var vpMainPager: ViewPager
     lateinit var tabMainPager: TabLayout
-    private var news: List<PersonalNews.Article>? = null
-    private var bussiness: List<PersonalNewsBussines.Article>? = null
-    private var entertain: List<PersonalNewsEntertainment.Article>? = null
 
     fun newInstance(news: ArrayList<PersonalNews.Article>?, bussines: ArrayList<PersonalNewsBussines.Article>?, entertain: ArrayList<PersonalNewsEntertainment.Article>?): MainPager {
         val bundle = Bundle()
@@ -32,10 +29,6 @@ class MainPager : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val args = arguments
-//        news = args?.getParcelableArrayList("news")
-//        bussiness = args?.getParcelableArrayList("bussiness")
-//        entertain = args?.getParcelableArrayList("entertain")
 
     }
 
