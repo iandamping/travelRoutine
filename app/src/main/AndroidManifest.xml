@@ -26,9 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.junemon.travelroutine.feature.items.input.InputActivity" />
+        <activity android:name="com.example.junemon.travelroutine.feature.items.input.InputActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name="com.example.junemon.travelroutine.feature.items.input.InputDetail" />
-        <activity android:name=".feature.routine.input.InputRoutineActivity" />
+        <activity android:name=".feature.routine.input.InputRoutineActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".feature.routine.input.InputRoutineDetail" />
 
         <receiver
