@@ -70,6 +70,7 @@
                         <TextView
                             android:id="@+id/tvDateRoutineReminder"
                             android:layout_width="wrap_content"
+                            android:visibility="gone"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/spacing_small"
                             tools:text="19/03/2018"/>
@@ -79,10 +80,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/letter_small"
+                            android:visibility="gone"
                             tools:text="13:90" />
 
                         <ImageView
-                            android:id="@+id/ivAlarmClock"
+                            android:id="@+id/ivAlarmRoutineClock"
+                            android:visibility="gone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>

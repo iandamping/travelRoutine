@@ -52,9 +52,6 @@ class OutputAdapter(val ctx: Context?, var listData: List<PersonalItems>, val li
             } else if (item.tags?.contains("Volunteer Travel")!!) {
                 ivCircluar.imageResource = R.drawable.ic_vespa
             }
-
-
-
             itemView.setOnClickListener {
                 listener((item))
             }

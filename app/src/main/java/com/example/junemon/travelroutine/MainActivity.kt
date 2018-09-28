@@ -6,6 +6,7 @@ import com.example.junemon.travelroutine.feature.items.output.OutputFragment
 import com.example.junemon.travelroutine.feature.routine.output.OutputRoutineFragment
 import com.example.junemon.travelroutine.repositories.News.NewsRepositories
 import com.example.junemon.travelroutine.ui.MainPager
+import com.google.android.gms.common.api.GoogleApiClient
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
