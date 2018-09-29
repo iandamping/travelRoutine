@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/InputMenu"
+            android:id="@+id/NavInputMenuNav"
             android:icon="@drawable/ic_add_circle_black_24dp"
             android:title="Belongings" />
         <item
-            android:id="@+id/RoutineMenu"
+            android:id="@+id/NavRoutineMenu"
             android:icon="@drawable/ic_markunread_mailbox_black_24dp"
             android:title="Routines" />
         <item
-            android:id="@+id/NewsMenu"
+            android:id="@+id/NavNewsMenu"
             android:icon="@drawable/ic_books_white_24dp"
             android:title="News" />
     </group>
