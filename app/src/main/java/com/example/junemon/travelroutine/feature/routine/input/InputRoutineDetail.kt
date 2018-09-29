@@ -27,6 +27,7 @@ class InputRoutineDetail : AppCompatActivity(), InputRoutineView {
         setContentView(R.layout.item_output_detail_routines)
         presenter = InputRoutinePresenter(this)
         presenter.onCreate(this)
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         initListener()
     }
 
@@ -73,6 +74,11 @@ class InputRoutineDetail : AppCompatActivity(), InputRoutineView {
             data = i.getParcelableExtra(InputRoutineActivity.INPUT_ROUTINE_ITEM_KEYS)
             presenter.getData(data)
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
     }
 
     override fun initListener() {

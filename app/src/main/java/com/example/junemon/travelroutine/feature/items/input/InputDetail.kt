@@ -26,6 +26,7 @@ class InputDetail : AppCompatActivity(), InputView {
         setContentView(R.layout.item_output_detail_items)
         presenter = InputPresenter(this)
         presenter.onCreate(this)
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -75,5 +76,9 @@ class InputDetail : AppCompatActivity(), InputView {
 
     override fun initListener() {
 
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
     }
 }

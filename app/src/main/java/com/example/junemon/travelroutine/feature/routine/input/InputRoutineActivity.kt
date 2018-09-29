@@ -44,6 +44,7 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
         setContentView(R.layout.activity_input_routines)
         presenter = InputRoutinePresenter(this)
         presenter.onCreate(this)
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         initView()
     }
 
@@ -147,5 +148,9 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
                 btnPickRoutineTag.text = name[i]
             }
         }
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
     }
 }

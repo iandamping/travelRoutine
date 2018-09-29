@@ -48,6 +48,7 @@ class InputActivity : AppCompatActivity(), InputView {
         setContentView(R.layout.activity_input_items)
         presenter = InputPresenter(this)
         presenter.onCreate(this)
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         initView()
     }
 
@@ -160,5 +161,9 @@ class InputActivity : AppCompatActivity(), InputView {
             }
         }
 
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
     }
 }

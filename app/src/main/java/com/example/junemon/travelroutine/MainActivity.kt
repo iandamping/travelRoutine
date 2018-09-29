@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         networkChecker.register(this)
         internetChecker()
 
-//        setSupportActionBar(toolbar_main)
         toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar_main, R.string.navigation_drawer_open, R.string.navigation_drawer_closed)
         toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.white)
 
@@ -44,9 +43,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         when (p0.itemId) {
-            R.id.NavInputMenuNav -> loadOutputItemsFragment(savedInstanceState = null)
-            R.id.NavRoutineMenu -> loadOutputRoutinesFragment(savedInstanceState = null)
-            R.id.NavNewsMenu -> loadMainFragment(savedInstanceState = null)
+            R.id.NavInputMenuNav -> loadOutputItemsFragment(null)
+            R.id.NavRoutineMenu -> loadOutputRoutinesFragment(null)
+            R.id.NavNewsMenu -> loadMainFragment(null)
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
@@ -56,7 +55,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun loadOutputItemsFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager
-                    .beginTransaction()
+                    .beginTransaction().setCustomAnimations(R.anim.exit_from_right, R.anim.enter_to_right, R.anim.exit_from_right, R.anim.enter_to_right)
                     .replace(R.id.main_fragment_container, OutputFragment(), OutputFragment::class.java.simpleName)
                     .commit()
         }
@@ -65,7 +64,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun loadOutputRoutinesFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager
-                    .beginTransaction()
+                    .beginTransaction().setCustomAnimations(R.anim.exit_from_right, R.anim.enter_to_right, R.anim.exit_from_right, R.anim.enter_to_right)
                     .replace(R.id.main_fragment_container, OutputRoutineFragment(), OutputRoutineFragment::class.java.simpleName)
                     .commit()
         }
