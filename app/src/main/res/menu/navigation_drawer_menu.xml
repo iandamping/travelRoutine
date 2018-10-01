@@ -14,4 +14,12 @@
             android:icon="@drawable/ic_books_white_24dp"
             android:title="News" />
     </group>
+    <item android:title="Preferences">
+        <menu>
+            <item
+                android:id="@+id/NavEnterPref"
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="Settings" />
+        </menu>
+    </item>
 </menu>

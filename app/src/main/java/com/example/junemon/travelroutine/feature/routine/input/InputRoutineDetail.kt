@@ -3,6 +3,7 @@ package com.example.junemon.travelroutine.feature.routine.input
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.app.AppCompatDelegate
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -23,6 +24,10 @@ class InputRoutineDetail : AppCompatActivity(), InputRoutineView {
     private val df: DateFormat = MainApplication.dateFormat
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.NightAppTheme)
+        } else setTheme(R.style.AppTheme)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.item_output_detail_routines)
         presenter = InputRoutinePresenter(this)
@@ -78,7 +83,7 @@ class InputRoutineDetail : AppCompatActivity(), InputRoutineView {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 
     override fun initListener() {

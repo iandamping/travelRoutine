@@ -16,5 +16,5 @@ class PersonalRoutines(@PrimaryKey(autoGenerate = true) var ID: Int?,
                        @ColumnInfo(name = "input_routine_date") var selectedDate: Date?,
                        @ColumnInfo(name = "input_routine_selected_hour") var selectedHour: Int?,
                        @ColumnInfo(name = "input_routine_selected_minute") var selectedMinute: Int?) : Parcelable {
-    constructor() : this(null, null, null,null, null, null, null)
+    constructor() : this(null, null, null, null, null, null, null)
 }

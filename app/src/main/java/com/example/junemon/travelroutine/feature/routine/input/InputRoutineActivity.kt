@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.app.AppCompatDelegate
 import android.text.Editable
 import android.view.View
 import android.widget.EditText
@@ -40,11 +41,16 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
     private var getData: PersonalRoutines? = PersonalRoutines()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.NightAppTheme)
+        } else setTheme(R.style.AppTheme)
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input_routines)
         presenter = InputRoutinePresenter(this)
         presenter.onCreate(this)
-        overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         initView()
     }
 
@@ -149,8 +155,9 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
             }
         }
     }
+
     override fun onBackPressed() {
         super.onBackPressed()
-        overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 }

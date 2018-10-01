@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?attr/backgroundcolor"
     android:orientation="vertical">
 
     <LinearLayout
@@ -25,12 +26,12 @@
                 android:paddingTop="5dp">
 
                 <TextView
+                    android:textColor="?attr/textcolor"
                     android:id="@+id/tvNewsAuthor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:text="Denny Muchtar"
-                    android:textColor="@color/textColorSecondary"
                     android:textSize="@dimen/letter_small" />
 
                 <TextView
@@ -38,7 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Selasa, 4 Juli 2015"
-                    android:textColor="@color/dc_gray"
+                    android:textColor="?attr/textcolor"
                     android:textSize="@dimen/letter_small" />
 
                 <ImageView
@@ -56,7 +57,7 @@
                     android:layout_marginBottom="5dip"
                     android:maxLines="2"
                     android:text="Pelantikan Ketua Baru FKGH"
-                    android:textColor="@color/dc_black"
+                    android:textColor="?attr/textcolor"
                     android:textSize="@dimen/letter_medium" />
 
                 <TextView
@@ -66,7 +67,7 @@
                     android:layout_marginBottom="5dip"
                     android:maxLines="3"
                     android:text="Sample sample sample sample"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="?attr/textcolor"
                     android:textSize="@dimen/letter_small" />
             </LinearLayout>
 
@@ -81,5 +82,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/dc_lightestgray" />
+        android:background="?attr/backgroundcolor" />
 </LinearLayout>

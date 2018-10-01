@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="16dp"
-    android:layout_marginTop="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="@dimen/spacing_medium"
+    android:layout_marginTop="@dimen/spacing_medium"
+    android:layout_marginRight="@dimen/spacing_medium"
+    android:background="?attr/backgroundcolor"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="@dimen/letter_medium"
+        app:cardBackgroundColor="?attr/cardbackground"
         app:cardCornerRadius="4dp">
 
         <RelativeLayout
@@ -41,11 +43,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="testing"
+                    android:textColor="?attr/textcolor"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textStyle="bold"
                     tools:text="Routines" />
 
                 <TextView
+                    android:textColor="?attr/textcolor"
                     android:id="@+id/tvRoutineDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -68,6 +72,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:textColor="?attr/textcolor"
                             android:id="@+id/tvDateRoutineReminder"
                             android:layout_width="wrap_content"
                             android:visibility="gone"
@@ -76,6 +81,7 @@
                             tools:text="19/03/2018"/>
 
                         <TextView
+                            android:textColor="?attr/textcolor"
                             android:id="@+id/tvRoutineTimer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

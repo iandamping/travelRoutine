@@ -14,16 +14,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/DayAppTheme">
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDdTEiRbvcX3_83ZpZhmqY1f0fI7gZ47kI" />
 
         <activity
+            android:theme="@style/DayAppTheme"
             android:name=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,6 +44,10 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".feature.routine.input.InputRoutineDetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".feature.settings.SettingsActivity"
+            android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
 
         <receiver

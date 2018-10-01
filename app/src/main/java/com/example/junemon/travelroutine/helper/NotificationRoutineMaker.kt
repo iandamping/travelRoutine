@@ -20,14 +20,12 @@ class NotificationRoutineMaker {
         private var OREO_NOTIF_CHANEL_ID: String = "routines"
         private val PENDING_INTENT_ID = 3417
         private var contentTitle: String? = null
-        private var contentText: String? = null
 
         fun reminderRoutineNotif(context: Context?, getRoutineData: PersonalRoutines?) {
             val notif = context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
             if (getRoutineData != null) {
                 contentTitle = context.resources.getString(R.string.routine_reminder)
-                contentText = getRoutineData.description
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val channel = NotificationChannel(OREO_NOTIF_CHANEL_ID, NOTIFICATION, NotificationManager.IMPORTANCE_HIGH)
@@ -37,7 +35,7 @@ class NotificationRoutineMaker {
                     .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                     .setContentTitle("Hai ! ${contentTitle} okaay ?")
                     .setSmallIcon(R.drawable.ic_cofee_bean)
-                    .setContentText("These ${contentText} must be important right ?")
+                    .setContentText("These ${getRoutineData?.description} must be important right ?")
                     .setDefaults(Notification.DEFAULT_VIBRATE)
                     .setContentIntent(contentIntent(context))  //ini pendingIntent
                     .setAutoCancel(true)  //notif akan hilang setelah di klik

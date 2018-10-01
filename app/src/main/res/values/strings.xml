@@ -12,21 +12,10 @@
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_closed">Close</string>
 
-    <string-array name="pick_some_tags">
-        <item>Event Travel</item>
-        <item>Visiting Friends</item>
-        <item>Road Trip</item>
-        <item>Volunteer Travel</item>
-        <item>Bussiness Travel</item>
-        <item>Group Tour</item>
-    </string-array>
+    <string name="enabled_night_mode_label">Enable Night Mode</string>
+    <string name="enabled_night_mode_key">Night Mode</string>
+    <string name="night_mode_enabled_true">Enabled</string>
+    <string name="night_mode_enabled_false">Disabled</string>
 
-    <array name="pick_some_tag_image">
-        <item>@drawable/ic_bar</item>
-        <item>@drawable/ic_cityscape</item>
-        <item>@drawable/ic_foodstall</item>
-        <item>@drawable/ic_library</item>
-        <item>@drawable/ic_train</item>
-        <item>@drawable/ic_vespa</item>
-    </array>
+
 </resources>

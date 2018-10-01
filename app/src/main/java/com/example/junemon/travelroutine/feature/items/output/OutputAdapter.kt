@@ -10,7 +10,6 @@ import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalItems
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_output.*
-import kotlinx.android.synthetic.main.item_routines.*
 import org.jetbrains.anko.imageResource
 
 class OutputAdapter(val ctx: Context?, var listData: List<PersonalItems>, val listener: (PersonalItems) -> Unit)

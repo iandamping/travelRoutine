@@ -15,12 +15,14 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     override fun onReceive(p0: Context?, p1: Intent?) {
+        NotificationMaker.reminderNotif(p0, getItemData)
+        NotificationRoutineMaker.reminderRoutineNotif(p0, getRoutineData)
+
         if (p1?.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
             NotificationMaker.reminderNotif(p0, getItemData)
             NotificationRoutineMaker.reminderRoutineNotif(p0, getRoutineData)
         }
-        NotificationMaker.reminderNotif(p0, getItemData)
-        NotificationRoutineMaker.reminderRoutineNotif(p0, getRoutineData)
+
     }
 
 

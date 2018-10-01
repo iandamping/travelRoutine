@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:buttonTint="?attr/tintcolor"
+        android:defaultValue="@bool/pref_night_mode"
+        android:key="@string/enabled_night_mode_key"
+        android:summaryOff="@string/night_mode_enabled_false"
+        android:summaryOn="@string/night_mode_enabled_true"
+        android:title="@string/enabled_night_mode_label" />
+
+</PreferenceScreen>

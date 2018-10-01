@@ -20,15 +20,13 @@ class NotificationMaker {
         private val NOTIFICATION = "Notification"
         private var REMINDER_NOTIFICATION_ID: Int = 23
         private var OREO_NOTIF_CHANEL_ID: String = "item"
-        private val PENDING_INTENT_ID = 3417
+        private val PENDING_INTENT_ID = 3490
         private var contentTitle: String? = null
-        private var contentText: String? = null
 
         fun reminderNotif(context: Context?, getItemData: PersonalItems?) {
             val notif = context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             if (getItemData != null) {
                 contentTitle = context.resources.getString(R.string.item_reminder)
-                contentText = getItemData.items
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val channel = NotificationChannel(OREO_NOTIF_CHANEL_ID, NOTIFICATION, NotificationManager.IMPORTANCE_HIGH)
@@ -38,7 +36,7 @@ class NotificationMaker {
                     .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                     .setContentTitle("Hai ! ${contentTitle} okaay ?")
                     .setSmallIcon(R.drawable.ic_cofee_bean)
-                    .setContentText("These ${contentText} must be important right ?")
+                    .setContentText("These ${getItemData?.items} must be important right ?")
                     .setDefaults(Notification.DEFAULT_VIBRATE)
                     .setContentIntent(contentIntent(context))  //ini pendingIntent
                     .setAutoCancel(true)  //notif akan hilang setelah di klik

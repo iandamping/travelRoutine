@@ -1,51 +1,54 @@
 package com.example.junemon.travelroutine
 
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.design.widget.NavigationView
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.app.AppCompatDelegate
 import android.view.MenuItem
 import com.example.junemon.travelroutine.feature.items.output.OutputFragment
 import com.example.junemon.travelroutine.feature.routine.output.OutputRoutineFragment
+import com.example.junemon.travelroutine.feature.settings.SettingsActivity
 import com.example.junemon.travelroutine.helper.networkchecker.NetworkChangeListener
 import com.example.junemon.travelroutine.repositories.News.NewsRepositories
 import com.example.junemon.travelroutine.ui.MainPager
 import kotlinx.android.synthetic.main.item_drawer_layout.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.yesButton
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
-
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, SharedPreferences.OnSharedPreferenceChangeListener {
     lateinit var networkChecker: NetworkChangeListener
     private lateinit var toggle: ActionBarDrawerToggle
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.DarkTheme)
+        } else {
+            setTheme(R.style.DayAppTheme)
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.item_drawer_layout)
-        networkChecker = NetworkChangeListener()
-        networkChecker.register(this)
         internetChecker()
+        initNavView()
+        setupSharedPref()
 
-        toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar_main, R.string.navigation_drawer_open, R.string.navigation_drawer_closed)
-        toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.white)
-
-        drawer_layout.addDrawerListener(toggle)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeButtonEnabled(true)
-        nav_view.setNavigationItemSelectedListener(this)
         loadOutputItemsFragment(savedInstanceState)
         nav_view.setCheckedItem(R.id.NavInputMenuNav)
     }
+
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         when (p0.itemId) {
             R.id.NavInputMenuNav -> loadOutputItemsFragment(null)
             R.id.NavRoutineMenu -> loadOutputRoutinesFragment(null)
             R.id.NavNewsMenu -> loadMainFragment(null)
+            R.id.NavEnterPref -> startActivity<SettingsActivity>()
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
@@ -80,6 +83,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun internetChecker() {
+        networkChecker = NetworkChangeListener()
+        networkChecker.register(this)
         if (networkChecker.isConnected(this) == false) {
             alert("no Internet Connection") {
                 yesButton { }
@@ -93,6 +98,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
     }
+
+    private fun initNavView() {
+        toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar_main, R.string.navigation_drawer_open, R.string.navigation_drawer_closed)
+        toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.white)
+
+        drawer_layout.addDrawerListener(toggle)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+
+        nav_view.setNavigationItemSelectedListener(this)
+    }
+
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
@@ -111,6 +128,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onSharedPreferenceChanged(p0: SharedPreferences?, p1: String?) {
+        if (p1?.equals(getString(R.string.enabled_night_mode_key))!!) {
+            initNightMode(p0?.getBoolean(getString(R.string.enabled_night_mode_key),
+                    resources.getBoolean(R.bool.pref_night_mode))!!)
+        }
+    }
+
+    private fun setupSharedPref() {
+        val sharedPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        initNightMode(sharedPref.getBoolean(getString(R.string.enabled_night_mode_key), resources.getBoolean(R.bool.pref_night_mode)))
+        sharedPref.registerOnSharedPreferenceChangeListener(this)
+
+    }
+
+    private fun initNightMode(status: Boolean) {
+        if (status) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else if (!status) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+    }
+
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
@@ -122,5 +161,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onDestroy() {
         super.onDestroy()
         NewsRepositories.onDestroy()
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this)
     }
 }

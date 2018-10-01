@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.app.AppCompatDelegate
 import android.text.Editable
 import android.view.View
 import android.widget.EditText
@@ -44,11 +45,15 @@ class InputActivity : AppCompatActivity(), InputView {
     private var getData: PersonalItems? = PersonalItems()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.NightAppTheme)
+        } else setTheme(R.style.AppTheme)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input_items)
         presenter = InputPresenter(this)
         presenter.onCreate(this)
-        overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         initView()
     }
 
@@ -85,7 +90,6 @@ class InputActivity : AppCompatActivity(), InputView {
                     mTimePicker.dismiss()
 
                 }
-
                 mTimePicker.setTitle("Select Time")
                 mTimePicker.show()
             } else if (!b) {
@@ -119,7 +123,6 @@ class InputActivity : AppCompatActivity(), InputView {
         }
         btnPickTag.setOnClickListener {
             initDialog()
-
         }
 
 
@@ -162,8 +165,9 @@ class InputActivity : AppCompatActivity(), InputView {
         }
 
     }
+
     override fun onBackPressed() {
         super.onBackPressed()
-        overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 }

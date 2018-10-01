@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/inputLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/backgroundcolor"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_medium">
+        android:layout_margin="@dimen/spacing_medium"
+        app:cardBackgroundColor="?attr/cardbackground">
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_margin="@dimen/spacing_medium">
+            android:layout_margin="@dimen/spacing_medium"
+            android:textColorHint="?attr/textcolor">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/etRoutine"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Whats Your Routine ?" />
+                android:hint="Whats Your Routine ?"
+                android:textColor="?attr/textcolor" />
         </android.support.design.widget.TextInputLayout>
     </android.support.v7.widget.CardView>
 
@@ -35,7 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="@dimen/spacing_small"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            app:cardBackgroundColor="?attr/cardbackground">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,12 +54,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textColorHint="?attr/textcolor"
                     android:background="@null"
                     android:descendantFocusability="blocksDescendants"
                     android:focusable="false"
                     android:gravity="center"
                     android:hint="Pick Date"
-                    android:padding="@dimen/spacing_medium" />
+                    android:padding="@dimen/spacing_medium"
+                    android:textColor="?attr/textcolor" />
 
 
                 <android.support.v7.widget.SwitchCompat
@@ -79,18 +87,21 @@
 
             <TextView
                 android:id="@+id/tvRoutineDatesReminderViews"
-                android:visibility="gone"
-                android:gravity="center"
                 android:layout_width="match_parent"
+                android:textColor="?attr/textcolor"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_medium"
-                android:layout_marginRight="@dimen/spacing_medium" />
+                android:layout_marginRight="@dimen/spacing_medium"
+                android:gravity="center"
+                android:visibility="gone" />
         </LinearLayout>
+
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="@dimen/spacing_small"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            app:cardBackgroundColor="?attr/cardbackground">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -106,7 +117,8 @@
                     android:background="@null"
                     android:gravity="center"
                     android:padding="@dimen/spacing_medium"
-                    android:text="Select Tag" />
+                    android:text="Select Tag"
+                    android:textColor="?attr/textcolor" />
 
             </LinearLayout>
 
@@ -120,11 +132,11 @@
             <EditText
                 android:id="@+id/etArrivalReminderViews"
                 android:layout_width="match_parent"
-                android:visibility="gone"
-                android:gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_medium"
-                android:layout_marginRight="@dimen/spacing_medium" />
+                android:layout_marginRight="@dimen/spacing_medium"
+                android:gravity="center"
+                android:visibility="gone" />
         </LinearLayout>
 
     </LinearLayout>
@@ -133,7 +145,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_medium"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        app:cardBackgroundColor="?attr/cardbackground">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -145,8 +158,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:layout_marginRight="@dimen/spacing_medium"
-                android:layout_marginTop="@dimen/spacing_medium">
+                android:textColorHint="?attr/textcolor">
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/etRoutineDescription"
@@ -160,8 +174,9 @@
                     android:lines="8"
                     android:maxLines="10"
                     android:minLines="5"
+                    android:scrollbars="vertical"
                     android:scrollHorizontally="false"
-                    android:scrollbars="vertical" />
+                    android:textColor="?attr/textcolor" />
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
@@ -175,6 +190,7 @@
         android:layout_gravity="center|bottom"
         android:layout_margin="@dimen/spacing_medium"
         android:layout_weight="0"
+        android:background="?attr/buttoncolor"
         android:text="Submit" />
 
 </LinearLayout>
