@@ -30,6 +30,7 @@ class InputRoutineDetail : AppCompatActivity(), InputRoutineView {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.item_output_detail_routines)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         presenter = InputRoutinePresenter(this)
         presenter.onCreate(this)
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
@@ -46,6 +47,7 @@ class InputRoutineDetail : AppCompatActivity(), InputRoutineView {
         return when (item?.itemId) {
             android.R.id.home -> {
                 finish()
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 true
             }
             R.id.deleteMenu -> {

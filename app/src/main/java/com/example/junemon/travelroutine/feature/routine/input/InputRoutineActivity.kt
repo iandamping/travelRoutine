@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.text.Editable
+import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import com.example.junemon.travelroutine.MainApplication
@@ -48,6 +49,7 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input_routines)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         presenter = InputRoutinePresenter(this)
         presenter.onCreate(this)
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
@@ -154,6 +156,16 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
                 btnPickRoutineTag.text = name[i]
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.getItemId() == android.R.id.home) {
+            finish();
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            return true;
+        }
+        return false;
+
     }
 
     override fun onBackPressed() {

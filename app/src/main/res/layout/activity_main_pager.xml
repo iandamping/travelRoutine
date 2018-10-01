@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:layout_height="wrap_content"
-            android:background="#2196F3"
+            android:background="?attr/colorPrimary"
             app:tabMode="fixed"
             app:tabSelectedTextColor="#ffffff" />
     </android.support.design.widget.AppBarLayout>

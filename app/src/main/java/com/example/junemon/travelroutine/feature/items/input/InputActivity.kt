@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.text.Editable
+import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import com.example.junemon.travelroutine.MainApplication.Companion.dateFormat
@@ -53,6 +54,7 @@ class InputActivity : AppCompatActivity(), InputView {
         setContentView(R.layout.activity_input_items)
         presenter = InputPresenter(this)
         presenter.onCreate(this)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         initView()
     }
@@ -163,6 +165,16 @@ class InputActivity : AppCompatActivity(), InputView {
                 btnPickTag.text = name[i]
             }
         }
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.getItemId() == android.R.id.home) {
+            finish();
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            return true;
+        }
+        return false;
 
     }
 

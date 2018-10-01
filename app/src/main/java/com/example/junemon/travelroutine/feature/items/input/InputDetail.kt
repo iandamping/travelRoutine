@@ -29,6 +29,7 @@ class InputDetail : AppCompatActivity(), InputView {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.item_output_detail_items)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         presenter = InputPresenter(this)
         presenter.onCreate(this)
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
@@ -44,6 +45,7 @@ class InputDetail : AppCompatActivity(), InputView {
         return when (item?.itemId) {
             android.R.id.home -> {
                 finish()
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 true
             }
             R.id.deleteMenu -> {
@@ -87,4 +89,5 @@ class InputDetail : AppCompatActivity(), InputView {
         super.onBackPressed()
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
+
 }
