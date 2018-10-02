@@ -19,7 +19,6 @@ import com.example.junemon.travelroutine.repositories.News.NewsRepositories
 import com.example.junemon.travelroutine.ui.MainPager
 import kotlinx.android.synthetic.main.item_drawer_layout.*
 import org.jetbrains.anko.alert
-import org.jetbrains.anko.noButton
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.yesButton
 
@@ -42,6 +41,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setCheckedItem(R.id.NavInputMenuNav)
     }
 
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.menu_delete_all, menu)
+//        menuItem = menu
+//        return true
+//    }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         when (p0.itemId) {
@@ -88,7 +92,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (networkChecker.isConnected(this) == false) {
             alert("no Internet Connection") {
                 yesButton { }
-                noButton { }
             }.show()
         } else if (networkChecker.isConnected(this) == true) {
             NewsRepositories.getAllNews(
@@ -110,7 +113,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
     }
 
-
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         toggle.syncState()
@@ -122,6 +124,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
         if (toggle.onOptionsItemSelected(item)) {
             return true
         }

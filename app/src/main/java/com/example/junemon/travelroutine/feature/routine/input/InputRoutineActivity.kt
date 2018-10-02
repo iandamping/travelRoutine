@@ -127,6 +127,7 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
             onFocus.text = Editable.Factory.getInstance().newEditable(presenter.formatedDate(Year, MonthOfYear, Day))
             Observable.just(onFocus.text.toString().trim()).subscribe({ results -> actualSelectedDate })
         }, MainApplication.years, MainApplication.month, MainApplication.days)
+        datePicks.datePicker.minDate = System.currentTimeMillis() - 1000
         datePicks.show()
     }
 

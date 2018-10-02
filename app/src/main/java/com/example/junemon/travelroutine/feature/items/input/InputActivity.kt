@@ -20,7 +20,6 @@ import com.example.junemon.travelroutine.MainApplication.Companion.years
 import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalItems
 import com.example.junemon.travelroutine.helper.KeyboardCloser
-import com.example.junemon.travelroutine.helper.ValidateEditTextHelper
 import com.example.junemon.travelroutine.helper.alarms.AlarmSetter
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_input_items.*
@@ -103,19 +102,28 @@ class InputActivity : AppCompatActivity(), InputView {
         }
 
         btnSave.setOnClickListener {
-            if (!ValidateEditTextHelper.validates(this, etDestination, ValidateEditTextHelper.Type.EMPTY)) {
+            if (etDestination?.text.isNullOrEmpty()) {
+                etDestination.requestFocus()
+                etDestination?.error = "Destination cannot be empty"
+            } else if (!etDestination?.text.isNullOrEmpty()) {
                 destinantion = etDestination.text.toString().trim()
                 getData?.destination = destinantion
             }
-            if (!ValidateEditTextHelper.validates(this, etBarang, ValidateEditTextHelper.Type.EMPTY)) {
+            if (etBarang?.text.isNullOrEmpty()) {
+                etBarang.requestFocus()
+                etBarang?.error = "Items cannot be empty"
+            } else if (!etBarang?.text.isNullOrEmpty()) {
                 itemName = etBarang.text.toString().trim()
                 getData?.items = itemName
-
             }
-            if (!ValidateEditTextHelper.validates(this, etDepartDates, ValidateEditTextHelper.Type.EMPTY)) {
+            if (etDepartDates?.text.isNullOrEmpty()) {
+                etDepartDates.requestFocus()
+                etDepartDates.error = "Dates cannot be empty"
+            } else if (!etDepartDates?.text.isNullOrEmpty()) {
                 val dateExtract: String = etDepartDates.text.toString().trim()
                 departDate = dateFormat.parse(dateExtract)
                 getData?.selectedDate = departDate
+
             }
             getData?.selectedHour = actualSelectedHour
             getData?.selectedMinute = actualSelectedMinute
@@ -136,6 +144,7 @@ class InputActivity : AppCompatActivity(), InputView {
             onFocus.text = Editable.Factory.getInstance().newEditable(presenter.formatedDate(Year, MonthOfYear, Day))
             Observable.just(onFocus.text.toString().trim()).subscribe({ results -> actualSelectedDate })
         }, years, month, days)
+        datePicks.datePicker.minDate = System.currentTimeMillis() - 1000
         datePicks.show()
     }
 
@@ -144,6 +153,7 @@ class InputActivity : AppCompatActivity(), InputView {
         AlarmSetter.startItemsAlarm(this, data)
         finish()
         clearEditText()
+
     }
 
     fun clearEditText() {

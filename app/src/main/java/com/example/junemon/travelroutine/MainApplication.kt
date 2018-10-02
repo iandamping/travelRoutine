@@ -12,7 +12,7 @@ class MainApplication : Application() {
 
 
     companion object {
-        private val cal: Calendar = Calendar.getInstance()
+        val cal: Calendar = Calendar.getInstance()
         val TAG: String = MainApplication::javaClass.name
         private const val DATE_FORMAT: String = "dd-MM-yyy"
         @SuppressLint("ConstantLocale")

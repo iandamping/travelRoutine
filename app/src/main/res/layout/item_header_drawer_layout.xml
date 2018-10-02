@@ -6,7 +6,7 @@
     android:focusable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
     android:gravity="bottom"
-    android:background="?attr/backgroundcolor"
+    android:background="?attr/colorPrimary"
     android:orientation="vertical"
     android:padding="@dimen/spacing_medium"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -18,7 +18,7 @@
         android:src="@mipmap/ic_launcher" />
 
     <TextView
-        android:textColor="?attr/textcolor"
+        android:textColor="@color/dc_white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="My header title"
