@@ -17,5 +17,13 @@
     <string name="night_mode_enabled_true">Enabled</string>
     <string name="night_mode_enabled_false">Disabled</string>
 
+    <string name="splash_header_1">Travel</string>
+    <string name="splash_header_2">Reminder</string>
+    <string name="splash_header_3">Goals</string>
+
+    <string name="splash_description_1">Kode di atas berarti bahwa saat pengguna menekan tombol Favorite, jika tim yang dimaksud belum ditambahkan ke database</string>
+    <string name="splash_description_2">Kode di atas berarti bahwa saat pengguna menekan tombol Favorite, jika tim yang dimaksud belum ditambahkan ke database</string>
+    <string name="splash_description_3">Kode di atas berarti bahwa saat pengguna menekan tombol Favorite, jika tim yang dimaksud belum ditambahkan ke database</string>
+
 
 </resources>

@@ -21,16 +21,20 @@
             android:value="AIzaSyDdTEiRbvcX3_83ZpZhmqY1f0fI7gZ47kI" />
 
         <activity
-            android:theme="@style/DayAppTheme"
-            android:name=".MainActivity"
+            android:name=".feature.splash.SplashActivity"
             android:screenOrientation="portrait"
-            >
+            android:theme="@style/DayAppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent"/>
         <activity
             android:name="com.example.junemon.travelroutine.feature.items.input.InputActivity"
             android:screenOrientation="portrait"

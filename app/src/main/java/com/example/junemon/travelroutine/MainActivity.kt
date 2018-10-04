@@ -1,5 +1,6 @@
 package com.example.junemon.travelroutine
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.view.MenuItem
 import com.example.junemon.travelroutine.feature.items.output.OutputFragment
 import com.example.junemon.travelroutine.feature.routine.output.OutputRoutineFragment
 import com.example.junemon.travelroutine.feature.settings.SettingsActivity
+import com.example.junemon.travelroutine.helper.animations.RevealAnimation
 import com.example.junemon.travelroutine.helper.networkchecker.NetworkChangeListener
 import com.example.junemon.travelroutine.repositories.News.NewsRepositories
 import com.example.junemon.travelroutine.ui.MainPager
@@ -22,8 +24,10 @@ import org.jetbrains.anko.alert
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.yesButton
 
+
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, SharedPreferences.OnSharedPreferenceChangeListener {
-    lateinit var networkChecker: NetworkChangeListener
+    private lateinit var networkChecker: NetworkChangeListener
+    private lateinit var mRevealAnimation: RevealAnimation
     private lateinit var toggle: ActionBarDrawerToggle
     override fun onCreate(savedInstanceState: Bundle?) {
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
@@ -33,9 +37,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.item_drawer_layout)
+
         internetChecker()
         initNavView()
         setupSharedPref()
+        initAnimationView()
+
 
         loadOutputItemsFragment(savedInstanceState)
         nav_view.setCheckedItem(R.id.NavInputMenuNav)
@@ -163,7 +170,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onDestroy() {
         super.onDestroy()
+        mRevealAnimation.unRevealActivity()
         NewsRepositories.onDestroy()
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this)
+    }
+    private fun initAnimationView(){
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+
+        val i: Intent = intent
+        mRevealAnimation = RevealAnimation(drawer_layout, i, this)
     }
 }

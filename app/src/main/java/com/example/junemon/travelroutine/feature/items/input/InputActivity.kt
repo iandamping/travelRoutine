@@ -102,33 +102,26 @@ class InputActivity : AppCompatActivity(), InputView {
         }
 
         btnSave.setOnClickListener {
-            if (etDestination?.text.isNullOrEmpty()) {
-                etDestination.requestFocus()
-                etDestination?.error = "Destination cannot be empty"
-            } else if (!etDestination?.text.isNullOrEmpty()) {
-                destinantion = etDestination.text.toString().trim()
-                getData?.destination = destinantion
-            }
-            if (etBarang?.text.isNullOrEmpty()) {
-                etBarang.requestFocus()
-                etBarang?.error = "Items cannot be empty"
-            } else if (!etBarang?.text.isNullOrEmpty()) {
-                itemName = etBarang.text.toString().trim()
-                getData?.items = itemName
-            }
-            if (etDepartDates?.text.isNullOrEmpty()) {
-                etDepartDates.requestFocus()
-                etDepartDates.error = "Dates cannot be empty"
-            } else if (!etDepartDates?.text.isNullOrEmpty()) {
-                val dateExtract: String = etDepartDates.text.toString().trim()
-                departDate = dateFormat.parse(dateExtract)
-                getData?.selectedDate = departDate
 
+            if (etDestination?.text.isNullOrEmpty() && etBarang?.text.isNullOrEmpty() &&etDepartDates?.text.isNullOrEmpty()){
+                etDestination?.error = "Destination cannot be empty"
+                etBarang?.error = "Items cannot be empty"
+                etDepartDates.error = "Dates cannot be empty"
+                etDestination.requestFocus()
+            } else if (!etDestination?.text.isNullOrEmpty() &&!etBarang?.text.isNullOrEmpty() && !etDepartDates?.text.isNullOrEmpty()){
+                val dateExtract: String = etDepartDates.text.toString().trim()
+                destinantion = etDestination.text.toString().trim()
+                itemName = etBarang.text.toString().trim()
+                departDate = dateFormat.parse(dateExtract)
+                getData?.destination = destinantion
+                getData?.items = itemName
+                getData?.selectedDate = departDate
+                getData?.selectedHour = actualSelectedHour
+                getData?.selectedMinute = actualSelectedMinute
+                getData?.tags = actualTags
+
+                insertData(getData)
             }
-            getData?.selectedHour = actualSelectedHour
-            getData?.selectedMinute = actualSelectedMinute
-            getData?.tags = actualTags
-            insertData(getData)
 
         }
         btnPickTag.setOnClickListener {
