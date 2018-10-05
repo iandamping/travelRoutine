@@ -15,6 +15,7 @@ import android.view.MenuItem
 import com.example.junemon.travelroutine.feature.items.output.OutputFragment
 import com.example.junemon.travelroutine.feature.routine.output.OutputRoutineFragment
 import com.example.junemon.travelroutine.feature.settings.SettingsActivity
+import com.example.junemon.travelroutine.feature.tags.TagsFragment
 import com.example.junemon.travelroutine.helper.animations.RevealAnimation
 import com.example.junemon.travelroutine.helper.networkchecker.NetworkChangeListener
 import com.example.junemon.travelroutine.repositories.News.NewsRepositories
@@ -37,11 +38,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.item_drawer_layout)
+        initAnimationView()
 
         internetChecker()
         initNavView()
         setupSharedPref()
-        initAnimationView()
 
 
         loadOutputItemsFragment(savedInstanceState)
@@ -60,6 +61,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.NavRoutineMenu -> loadOutputRoutinesFragment(null)
             R.id.NavNewsMenu -> loadMainFragment(null)
             R.id.NavEnterPref -> startActivity<SettingsActivity>()
+            R.id.NavAddTags -> loadTagsFragment(null)
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
@@ -89,6 +91,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.main_fragment_container, MainPager(), MainPager::class.java.simpleName)
+                    .commit()
+        }
+    }
+
+    private fun loadTagsFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                    .beginTransaction().setCustomAnimations(R.anim.exit_from_right, R.anim.enter_to_right, R.anim.exit_from_right, R.anim.enter_to_right)
+                    .replace(R.id.main_fragment_container, TagsFragment(), TagsFragment::class.java.simpleName)
                     .commit()
         }
     }
@@ -163,6 +174,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
+            mRevealAnimation.unRevealActivity()
         } else {
             super.onBackPressed()
         }
@@ -170,11 +182,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onDestroy() {
         super.onDestroy()
-        mRevealAnimation.unRevealActivity()
         NewsRepositories.onDestroy()
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this)
     }
-    private fun initAnimationView(){
+
+    private fun initAnimationView() {
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
 
         val i: Intent = intent

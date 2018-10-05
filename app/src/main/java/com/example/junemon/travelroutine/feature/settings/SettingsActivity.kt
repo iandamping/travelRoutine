@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.view.MenuItem
 import com.example.junemon.travelroutine.R
+import org.jetbrains.anko.startActivity
 
-class SettingsActivity : AppCompatActivity() , SharedPreferences.OnSharedPreferenceChangeListener{
+class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
@@ -35,11 +37,11 @@ class SettingsActivity : AppCompatActivity() , SharedPreferences.OnSharedPrefere
         return false;
 
     }
-    private fun initNightMode(status: Boolean) {
-        if (status) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else if (!status) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+    override fun onSharedPreferenceChanged(p0: SharedPreferences?, p1: String?) {
+        if (p1?.equals(getString(R.string.enabled_night_mode_key))!!) {
+            initNightMode(p0?.getBoolean(getString(R.string.enabled_night_mode_key),
+                    resources.getBoolean(R.bool.pref_night_mode))!!)
         }
     }
 
@@ -49,12 +51,15 @@ class SettingsActivity : AppCompatActivity() , SharedPreferences.OnSharedPrefere
         sharedPref.registerOnSharedPreferenceChangeListener(this)
 
     }
-    override fun onSharedPreferenceChanged(p0: SharedPreferences?, p1: String?) {
-        if (p1?.equals(getString(R.string.enabled_night_mode_key))!!) {
-            initNightMode(p0?.getBoolean(getString(R.string.enabled_night_mode_key),
-                    resources.getBoolean(R.bool.pref_night_mode))!!)
-            setTheme(R.style.NightAppTheme)
+
+    private fun initNightMode(status: Boolean) {
+        if (status) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else if (!status) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         }
     }
+
 
 }

@@ -11,6 +11,8 @@ import com.example.junemon.travelroutine.MainActivity
 import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.helper.animations.RevealAnimation
 import kotlinx.android.synthetic.main.activity_main_pager_splash.*
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.onPageChangeListener
 
 
@@ -40,16 +42,14 @@ class SplashActivity : AppCompatActivity() {
                     imBtnSplash.visibility = ViewGroup.VISIBLE
                 } else if (results < 2) {
                     imBtnSplash.animate().alpha(0f)
-
                 }
             }
         }
         imBtnSplash.setOnClickListener { view ->
             startRevealActivity(view)
-            finish()
+
         }
     }
-
 
     private fun startRevealActivity(v: View) {
         val revealX = v.right
@@ -59,6 +59,7 @@ class SplashActivity : AppCompatActivity() {
         intent.putExtra(RevealAnimation.EXTRA_CIRCULAR_REVEAL_Y, revealY)
         ActivityCompat.startActivity(this, intent, null)
         overridePendingTransition(0, 0);
+        finish()
     }
 
 }

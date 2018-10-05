@@ -13,6 +13,9 @@
             android:id="@+id/NavNewsMenu"
             android:icon="@drawable/ic_books_white_24dp"
             android:title="News" />
+        <item
+            android:id="@+id/NavAddTags"
+            android:title="Add Tags" />
     </group>
     <item android:title="Preferences">
         <menu>
