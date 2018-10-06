@@ -24,6 +24,13 @@
     <string name="splash_description_1">Kode di atas berarti bahwa saat pengguna menekan tombol Favorite, jika tim yang dimaksud belum ditambahkan ke database</string>
     <string name="splash_description_2">Kode di atas berarti bahwa saat pengguna menekan tombol Favorite, jika tim yang dimaksud belum ditambahkan ke database</string>
     <string name="splash_description_3">Kode di atas berarti bahwa saat pengguna menekan tombol Favorite, jika tim yang dimaksud belum ditambahkan ke database</string>
+    <string name="insert_update_tag">Insert Your Tag</string>
+    <string name="alert_update_tag">Update Your Tag</string>
+    <string name="alert_edittext_hint">Type Your New Tag</string>
+    <string name="null_alerts">Please Never Save Empty Data</string>
 
+    <string name="deleted">Deleted</string>
+    <string name="saved">Saved</string>
+    <string name="updated">Updated</string>
 
 </resources>

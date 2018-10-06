@@ -9,20 +9,15 @@ import android.support.v4.app.Fragment
 import android.view.View
 import com.example.junemon.travelroutine.MainApplication
 import com.example.junemon.travelroutine.base.BaseFragmentsPresenter
-import com.example.junemon.travelroutine.database.AppExecutor
 import com.example.junemon.travelroutine.database.model.PersonalTags
-import com.example.junemon.travelroutine.repositories.Tags.GetPersonalTagById
-import com.example.junemon.travelroutine.repositories.Tags.GetPersonalTagFactory
-import com.example.junemon.travelroutine.repositories.Tags.GetPersonalTagRepo
-import io.reactivex.Completable
+import com.example.junemon.travelroutine.repositories.Tags.TagsRepositories
+import com.example.junemon.travelroutine.repositories.Tags.viewmodel.GetPersonalTagRepo
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-import org.jetbrains.anko.design.snackbar
 
 
 class TagsPresenter(var mView: TagsView) : BaseFragmentsPresenter {
     var ctx: Context? = null
-    lateinit var actualData:PersonalTags
     lateinit var firstDatas: PersonalTags
     lateinit var secDatas: PersonalTags
     lateinit var thirdDatas: PersonalTags
@@ -30,8 +25,6 @@ class TagsPresenter(var mView: TagsView) : BaseFragmentsPresenter {
     lateinit var fifthDatas: PersonalTags
     lateinit var sixthData: PersonalTags
     private var viewModel: GetPersonalTagRepo? = null
-    private var loadDataFactory: GetPersonalTagFactory? = null
-    private var loadDataById: GetPersonalTagById? = null
 
     companion object {
         const val KEY = "data"
@@ -56,39 +49,13 @@ class TagsPresenter(var mView: TagsView) : BaseFragmentsPresenter {
 
     @SuppressLint("CheckResult")
     fun addNewTag(newTag: PersonalTags, view: View) {
-        Observable.fromCallable {
-            Runnable {
-                MainApplication.mDBAccess?.personalTags_dao()?.insertData(newTag)
-            }.run()
-        }.subscribeOn(Schedulers.io()).subscribe {
-            snackbar(view, "Saved")
-        }
+        TagsRepositories.addNewTag(newTag, ctx, view)
 
     }
 
     @SuppressLint("CheckResult")
-    fun deleteTag(deleteTag: PersonalTags, view: View) {
-        Completable.fromCallable {
-            Runnable {
-                MainApplication.mDBAccess?.personalTags_dao()?.deleteData(deleteTag)
-            }.run()
-        }.subscribeOn(Schedulers.io()).subscribe {
-            snackbar(view, "Deleted")
-        }
-    }
-
-    @SuppressLint("CheckResult")
-    fun updateTag(updateTag: PersonalTags) {
-//        AppExecutor.getInstance()?.diskIO?.execute {
-//            Runnable {
-//                MainApplication.mDBAccess?.personalTags_dao()?.updateData(updateTag)
-//            }.run()
-//        }
-        Observable.fromCallable {
-            Runnable {
-                MainApplication.mDBAccess?.personalTags_dao()?.updateData(updateTag)
-            }.run()
-        }.subscribeOn(Schedulers.io()).subscribe {}
+    fun updateTag(updateTag: PersonalTags, view: View) {
+        TagsRepositories.updateTag(updateTag, ctx, view)
     }
 
     @SuppressLint("CheckResult")
@@ -104,17 +71,6 @@ class TagsPresenter(var mView: TagsView) : BaseFragmentsPresenter {
 
     }
 
-//    fun theveryfirst(frag: Fragment,targetId: Int?){
-//        loadDataFactory = GetPersonalTagFactory(MainApplication.mDBAccess, targetId!!)
-//        loadDataById = ViewModelProviders.of(frag).get(GetPersonalTagById::class.java)
-//        loadDataById?.getAddDataById()?.observe(frag, Observer { results ->
-//            if (results?.equals(null)!!){
-//                initFirstItemTag()
-//            } else{
-//
-//            }
-//        })
-//    }
 
     @SuppressLint("CheckResult")
     private fun initData(firstData: List<String>): Observable<List<String>> {

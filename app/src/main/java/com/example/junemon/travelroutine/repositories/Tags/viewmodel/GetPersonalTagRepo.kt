@@ -1,4 +1,4 @@
-package com.example.junemon.travelroutine.repositories.Tags
+package com.example.junemon.travelroutine.repositories.Tags.viewmodel
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel

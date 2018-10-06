@@ -14,6 +14,7 @@ import android.widget.EditText
 import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalTags
 import kotlinx.android.synthetic.main.activity_adding_tag.*
+import kotlinx.android.synthetic.main.activity_adding_tag.view.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.support.v4.alert
@@ -24,6 +25,7 @@ class TagsFragment : Fragment(), TagsView {
     private var actualView: View? = null
     lateinit var presenter: TagsPresenter
     lateinit var update: EditText
+    lateinit var insert: EditText
     var tagData: PersonalTags = PersonalTags()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,17 +54,41 @@ class TagsFragment : Fragment(), TagsView {
 
     override fun initView(view: View) {
         actualView = view
+        actualView?.fabNewTags?.setOnClickListener {
+            alert(resources.getString(R.string.insert_update_tag)) {
+                customView {
+                    verticalLayout {
+                        insert = editText() {
+                            hint = resources.getString(R.string.alert_edittext_hint)
+                            background = null
+                            maxLines = 1
+                            inputType = InputType.TYPE_CLASS_TEXT
+                        }
+                    }
+                }
+                yesButton {
+                    if (insert.text.isNullOrEmpty()) {
+                        snackbar(actualView!!, R.string.null_alerts)
+                    } else if (!insert.text.isNullOrEmpty()) {
+                        tagData.newTags = insert.text.toString().trim()
+                        presenter.addNewTag(tagData, actualView!!)
+                    }
+                }
+                noButton {}
+            }.show()
+        }
     }
 
     override fun getData(data: List<PersonalTags>?) {
         rvNewTag.layoutManager = LinearLayoutManager(ctx)
-        rvNewTag.adapter = TagsAdapter(ctx, data!!) {
-            alert("Update Your Tag ") {
+        rvNewTag.adapter = TagsAdapter(ctx, data!!) { it ->
+            alert(resources.getString(R.string.alert_update_tag)) {
                 customView {
                     verticalLayout {
                         update = editText() {
-                            hint = "New Tag"
+                            hint = resources.getString(R.string.alert_edittext_hint)
                             background = null
+                            maxLines = 1
                             inputType = InputType.TYPE_CLASS_TEXT
                             text = Editable.Factory.getInstance().newEditable(it.newTags)
                             tagData = it
@@ -70,12 +96,13 @@ class TagsFragment : Fragment(), TagsView {
                     }
                 }
                 yesButton {
-                    tagData.newTags = update.text.toString().trim()
-                    presenter.updateTag(tagData)
-                    snackbar(actualView!!, "${tagData.newTags}")
+                    if (update.text.isNullOrEmpty()) {
+                        snackbar(actualView!!, R.string.null_alerts)
+                    } else if (!update.text.isNullOrEmpty()) {
+                        tagData.newTags = update.text.toString().trim()
+                        presenter.updateTag(tagData, actualView!!)
+                    }
                 }
-
-
                 noButton {}
             }.show()
 
