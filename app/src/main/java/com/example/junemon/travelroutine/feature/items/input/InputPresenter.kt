@@ -9,6 +9,7 @@ import com.example.junemon.travelroutine.base.BasePresenters
 import com.example.junemon.travelroutine.database.model.PersonalItems
 import com.example.junemon.travelroutine.repositories.Items.LoadDataByIds
 import com.example.junemon.travelroutine.repositories.Items.LoadDataFactories
+import com.example.junemon.travelroutine.repositories.Tags.viewmodel.GetPersonalTagRepo
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -18,6 +19,7 @@ class InputPresenter(var mView: InputView) : BasePresenters {
     private lateinit var ctx: Context
     private var loadDataFactory: LoadDataFactories? = null
     private var loadDataById: LoadDataByIds? = null
+    private var viewModel: GetPersonalTagRepo? = null
     private lateinit var composite: CompositeDisposable
     override fun getContext(): Context? {
         return ctx
@@ -76,12 +78,19 @@ class InputPresenter(var mView: InputView) : BasePresenters {
     }
 
     fun deleteData(data: PersonalItems?) {
-        var ID: Int? = data?.ID
         composite.add(Observable.fromCallable {
             Runnable {
                 MainApplication.mDBAccess?.personalItem_dao()?.deleteData(data)
             }.run()
         }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
+        })
+    }
+
+    fun getLiveDataAllTag(frag: FragmentActivity) {
+        viewModel = ViewModelProviders.of(frag).get(GetPersonalTagRepo::class.java)
+        viewModel?.getData()
+        viewModel?.getPersonalTagLiveData()?.observe(frag, Observer { results ->
+            mView.showTag(results)
         })
     }
 

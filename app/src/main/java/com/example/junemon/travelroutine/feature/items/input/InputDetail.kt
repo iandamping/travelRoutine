@@ -10,6 +10,7 @@ import android.view.View
 import com.example.junemon.travelroutine.MainApplication
 import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalItems
+import com.example.junemon.travelroutine.database.model.PersonalTags
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.item_output_detail_items.*
 import org.jetbrains.anko.alert
@@ -18,6 +19,8 @@ import org.jetbrains.anko.yesButton
 import java.text.DateFormat
 
 class InputDetail : AppCompatActivity(), InputView {
+
+
     private var data: PersonalItems? = null
     lateinit var presenter: InputPresenter
     private var menuItem: Menu? = null
@@ -88,6 +91,10 @@ class InputDetail : AppCompatActivity(), InputView {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    }
+
+    override fun showTag(data: List<PersonalTags>?) {
+        
     }
 
 }

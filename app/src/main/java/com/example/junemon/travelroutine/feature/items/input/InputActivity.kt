@@ -19,6 +19,7 @@ import com.example.junemon.travelroutine.MainApplication.Companion.month
 import com.example.junemon.travelroutine.MainApplication.Companion.years
 import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalItems
+import com.example.junemon.travelroutine.database.model.PersonalTags
 import com.example.junemon.travelroutine.helper.KeyboardCloser
 import com.example.junemon.travelroutine.helper.alarms.AlarmSetter
 import io.reactivex.Observable
@@ -28,6 +29,7 @@ import java.util.*
 
 
 class InputActivity : AppCompatActivity(), InputView {
+
     companion object {
         val INPUT_ITEMS_ACTIVITY_KEY: String = "this is key"
     }
@@ -53,6 +55,7 @@ class InputActivity : AppCompatActivity(), InputView {
         setContentView(R.layout.activity_input_items)
         presenter = InputPresenter(this)
         presenter.onCreate(this)
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         initView()
@@ -86,12 +89,12 @@ class InputActivity : AppCompatActivity(), InputView {
                     tvDepartDateslReminderViews.visibility = View.VISIBLE
                     tvDepartDateslReminderViews.text = resources.getString(R.string.reminded_info) + " ${hours} : ${minutes}"
                 }, hours, minutes, true)
-                mTimePicker.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel") { dialogInterface, i ->
+                mTimePicker.setButton(DialogInterface.BUTTON_NEGATIVE, resources.getString(R.string.cancel)) { dialogInterface, i ->
                     swDepartReminder.isChecked = false
                     mTimePicker.dismiss()
 
                 }
-                mTimePicker.setTitle("Select Time")
+                mTimePicker.setTitle(resources.getString(R.string.select_time))
                 mTimePicker.show()
             } else if (!b) {
                 actualSelectedHour = null
@@ -102,13 +105,12 @@ class InputActivity : AppCompatActivity(), InputView {
         }
 
         btnSave.setOnClickListener {
-
-            if (etDestination?.text.isNullOrEmpty() && etBarang?.text.isNullOrEmpty() &&etDepartDates?.text.isNullOrEmpty()){
-                etDestination?.error = "Destination cannot be empty"
-                etBarang?.error = "Items cannot be empty"
-                etDepartDates.error = "Dates cannot be empty"
+            if (etDestination?.text.isNullOrEmpty() && etBarang?.text.isNullOrEmpty() && etDepartDates?.text.isNullOrEmpty()) {
+                etDestination?.error = resources.getString(R.string.destination_cannot_be_empty)
+                etBarang?.error = resources.getString(R.string.items_cannot_be_empty)
+                etDepartDates.error = resources.getString(R.string.dates_cannot_be_empty)
                 etDestination.requestFocus()
-            } else if (!etDestination?.text.isNullOrEmpty() &&!etBarang?.text.isNullOrEmpty() && !etDepartDates?.text.isNullOrEmpty()){
+            } else if (!etDestination?.text.isNullOrEmpty() && !etBarang?.text.isNullOrEmpty() && !etDepartDates?.text.isNullOrEmpty()) {
                 val dateExtract: String = etDepartDates.text.toString().trim()
                 destinantion = etDestination.text.toString().trim()
                 itemName = etBarang.text.toString().trim()
@@ -125,7 +127,7 @@ class InputActivity : AppCompatActivity(), InputView {
 
         }
         btnPickTag.setOnClickListener {
-            initDialog()
+            presenter.getLiveDataAllTag(this)
         }
 
 
@@ -160,16 +162,17 @@ class InputActivity : AppCompatActivity(), InputView {
         presenter.finishObserving()
     }
 
-    fun initDialog() {
-        val name = listOf("Travel", "Visiting Friends", "Road Trip", "Volunteer Travel", "Bussiness Travel", "Group Tour")
-        selector("Pick Tag", name) { dialogInterface, i ->
-            Observable.fromArray(name).subscribe { results ->
-                actualTags = results[i]
-                btnPickTag.text = name[i]
-            }
-        }
 
+    override fun showTag(data: List<PersonalTags>?) {
+        val dataForSelector: MutableList<String> = mutableListOf()
+        Observable.fromIterable(data).subscribe { results -> dataForSelector.add(results.newTags!!) }
+        selector("Pick Tag", dataForSelector) { dialogInterface, i ->
+            actualTags = dataForSelector[i]
+            btnPickTag.text = dataForSelector[i]
+
+        }
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.getItemId() == android.R.id.home) {

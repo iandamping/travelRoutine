@@ -11,6 +11,14 @@
     <string name="google_api_key">AIzaSyDdTEiRbvcX3_83ZpZhmqY1f0fI7gZ47kI</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_closed">Close</string>
+    <string name="select_time">Select Time</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="destination_cannot_be_empty">Destination cannot be empty</string>
+    <string name="items_cannot_be_empty">Items cannot be empty</string>
+    <string name="dates_cannot_be_empty">Dates cannot be empty</string>
+
+
 
     <string name="enabled_night_mode_label">Enable Night Mode</string>
     <string name="enabled_night_mode_key">Night Mode</string>
