@@ -1,18 +1,40 @@
 package com.example.junemon.travelroutine.repositories.Routine
 
-import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
-import com.example.junemon.travelroutine.database.MainDatabase
+import com.example.junemon.travelroutine.MainApplication
 import com.example.junemon.travelroutine.database.model.PersonalRoutines
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 
-class RoutineRepositories(application: Application) : AndroidViewModel(application) {
-    var tasks: LiveData<List<PersonalRoutines>>? = null
+class RoutineRepositories {
 
-    fun loadMainData(application: Application) {
-        val mDb: MainDatabase? = MainDatabase.getInstances(this.getApplication())
-        tasks = mDb?.personalRoutine_dao()?.getLiveAllData()
+    companion object {
+        private var composite: CompositeDisposable
+
+        init {
+            composite = CompositeDisposable()
+        }
+
+        fun insertData(data: PersonalRoutines?) {
+            composite.add(Observable.fromCallable {
+                Runnable {
+                    MainApplication.mDBAccess?.personalRoutine_dao()?.insertData(data)
+                }.run()
+            }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
+            })
+        }
+
+        fun deleteData(data: PersonalRoutines?) {
+            composite.add(Observable.fromCallable {
+                Runnable {
+                    MainApplication.mDBAccess?.personalRoutine_dao()?.deleteData(data)
+                }.run()
+            }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
+            })
+        }
+        fun finishObserving() {
+            composite.clear()
+        }
     }
-
-    fun getPersonalLiveData(): LiveData<List<PersonalRoutines>>? = tasks
 }

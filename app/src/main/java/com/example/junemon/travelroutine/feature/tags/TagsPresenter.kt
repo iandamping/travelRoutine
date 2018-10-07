@@ -47,13 +47,11 @@ class TagsPresenter(var mView: TagsView) : BaseFragmentsPresenter {
         })
     }
 
-    @SuppressLint("CheckResult")
     fun addNewTag(newTag: PersonalTags, view: View) {
         TagsRepositories.addNewTag(newTag, ctx, view)
 
     }
 
-    @SuppressLint("CheckResult")
     fun updateTag(updateTag: PersonalTags, view: View) {
         TagsRepositories.updateTag(updateTag, ctx, view)
     }

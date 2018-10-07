@@ -27,3 +27,5 @@ fun EditText.validate(validator: (String) -> Boolean, message: String) {
 
 fun String.isValidData(): Boolean = this.isNotEmpty()
 
+//todo cara pakai untuk setiap edittext = etDestination.validate({s -> s.isValidData()}, "need data")
+

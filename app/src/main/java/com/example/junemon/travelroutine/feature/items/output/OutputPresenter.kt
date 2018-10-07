@@ -7,11 +7,11 @@ import android.support.v4.app.Fragment
 import android.view.View
 import com.example.junemon.travelroutine.MainApplication
 import com.example.junemon.travelroutine.base.BaseFragmentsPresenter
-import com.example.junemon.travelroutine.repositories.Items.ItemRepositories
+import com.example.junemon.travelroutine.repositories.Items.viewmodel.LoadItemData
 
 class OutputPresenter(var mView: OutputView) : BaseFragmentsPresenter {
     var ctx: Context? = null
-    var viewModel: ItemRepositories? = null
+    var viewModel: LoadItemData? = null
     override fun onAttach(context: Context?) {
         this.ctx = context
 
@@ -22,7 +22,7 @@ class OutputPresenter(var mView: OutputView) : BaseFragmentsPresenter {
     }
 
     fun getAllLiveData(fragment: Fragment) {
-        viewModel = ViewModelProviders.of(fragment).get(ItemRepositories::class.java)
+        viewModel = ViewModelProviders.of(fragment).get(LoadItemData::class.java)
         viewModel?.loadMainData(MainApplication.MAIN_APPS)
         viewModel?.getPersonalLiveData()?.observe(fragment, Observer { results ->
             mView.showData(results)

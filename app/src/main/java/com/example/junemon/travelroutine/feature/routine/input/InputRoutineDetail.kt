@@ -10,6 +10,7 @@ import android.view.View
 import com.example.junemon.travelroutine.MainApplication
 import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalRoutines
+import com.example.junemon.travelroutine.database.model.PersonalTags
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.item_output_detail_routines.*
 import org.jetbrains.anko.alert
@@ -18,6 +19,8 @@ import org.jetbrains.anko.yesButton
 import java.text.DateFormat
 
 class InputRoutineDetail : AppCompatActivity(), InputRoutineView {
+
+
     private var data: PersonalRoutines? = null
     lateinit var presenter: InputRoutinePresenter
     private var menuItem: Menu? = null
@@ -89,5 +92,8 @@ class InputRoutineDetail : AppCompatActivity(), InputRoutineView {
     }
 
     override fun initListener() {
+    }
+
+    override fun showTag(data: List<PersonalTags>?) {
     }
 }

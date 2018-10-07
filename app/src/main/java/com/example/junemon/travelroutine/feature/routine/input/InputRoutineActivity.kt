@@ -14,11 +14,12 @@ import android.widget.EditText
 import com.example.junemon.travelroutine.MainApplication
 import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalRoutines
+import com.example.junemon.travelroutine.database.model.PersonalTags
 import com.example.junemon.travelroutine.feature.items.input.InputActivity
 import com.example.junemon.travelroutine.helper.KeyboardCloser
-import com.example.junemon.travelroutine.helper.ValidateEditTextHelper
 import com.example.junemon.travelroutine.helper.alarms.AlarmSetter
 import io.reactivex.Observable
+import kotlinx.android.synthetic.main.activity_input_items.*
 import kotlinx.android.synthetic.main.activity_input_routines.*
 import org.jetbrains.anko.selector
 import java.util.*
@@ -97,27 +98,27 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
             }
         }
         btnRoutineSave.setOnClickListener {
-            if (!ValidateEditTextHelper.validates(this, etRoutine, ValidateEditTextHelper.Type.EMPTY)) {
+            if (etRoutine?.text.isNullOrEmpty() && etRoutineDescription?.text.isNullOrEmpty() && etRoutineDate?.text.isNullOrEmpty()) {
+                etRoutine.error = resources.getString(R.string.routine_cannot_be_empty)
+                etRoutineDescription.error = resources.getString(R.string.description_cannot_be_empty)
+                etRoutineDate.error = resources.getString(R.string.dates_cannot_be_empty)
+            } else if (!etRoutine?.text.isNullOrEmpty() && !etRoutineDescription?.text.isNullOrEmpty() && !etRoutineDate?.text.isNullOrEmpty()) {
+                val dateExtract: String = etRoutineDate.text.toString().trim()
                 routines = etRoutine.text.toString().trim()
-                getData?.routine = routines
-            }
-            if (!ValidateEditTextHelper.validates(this, etRoutineDescription, ValidateEditTextHelper.Type.EMPTY)) {
                 routineDescription = etRoutineDescription.text.toString().trim()
                 getData?.description = routineDescription
-
-            }
-            if (!ValidateEditTextHelper.validates(this, etRoutineDate, ValidateEditTextHelper.Type.EMPTY)) {
-                val dateExtract: String = etRoutineDate.text.toString().trim()
+                getData?.routine = routines
                 departDate = MainApplication.dateFormat.parse(dateExtract)
                 getData?.selectedDate = departDate
+                getData?.selectedHour = actualSelectedHour
+                getData?.selectedMinute = actualSelectedMinute
+                getData?.tags = actualTags
+                insertData(getData)
             }
-            getData?.selectedHour = actualSelectedHour
-            getData?.selectedMinute = actualSelectedMinute
-            getData?.tags = actualTags
-            insertData(getData)
+
         }
         btnPickRoutineTag.setOnClickListener {
-            initDialog()
+            presenter.getLiveDataAllTag(this)
         }
     }
 
@@ -149,15 +150,6 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
         presenter.finishObserving()
     }
 
-    fun initDialog() {
-        val name = listOf("Work", "Play Games", "Fishing", "Cooking", "Swimming", "Boxing")
-        selector("Pick Tag", name) { dialogInterface, i ->
-            Observable.fromArray(name).subscribe { results ->
-                actualTags = results[i]
-                btnPickRoutineTag.text = name[i]
-            }
-        }
-    }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.getItemId() == android.R.id.home) {
@@ -168,6 +160,17 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
         return false;
 
     }
+
+    override fun showTag(data: List<PersonalTags>?) {
+        val dataForSelector: MutableList<String> = mutableListOf()
+        Observable.fromIterable(data).subscribe { results -> dataForSelector.add(results.newTags!!) }
+        selector(resources.getString(R.string.pick_tag), dataForSelector) { dialogInterface, i ->
+            actualTags = dataForSelector[i]
+            btnPickTag.text = dataForSelector[i]
+
+        }
+    }
+
 
     override fun onBackPressed() {
         super.onBackPressed()

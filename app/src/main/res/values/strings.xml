@@ -16,7 +16,11 @@
 
     <string name="destination_cannot_be_empty">Destination cannot be empty</string>
     <string name="items_cannot_be_empty">Items cannot be empty</string>
-    <string name="dates_cannot_be_empty">Dates cannot be empty</string>
+
+    <string name="routine_cannot_be_empty">Routine cannot be empty</string>
+    <string name="description_cannot_be_empty">Description cannot be empty</string>
+    <string name="date_cannot_be_empty">Date cannot be empty</string>
+    <string name="pick_tag">Pick Tag</string>
 
 
 

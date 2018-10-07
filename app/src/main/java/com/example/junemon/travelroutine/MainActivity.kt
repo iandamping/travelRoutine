@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.item_drawer_layout)
-        initAnimationView()
+//        initAnimationView()
 
         internetChecker()
         initNavView()
@@ -48,12 +48,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         loadOutputItemsFragment(savedInstanceState)
         nav_view.setCheckedItem(R.id.NavInputMenuNav)
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.menu_delete_all, menu)
-//        menuItem = menu
-//        return true
-//    }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         when (p0.itemId) {
@@ -123,7 +117,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun initNavView() {
         toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar_main, R.string.navigation_drawer_open, R.string.navigation_drawer_closed)
         toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.white)
-
+        toolbar_main.title = "Travel Routine"
         drawer_layout.addDrawerListener(toggle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
@@ -174,7 +168,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
-            mRevealAnimation.unRevealActivity()
+//            mRevealAnimation.unRevealActivity()
         } else {
             super.onBackPressed()
         }

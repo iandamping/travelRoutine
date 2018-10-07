@@ -1,4 +1,4 @@
-package com.example.junemon.travelroutine.repositories.Routine
+package com.example.junemon.travelroutine.repositories.Routine.viewmodel
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel

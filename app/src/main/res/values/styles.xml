@@ -62,9 +62,9 @@
 
     </style>
 
-    <style name="CustomAccentOverlay" parent="ThemeOverlay.AppCompat">
-    <item name="colorAccent">@color/custom_accent</item>
-</style>
+    <!--<style name="CustomAccentOverlay" parent="ThemeOverlay.AppCompat">-->
+    <!--<item name="colorAccent">@color/custom_accent</item>-->
+<!--</style>-->
 
 </resources>
 

@@ -121,7 +121,6 @@ class InputActivity : AppCompatActivity(), InputView {
                 getData?.selectedHour = actualSelectedHour
                 getData?.selectedMinute = actualSelectedMinute
                 getData?.tags = actualTags
-
                 insertData(getData)
             }
 
@@ -166,7 +165,7 @@ class InputActivity : AppCompatActivity(), InputView {
     override fun showTag(data: List<PersonalTags>?) {
         val dataForSelector: MutableList<String> = mutableListOf()
         Observable.fromIterable(data).subscribe { results -> dataForSelector.add(results.newTags!!) }
-        selector("Pick Tag", dataForSelector) { dialogInterface, i ->
+        selector(resources.getString(R.string.pick_tag), dataForSelector) { dialogInterface, i ->
             actualTags = dataForSelector[i]
             btnPickTag.text = dataForSelector[i]
 

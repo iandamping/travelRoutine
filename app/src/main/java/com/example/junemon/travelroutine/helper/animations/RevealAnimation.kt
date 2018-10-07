@@ -56,7 +56,7 @@ class RevealAnimation(private val mView: View, intent: Intent, private val mActi
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             mActivity.finish()
         } else {
-            val finalRadius = Math.max(mView.width, mView.height)* 1.1F
+            val finalRadius = Math.max(mView.width, mView.height) * 1.1F
             val circularReveal = ViewAnimationUtils.createCircularReveal(
                     mView, revealX, revealY, finalRadius, 0f)
 

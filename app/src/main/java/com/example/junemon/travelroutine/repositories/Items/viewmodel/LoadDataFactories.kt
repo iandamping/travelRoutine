@@ -1,12 +1,12 @@
-package com.example.junemon.travelroutine.repositories.Routine
+package com.example.junemon.travelroutine.repositories.Items.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.example.junemon.travelroutine.database.MainDatabase
 
-class LoadRoutineFactories(val mDb: MainDatabase, var taskId: Int) : ViewModelProvider.NewInstanceFactory() {
+class LoadDataFactories(val mDb: MainDatabase?, var taskId: Int) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return LoadRoutineByiD(mDb, taskId) as T
+        return LoadDataByIds(mDb, taskId) as T
     }
 }

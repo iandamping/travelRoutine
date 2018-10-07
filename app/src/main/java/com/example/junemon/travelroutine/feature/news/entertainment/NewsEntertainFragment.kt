@@ -47,7 +47,7 @@ class NewsEntertainFragment : Fragment(), NewsEntertainView {
     override fun getData(data: List<PersonalNewsEntertainment.Article>?) {
         rvNewsEntertain.layoutManager = LinearLayoutManager(ctx)
         rvNewsEntertain.adapter = NewsEntertainAdapter(ctx, data!!) {
-//            builder.launchUrl(ctx, Uri.parse(it.url))
+            //            builder.launchUrl(ctx, Uri.parse(it.url))
             CustomTabActivityHelper.openCustomTab(activity!!, builder, Uri.parse(it.url),
                     object : CustomTabActivityHelper.CustomTabFallback {
                         override fun openUri(activity: Activity, uri: Uri) {

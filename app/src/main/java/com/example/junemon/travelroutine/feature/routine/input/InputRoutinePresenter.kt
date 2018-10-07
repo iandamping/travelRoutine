@@ -1,18 +1,18 @@
 package com.example.junemon.travelroutine.feature.routine.input
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
-import com.example.junemon.travelroutine.MainApplication
+import android.support.v4.app.FragmentActivity
 import com.example.junemon.travelroutine.base.BasePresenters
 import com.example.junemon.travelroutine.database.model.PersonalRoutines
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.example.junemon.travelroutine.repositories.Routine.RoutineRepositories
+import com.example.junemon.travelroutine.repositories.Tags.viewmodel.GetPersonalTagRepo
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
 class InputRoutinePresenter(var mView: InputRoutineView) : BasePresenters {
     private lateinit var ctx: Context
-    private lateinit var composite: CompositeDisposable
-
+    private var viewModel: GetPersonalTagRepo? = null
     override fun getContext(): Context? {
         return ctx
     }
@@ -21,7 +21,6 @@ class InputRoutinePresenter(var mView: InputRoutineView) : BasePresenters {
         this.ctx = context
         mView.initView()
         mView.initListener()
-        composite = CompositeDisposable()
     }
 
     fun formatedDate(years: Int, months: Int, dayOfMonth: Int): String {
@@ -45,25 +44,22 @@ class InputRoutinePresenter(var mView: InputRoutineView) : BasePresenters {
     }
 
     fun insertData(data: PersonalRoutines?) {
-        composite.add(Observable.fromCallable {
-            Runnable {
-                MainApplication.mDBAccess?.personalRoutine_dao()?.insertData(data)
-            }.run()
-        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
-        })
+        RoutineRepositories.insertData(data)
     }
 
     fun deleteData(data: PersonalRoutines?) {
-        var ID: Int? = data?.ID
-        composite.add(Observable.fromCallable {
-            Runnable {
-                MainApplication.mDBAccess?.personalRoutine_dao()?.deleteData(data)
-            }.run()
-        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
+        RoutineRepositories.deleteData(data)
+    }
+
+    fun getLiveDataAllTag(frag: FragmentActivity) {
+        viewModel = ViewModelProviders.of(frag).get(GetPersonalTagRepo::class.java)
+        viewModel?.getData()
+        viewModel?.getPersonalTagLiveData()?.observe(frag, Observer { results ->
+            mView.showTag(results)
         })
     }
 
     fun finishObserving() {
-        composite.clear()
+        RoutineRepositories.finishObserving()
     }
 }

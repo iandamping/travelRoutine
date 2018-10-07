@@ -50,7 +50,7 @@ class NewBussinesFragment : Fragment(), NewBussinesView {
     override fun getData(data: List<PersonalNewsBussines.Article>?) {
         rvNewsBussiness.layoutManager = LinearLayoutManager(ctx)
         rvNewsBussiness.adapter = NewBussinesAdapter(ctx, data!!) {
-//            builder.launchUrl(ctx, Uri.parse(it.url))
+            //            builder.launchUrl(ctx, Uri.parse(it.url))
             CustomTabActivityHelper.openCustomTab(activity!!, builder, Uri.parse(it.url),
                     object : CustomTabActivityHelper.CustomTabFallback {
                         override fun openUri(activity: Activity, uri: Uri) {

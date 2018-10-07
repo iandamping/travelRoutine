@@ -19,8 +19,6 @@ import org.jetbrains.anko.yesButton
 import java.text.DateFormat
 
 class InputDetail : AppCompatActivity(), InputView {
-
-
     private var data: PersonalItems? = null
     lateinit var presenter: InputPresenter
     private var menuItem: Menu? = null
@@ -94,7 +92,7 @@ class InputDetail : AppCompatActivity(), InputView {
     }
 
     override fun showTag(data: List<PersonalTags>?) {
-        
+
     }
 
 }

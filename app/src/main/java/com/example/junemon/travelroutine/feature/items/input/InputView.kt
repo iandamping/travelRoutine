@@ -6,5 +6,5 @@ import com.example.junemon.travelroutine.database.model.PersonalTags
 
 interface InputView : BaseViews {
     fun showData(data: PersonalItems?)
-    fun showTag(data:List<PersonalTags>?)
+    fun showTag(data: List<PersonalTags>?)
 }

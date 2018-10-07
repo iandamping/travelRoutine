@@ -4,23 +4,15 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.support.v4.app.FragmentActivity
-import com.example.junemon.travelroutine.MainApplication
 import com.example.junemon.travelroutine.base.BasePresenters
 import com.example.junemon.travelroutine.database.model.PersonalItems
-import com.example.junemon.travelroutine.repositories.Items.LoadDataByIds
-import com.example.junemon.travelroutine.repositories.Items.LoadDataFactories
+import com.example.junemon.travelroutine.repositories.Items.ItemRepositories
 import com.example.junemon.travelroutine.repositories.Tags.viewmodel.GetPersonalTagRepo
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
 class InputPresenter(var mView: InputView) : BasePresenters {
     private lateinit var ctx: Context
-    private var loadDataFactory: LoadDataFactories? = null
-    private var loadDataById: LoadDataByIds? = null
+
     private var viewModel: GetPersonalTagRepo? = null
-    private lateinit var composite: CompositeDisposable
     override fun getContext(): Context? {
         return ctx
     }
@@ -29,7 +21,6 @@ class InputPresenter(var mView: InputView) : BasePresenters {
         ctx = context
         mView.initView()
         mView.initListener()
-        composite = CompositeDisposable()
     }
 
     override fun onPause() {
@@ -52,38 +43,17 @@ class InputPresenter(var mView: InputView) : BasePresenters {
         mView.showData(data)
     }
 
-    fun getDataById(targetActivity: FragmentActivity, targetId: Int?) {
-        loadDataFactory = LoadDataFactories(MainApplication.mDBAccess, targetId!!)
-        loadDataById = ViewModelProviders.of(targetActivity, loadDataFactory).get(LoadDataByIds::class.java)
-        loadDataById?.getAddDataById()?.observe(targetActivity, Observer { results -> mView.showData(results) })
-    }
 
     fun insertData(data: PersonalItems?) {
-        composite.add(Observable.fromCallable {
-            Runnable {
-                MainApplication.mDBAccess?.personalItem_dao()?.insertData(data)
-            }.run()
-        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
-        })
-
+        ItemRepositories.insertData(data)
     }
 
     fun updateData(data: PersonalItems?) {
-        composite.add(Observable.fromCallable {
-            Runnable {
-                MainApplication.mDBAccess?.personalItem_dao()?.insertData(data)
-            }.run()
-        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
-        })
+        ItemRepositories.updateData(data)
     }
 
     fun deleteData(data: PersonalItems?) {
-        composite.add(Observable.fromCallable {
-            Runnable {
-                MainApplication.mDBAccess?.personalItem_dao()?.deleteData(data)
-            }.run()
-        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
-        })
+        ItemRepositories.deleteData(data)
     }
 
     fun getLiveDataAllTag(frag: FragmentActivity) {
@@ -95,7 +65,7 @@ class InputPresenter(var mView: InputView) : BasePresenters {
     }
 
     fun finishObserving() {
-        composite.clear()
+        ItemRepositories.finishObserving()
     }
 
 }
