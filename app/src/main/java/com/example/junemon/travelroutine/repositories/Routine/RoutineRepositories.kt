@@ -9,32 +9,31 @@ import io.reactivex.schedulers.Schedulers
 
 class RoutineRepositories {
 
-    companion object {
-        private var composite: CompositeDisposable
+    private var composite: CompositeDisposable
 
-        init {
-            composite = CompositeDisposable()
-        }
+    init {
+        composite = CompositeDisposable()
+    }
 
-        fun insertData(data: PersonalRoutines?) {
-            composite.add(Observable.fromCallable {
-                Runnable {
-                    MainApplication.mDBAccess?.personalRoutine_dao()?.insertData(data)
-                }.run()
-            }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
-            })
-        }
+    fun insertData(data: PersonalRoutines?) {
+        composite.add(Observable.fromCallable {
+            Runnable {
+                MainApplication.mDBAccess?.personalRoutine_dao()?.insertData(data)
+            }.run()
+        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
+        })
+    }
 
-        fun deleteData(data: PersonalRoutines?) {
-            composite.add(Observable.fromCallable {
-                Runnable {
-                    MainApplication.mDBAccess?.personalRoutine_dao()?.deleteData(data)
-                }.run()
-            }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
-            })
-        }
-        fun finishObserving() {
-            composite.clear()
-        }
+    fun deleteData(data: PersonalRoutines?) {
+        composite.add(Observable.fromCallable {
+            Runnable {
+                MainApplication.mDBAccess?.personalRoutine_dao()?.deleteData(data)
+            }.run()
+        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
+        })
+    }
+
+    fun finishObserving() {
+        composite.clear()
     }
 }

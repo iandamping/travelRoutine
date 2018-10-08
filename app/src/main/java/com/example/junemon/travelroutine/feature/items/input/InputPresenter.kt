@@ -11,7 +11,7 @@ import com.example.junemon.travelroutine.repositories.Tags.viewmodel.GetPersonal
 
 class InputPresenter(var mView: InputView) : BasePresenters {
     private lateinit var ctx: Context
-
+    private lateinit var repos: ItemRepositories
     private var viewModel: GetPersonalTagRepo? = null
     override fun getContext(): Context? {
         return ctx
@@ -21,6 +21,7 @@ class InputPresenter(var mView: InputView) : BasePresenters {
         ctx = context
         mView.initView()
         mView.initListener()
+        repos = ItemRepositories()
     }
 
     override fun onPause() {
@@ -45,15 +46,15 @@ class InputPresenter(var mView: InputView) : BasePresenters {
 
 
     fun insertData(data: PersonalItems?) {
-        ItemRepositories.insertData(data)
+        repos.insertData(data)
     }
 
     fun updateData(data: PersonalItems?) {
-        ItemRepositories.updateData(data)
+        repos.updateData(data)
     }
 
     fun deleteData(data: PersonalItems?) {
-        ItemRepositories.deleteData(data)
+        repos.deleteData(data)
     }
 
     fun getLiveDataAllTag(frag: FragmentActivity) {
@@ -65,7 +66,7 @@ class InputPresenter(var mView: InputView) : BasePresenters {
     }
 
     fun finishObserving() {
-        ItemRepositories.finishObserving()
+        repos.finishObserving()
     }
 
 }

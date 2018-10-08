@@ -84,11 +84,11 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
                     tvRoutineDatesReminderViews.visibility = View.VISIBLE
                     tvRoutineDatesReminderViews.text = resources.getString(R.string.reminded_info) + " ${hours} : ${minutes}"
                 }, MainApplication.hours, MainApplication.minutes, true)
-                mTimePicker.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel") { dialogInterface, i ->
+                mTimePicker.setButton(DialogInterface.BUTTON_NEGATIVE, resources.getString(R.string.cancel)) { dialogInterface, i ->
                     mTimePicker.dismiss()
                 }
 
-                mTimePicker.setTitle("Select Time")
+                mTimePicker.setTitle(resources.getString(R.string.select_time))
                 mTimePicker.show()
             } else if (!b) {
                 actualSelectedHour = null
@@ -101,7 +101,7 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
             if (etRoutine?.text.isNullOrEmpty() && etRoutineDescription?.text.isNullOrEmpty() && etRoutineDate?.text.isNullOrEmpty()) {
                 etRoutine.error = resources.getString(R.string.routine_cannot_be_empty)
                 etRoutineDescription.error = resources.getString(R.string.description_cannot_be_empty)
-                etRoutineDate.error = resources.getString(R.string.dates_cannot_be_empty)
+                etRoutineDate.error = resources.getString(R.string.date_cannot_be_empty)
             } else if (!etRoutine?.text.isNullOrEmpty() && !etRoutineDescription?.text.isNullOrEmpty() && !etRoutineDate?.text.isNullOrEmpty()) {
                 val dateExtract: String = etRoutineDate.text.toString().trim()
                 routines = etRoutine.text.toString().trim()

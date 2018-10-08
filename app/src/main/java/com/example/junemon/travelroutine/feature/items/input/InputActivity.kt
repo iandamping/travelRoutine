@@ -108,7 +108,7 @@ class InputActivity : AppCompatActivity(), InputView {
             if (etDestination?.text.isNullOrEmpty() && etBarang?.text.isNullOrEmpty() && etDepartDates?.text.isNullOrEmpty()) {
                 etDestination?.error = resources.getString(R.string.destination_cannot_be_empty)
                 etBarang?.error = resources.getString(R.string.items_cannot_be_empty)
-                etDepartDates.error = resources.getString(R.string.dates_cannot_be_empty)
+                etDepartDates.error = resources.getString(R.string.date_cannot_be_empty)
                 etDestination.requestFocus()
             } else if (!etDestination?.text.isNullOrEmpty() && !etBarang?.text.isNullOrEmpty() && !etDepartDates?.text.isNullOrEmpty()) {
                 val dateExtract: String = etDepartDates.text.toString().trim()

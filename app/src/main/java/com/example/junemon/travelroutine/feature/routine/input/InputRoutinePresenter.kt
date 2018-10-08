@@ -8,11 +8,11 @@ import com.example.junemon.travelroutine.base.BasePresenters
 import com.example.junemon.travelroutine.database.model.PersonalRoutines
 import com.example.junemon.travelroutine.repositories.Routine.RoutineRepositories
 import com.example.junemon.travelroutine.repositories.Tags.viewmodel.GetPersonalTagRepo
-import io.reactivex.disposables.CompositeDisposable
 
 class InputRoutinePresenter(var mView: InputRoutineView) : BasePresenters {
     private lateinit var ctx: Context
     private var viewModel: GetPersonalTagRepo? = null
+    private lateinit var repo: RoutineRepositories
     override fun getContext(): Context? {
         return ctx
     }
@@ -21,6 +21,7 @@ class InputRoutinePresenter(var mView: InputRoutineView) : BasePresenters {
         this.ctx = context
         mView.initView()
         mView.initListener()
+        repo = RoutineRepositories()
     }
 
     fun formatedDate(years: Int, months: Int, dayOfMonth: Int): String {
@@ -44,11 +45,11 @@ class InputRoutinePresenter(var mView: InputRoutineView) : BasePresenters {
     }
 
     fun insertData(data: PersonalRoutines?) {
-        RoutineRepositories.insertData(data)
+        repo.insertData(data)
     }
 
     fun deleteData(data: PersonalRoutines?) {
-        RoutineRepositories.deleteData(data)
+        repo.deleteData(data)
     }
 
     fun getLiveDataAllTag(frag: FragmentActivity) {
@@ -60,6 +61,6 @@ class InputRoutinePresenter(var mView: InputRoutineView) : BasePresenters {
     }
 
     fun finishObserving() {
-        RoutineRepositories.finishObserving()
+        repo.finishObserving()
     }
 }
