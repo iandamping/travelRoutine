@@ -23,7 +23,8 @@ class TagsAdapter(var ctx: Context?, var listData: List<PersonalTags>, val liste
         p0.bindViews(listData.get(p1), listener)
     }
 
-    class ViewHolders(override var containerView: View, var ctx: Context?) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+    class ViewHolders(override var containerView: View, var ctx: Context?)
+        : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bindViews(data: PersonalTags, listener: (PersonalTags) -> Unit) {
             tvTags.text = data.newTags
             ivDeleteTags.setOnClickListener {
@@ -31,5 +32,17 @@ class TagsAdapter(var ctx: Context?, var listData: List<PersonalTags>, val liste
             }
             itemView.setOnClickListener { listener((data)) }
         }
+
+
     }
 }
+//            val manager = (ctx as FragmentActivity).supportFragmentManager
+
+//            val icons = listOf<String>(Integer.toString(R.drawable.ic_bar), Integer.toString(R.drawable.ic_cityscape), Integer.toString(R.drawable.ic_cofee_bean), Integer.toString(R.drawable.ic_foodstall), Integer.toString(R.drawable.ic_library), Integer.toString(R.drawable.ic_train), Integer.toString(R.drawable.ic_vespa))
+//            var actualImage: String? = null
+//            ivPickTag.setOnClickListener {
+//                ctx?.selector("Pick icon", icons, { dialogInterface, i ->
+//                    actualImage = icons[i]
+//                    ivPickTag.setImageResource(actualImage!!.toInt())
+//                })
+//            }

@@ -11,6 +11,7 @@ import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalItems
 import com.example.junemon.travelroutine.feature.items.input.InputActivity
 import com.example.junemon.travelroutine.feature.items.input.InputDetail
+import kotlinx.android.synthetic.main.activity_output_items.*
 import kotlinx.android.synthetic.main.activity_output_items.view.*
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.startActivity
@@ -55,5 +56,6 @@ class OutputFragment : Fragment(), OutputView {
         }
         actualView?.rvInput?.adapter?.notifyDataSetChanged()
     }
+
 
 }

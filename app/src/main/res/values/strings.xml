@@ -23,7 +23,6 @@
     <string name="pick_tag">Pick Tag</string>
 
 
-
     <string name="enabled_night_mode_label">Enable Night Mode</string>
     <string name="enabled_night_mode_key">Night Mode</string>
     <string name="night_mode_enabled_true">Enabled</string>
@@ -44,5 +43,15 @@
     <string name="deleted">Deleted</string>
     <string name="saved">Saved</string>
     <string name="updated">Updated</string>
+
+    <string-array name="icon_name">
+        <item>sad</item>
+        <item>happy</item>
+        <item>anxious</item>
+        <item>pickes</item>
+        <item>adafasd</item>
+        <item>123124123</item>
+        <item>AFAS</item>
+    </string-array>
 
 </resources>

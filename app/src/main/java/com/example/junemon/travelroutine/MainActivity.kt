@@ -29,6 +29,7 @@ import org.jetbrains.anko.yesButton
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, SharedPreferences.OnSharedPreferenceChangeListener {
     private lateinit var networkChecker: NetworkChangeListener
     private lateinit var mRevealAnimation: RevealAnimation
+    private lateinit var fragment: TagsFragment
     private lateinit var toggle: ActionBarDrawerToggle
     override fun onCreate(savedInstanceState: Bundle?) {
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
@@ -43,7 +44,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         internetChecker()
         initNavView()
         setupSharedPref()
-
 
         loadOutputItemsFragment(savedInstanceState)
         nav_view.setCheckedItem(R.id.NavInputMenuNav)
@@ -123,6 +123,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportActionBar?.setHomeButtonEnabled(true)
 
         nav_view.setNavigationItemSelectedListener(this)
+        fragment = TagsFragment()
+        fragment.initiateFirst(this)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {

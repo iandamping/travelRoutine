@@ -22,18 +22,23 @@ import com.example.junemon.travelroutine.database.model.PersonalItems
 import com.example.junemon.travelroutine.database.model.PersonalTags
 import com.example.junemon.travelroutine.helper.KeyboardCloser
 import com.example.junemon.travelroutine.helper.alarms.AlarmSetter
+import com.maltaisn.icondialog.Icon
+import com.maltaisn.icondialog.IconDialog
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_input_items.*
 import org.jetbrains.anko.selector
 import java.util.*
 
 
-class InputActivity : AppCompatActivity(), InputView {
+class InputActivity : AppCompatActivity(), InputView, IconDialog.Callback {
+
 
     companion object {
         val INPUT_ITEMS_ACTIVITY_KEY: String = "this is key"
     }
 
+    private var selectedIcons: Array<Icon>? = null
+    private var iconDialog = IconDialog()
     private val DEFAULT_TASK_ID = -1
     private var mTaskId = DEFAULT_TASK_ID
     private lateinit var presenter: InputPresenter
@@ -42,6 +47,7 @@ class InputActivity : AppCompatActivity(), InputView {
     private var actualSelectedDate: String? = null
     private var actualSelectedHour: Int? = null
     private var actualSelectedMinute: Int? = null
+    private var actualSelectedIconHelper: Int? = null
     private var actualTags: String? = null
     private var departDate: Date? = null
     private var getData: PersonalItems? = PersonalItems()
@@ -121,12 +127,17 @@ class InputActivity : AppCompatActivity(), InputView {
                 getData?.selectedHour = actualSelectedHour
                 getData?.selectedMinute = actualSelectedMinute
                 getData?.tags = actualTags
+                getData?.selectedIcon = actualSelectedIconHelper
                 insertData(getData)
             }
 
         }
         btnPickTag.setOnClickListener {
             presenter.getLiveDataAllTag(this)
+        }
+        ivPicksIcon.setOnClickListener {
+            iconDialog.setSelectedIcons(0)
+            iconDialog.show(getSupportFragmentManager(), "test")
         }
 
 
@@ -182,6 +193,20 @@ class InputActivity : AppCompatActivity(), InputView {
         return false;
 
     }
+
+    override fun onIconDialogIconsSelected(icons: Array<Icon>?) {
+        selectedIcons = icons
+        actualSelectedIconHelper = selectedIcons?.get(0)?.id
+
+//        var iconHelper:IconHelper = IconHelper.getInstance(this)
+//
+//        ivPicksIcon.setImageDrawable(iconHelper.getIcon(220).getDrawable(this) )
+
+        ivPicksIcon.setImageDrawable(selectedIcons?.get(0)?.getDrawable(this))
+//        ivPicksIcon.setImageResource(selectedIcons?.get(0)?.id!!)
+//        Log.d("tags", selectedIcons?.get(0)?.id.toString() + " : 4123")
+    }
+
 
     override fun onBackPressed() {
         super.onBackPressed()

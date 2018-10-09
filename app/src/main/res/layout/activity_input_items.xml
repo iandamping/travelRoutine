@@ -123,6 +123,12 @@
                     android:text="Select Tag"
                     android:textColor="?attr/textcolor" />
 
+                <ImageView
+                    android:id="@+id/ivPicksIcon"
+                    android:layout_width="79dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_style_gray_24dp" />
+
             </LinearLayout>
 
 
@@ -185,7 +191,6 @@
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
-
     <Button
         android:id="@+id/btnSave"
         android:layout_width="match_parent"

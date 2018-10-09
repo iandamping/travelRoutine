@@ -23,10 +23,10 @@ import org.jetbrains.anko.support.v4.alert
 class TagsFragment : Fragment(), TagsView {
     private var ctx: Context? = null
     private var actualView: View? = null
-    lateinit var presenter: TagsPresenter
-    lateinit var update: EditText
-    lateinit var insert: EditText
-    var tagData: PersonalTags = PersonalTags()
+    private var presenter: TagsPresenter = TagsPresenter(this)
+    private lateinit var update: EditText
+    private lateinit var insert: EditText
+    private var tagData: PersonalTags = PersonalTags()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +40,7 @@ class TagsFragment : Fragment(), TagsView {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         this.ctx = context
-        presenter = TagsPresenter(this)
         presenter.onAttach(ctx)
-        initiateFirst(ctx)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -89,7 +87,6 @@ class TagsFragment : Fragment(), TagsView {
                             hint = resources.getString(R.string.alert_edittext_hint)
                             background = null
                             maxLines = 1
-                            inputType = InputType.TYPE_CLASS_TEXT
                             text = Editable.Factory.getInstance().newEditable(it.newTags)
                             tagData = it
                         }
@@ -105,19 +102,19 @@ class TagsFragment : Fragment(), TagsView {
                 }
                 noButton {}
             }.show()
-
         }
     }
 
 
-    private fun initiateFirst(ctx: Context?) {
+    fun initiateFirst(ctx: Context?) {
         val prefs = ctx?.getSharedPreferences(TagsPresenter.DEVICE_TOKEN, MODE_PRIVATE)
         val pageNumber = prefs?.getInt(TagsPresenter.KEY, 0)
 
         if (pageNumber == 0) {
             presenter.initFirstItemTag(ctx)
         }
+
     }
-
-
 }
+
+

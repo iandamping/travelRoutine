@@ -15,7 +15,8 @@
             android:title="News" />
         <item
             android:id="@+id/NavAddTags"
-            android:title="Add Tags" />
+            android:icon="@drawable/ic_style_black_24dp"
+            android:title="Tags" />
     </group>
     <item android:title="Preferences">
         <menu>

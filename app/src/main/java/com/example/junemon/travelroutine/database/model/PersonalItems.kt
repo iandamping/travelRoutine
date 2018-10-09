@@ -15,8 +15,9 @@ data class PersonalItems(@PrimaryKey(autoGenerate = true) var ID: Int?,
                          @ColumnInfo(name = "input_destination") var destination: String?,
                          @ColumnInfo(name = "input_departure_date") var selectedDate: Date?,
                          @ColumnInfo(name = "input_arrival_selected_hour") var selectedHour: Int?,
+                         @ColumnInfo(name = "input_selected_tag") var selectedIcon: Int?,
                          @ColumnInfo(name = "input_arrival_selected_minute") var selectedMinute: Int?) : Parcelable {
     constructor() : this(null, null, null, null, null,
-            null, null)
+            null, null, null)
 
 }
