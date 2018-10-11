@@ -55,6 +55,9 @@
             android:name=".feature.settings.SettingsActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".feature.tags.inputTags.InputTagActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
 
         <receiver
             android:name=".helper.alarms.AlarmReceiver"

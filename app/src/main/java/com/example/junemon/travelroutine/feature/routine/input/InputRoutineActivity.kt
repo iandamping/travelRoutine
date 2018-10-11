@@ -19,7 +19,6 @@ import com.example.junemon.travelroutine.feature.items.input.InputActivity
 import com.example.junemon.travelroutine.helper.KeyboardCloser
 import com.example.junemon.travelroutine.helper.alarms.AlarmSetter
 import io.reactivex.Observable
-import kotlinx.android.synthetic.main.activity_input_items.*
 import kotlinx.android.synthetic.main.activity_input_routines.*
 import org.jetbrains.anko.selector
 import java.util.*
@@ -38,6 +37,8 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
     private var actualSelectedDate: String? = null
     private var actualSelectedHour: Int? = null
     private var actualSelectedMinute: Int? = null
+    private var actualSelectedIconHelper: Int? = null
+    private var actualSelectedColorHelper: Int? = null
     private var actualTags: String? = null
     private var departDate: Date? = null
     private var getData: PersonalRoutines? = PersonalRoutines()
@@ -113,6 +114,8 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
                 getData?.selectedHour = actualSelectedHour
                 getData?.selectedMinute = actualSelectedMinute
                 getData?.tags = actualTags
+                getData?.selectedIcon = actualSelectedIconHelper
+                getData?.selectedColor = actualSelectedColorHelper
                 insertData(getData)
             }
 
@@ -163,10 +166,14 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
 
     override fun showTag(data: List<PersonalTags>?) {
         val dataForSelector: MutableList<String> = mutableListOf()
-        Observable.fromIterable(data).subscribe { results -> dataForSelector.add(results.newTags!!) }
+        Observable.fromIterable(data).subscribe { results ->
+            dataForSelector.add(results.newTags!!)
+            actualSelectedIconHelper = results.newIcons
+            actualSelectedColorHelper = results.newColor
+        }
         selector(resources.getString(R.string.pick_tag), dataForSelector) { dialogInterface, i ->
             actualTags = dataForSelector[i]
-            btnPickTag.text = dataForSelector[i]
+            btnPickRoutineTag.text = dataForSelector[i]
 
         }
     }

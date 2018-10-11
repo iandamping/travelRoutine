@@ -5,6 +5,7 @@ import android.app.Application
 import android.support.customtabs.CustomTabsIntent
 import com.example.junemon.travelroutine.database.MainDatabase
 import com.example.junemon.travelroutine.network.ApiClient
+import com.maltaisn.icondialog.IconHelper
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -18,6 +19,7 @@ class MainApplication : Application() {
         @SuppressLint("ConstantLocale")
         val dateFormat: SimpleDateFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
         lateinit var builder: CustomTabsIntent
+        lateinit var iconHelper: IconHelper
         var mDBAccess: MainDatabase? = null
         var MAIN_APPS: Application = Application()
         val years: Int = cal.get(Calendar.YEAR)
@@ -34,5 +36,7 @@ class MainApplication : Application() {
         super.onCreate()
         mDBAccess = MainDatabase.getInstances(applicationContext)
         builder = CustomTabsIntent.Builder().build()
+        iconHelper = IconHelper.getInstance(this)
+
     }
 }

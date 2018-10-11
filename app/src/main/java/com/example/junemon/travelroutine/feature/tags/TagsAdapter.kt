@@ -8,41 +8,45 @@ import android.view.ViewGroup
 import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalTags
 import com.example.junemon.travelroutine.repositories.Tags.TagsRepositories
+import com.maltaisn.icondialog.IconHelper
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_tag.*
+import java.math.BigInteger
 
-class TagsAdapter(var ctx: Context?, var listData: List<PersonalTags>, val listener: (PersonalTags) -> Unit)
-    : RecyclerView.Adapter<TagsAdapter.ViewHolders>() {
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolders {
-        return ViewHolders(LayoutInflater.from(ctx).inflate(R.layout.item_tag, p0, false), ctx)
+class TagsAdapter(val ctx: Context?, var listData: List<PersonalTags>, val listener: (PersonalTags) -> Unit)
+    : RecyclerView.Adapter<TagsAdapter.ViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(LayoutInflater.from(ctx).inflate(R.layout.item_tag, parent, false), ctx)
     }
 
     override fun getItemCount(): Int = listData.size
 
-    override fun onBindViewHolder(p0: ViewHolders, p1: Int) {
-        p0.bindViews(listData.get(p1), listener)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bindViewss(listData.get(position), listener)
     }
 
-    class ViewHolders(override var containerView: View, var ctx: Context?)
-        : RecyclerView.ViewHolder(containerView), LayoutContainer {
-        fun bindViews(data: PersonalTags, listener: (PersonalTags) -> Unit) {
+    class ViewHolder(override val containerView: View, var ctx: Context?) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+        fun bindViewss(data: PersonalTags, listener: (PersonalTags) -> Unit) {
+            var actualDataIcons: Int = data.newIcons!!
+            var actualDataIconsLength: String = Integer.toString(actualDataIcons)
+            val hexData = data.newColor?.let { it -> Integer.toHexString(it) }
+            val actualColor = BigInteger(hexData, 16)
             tvTags.text = data.newTags
+            if (data.newIcons != null) {
+                val iconHelper: IconHelper = IconHelper.getInstance(ctx)
+                if (actualDataIconsLength.length > 4) {
+                    ivTagsOnly.setImageResource(data.newIcons!!)
+                    ivTagsOnly.setBackgroundColor(data.newColor!!)
+                } else if (actualDataIconsLength.length < 4) {
+                    ivTagsOnly.setImageDrawable(iconHelper.getIcon(data.newIcons!!).getDrawable(ctx!!))
+                    ivTagsOnly.setBackgroundColor(actualColor.toInt())
+                }
+            }
             ivDeleteTags.setOnClickListener {
                 TagsRepositories.deleteTag(data, ctx, containerView)
             }
             itemView.setOnClickListener { listener((data)) }
         }
-
-
     }
 }
-//            val manager = (ctx as FragmentActivity).supportFragmentManager
-
-//            val icons = listOf<String>(Integer.toString(R.drawable.ic_bar), Integer.toString(R.drawable.ic_cityscape), Integer.toString(R.drawable.ic_cofee_bean), Integer.toString(R.drawable.ic_foodstall), Integer.toString(R.drawable.ic_library), Integer.toString(R.drawable.ic_train), Integer.toString(R.drawable.ic_vespa))
-//            var actualImage: String? = null
-//            ivPickTag.setOnClickListener {
-//                ctx?.selector("Pick icon", icons, { dialogInterface, i ->
-//                    actualImage = icons[i]
-//                    ivPickTag.setImageResource(actualImage!!.toInt())
-//                })
-//            }

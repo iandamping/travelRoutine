@@ -8,15 +8,17 @@ import android.view.ViewGroup
 import com.example.junemon.travelroutine.MainApplication.Companion.dateFormat
 import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalRoutines
+import com.maltaisn.icondialog.IconHelper
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_routines.*
 import org.jetbrains.anko.imageResource
+import java.math.BigInteger
 
 class OutputRoutineAdapter(val ctx: Context?, var listData: List<PersonalRoutines>, val listener: (PersonalRoutines) -> Unit)
     : RecyclerView.Adapter<OutputRoutineAdapter.ViewHolders>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolders {
-        return ViewHolders(LayoutInflater.from(ctx).inflate(R.layout.item_routines, parent, false))
+        return ViewHolders(LayoutInflater.from(ctx).inflate(R.layout.item_routines, parent, false), ctx)
     }
 
     override fun getItemCount(): Int = listData.size
@@ -26,8 +28,13 @@ class OutputRoutineAdapter(val ctx: Context?, var listData: List<PersonalRoutine
     }
 
 
-    class ViewHolders(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+    class ViewHolders(override val containerView: View, var ctx: Context?) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bindViews(data: PersonalRoutines, listener: (PersonalRoutines) -> Unit) {
+            var actualDataIcons: Int = data.selectedIcon!!
+            var actualDataIconsLength: String = Integer.toString(actualDataIcons)
+            val hexData = data.selectedColor?.let { it -> Integer.toHexString(it) }
+            val actualColor = BigInteger(hexData, 16)
+
             tvRoutineDescription.text = data.description
             tvRoutines.text = data.routine
             if (data.selectedHour != null) {
@@ -40,12 +47,19 @@ class OutputRoutineAdapter(val ctx: Context?, var listData: List<PersonalRoutine
             }
             if (data.tags == null) {
                 ivRoutineCircluar.imageResource = R.drawable.ic_cofee_bean
-            } else if (data.tags?.contains("Work")!!) let { ivRoutineCircluar.imageResource = R.drawable.ic_bar }
-            else if (data.tags?.contains("Play Games")!!) let { ivRoutineCircluar.imageResource = R.drawable.ic_train }
-            else if (data.tags?.contains("Fishing")!!) let { ivRoutineCircluar.imageResource = R.drawable.ic_library }
-            else if (data.tags?.contains("Cooking")!!) let { ivRoutineCircluar.imageResource = R.drawable.ic_vespa }
-            else if (data.tags?.contains("Swimming")!!) let { ivRoutineCircluar.imageResource = R.drawable.ic_foodstall }
-            else if (data.tags?.contains("Boxing")!!) let { ivRoutineCircluar.imageResource = R.drawable.ic_cityscape }
+            } else if (!data.tags.isNullOrEmpty() && data.selectedIcon != null) {
+                val iconHelper: IconHelper = IconHelper.getInstance(ctx)
+                if (actualDataIconsLength.length > 4) {
+                    ivRoutineCircluar.setImageResource(data.selectedIcon!!)
+                    ivRoutineCircluar.setBackgroundColor(data.selectedColor!!)
+                } else if (actualDataIconsLength.length < 4) {
+                    ivRoutineCircluar.setImageDrawable(iconHelper.getIcon(data.selectedIcon!!).getDrawable(ctx!!))
+                    if (actualColor != null) {
+                        ivRoutineCircluar.setBackgroundColor(actualColor.toInt())
+                    }
+                }
+
+            }
             itemView.setOnClickListener { listener((data)) }
         }
     }

@@ -12,6 +12,7 @@ import com.maltaisn.icondialog.IconHelper
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_output.*
 import org.jetbrains.anko.imageResource
+import java.math.BigInteger
 
 class OutputAdapter(val ctx: Context?, var listData: List<PersonalItems>, val listener: (PersonalItems) -> Unit)
     : RecyclerView.Adapter<OutputAdapter.ViewHolder>() {
@@ -27,8 +28,12 @@ class OutputAdapter(val ctx: Context?, var listData: List<PersonalItems>, val li
     }
 
     class ViewHolder(override val containerView: View, var ctx: Context?) : RecyclerView.ViewHolder(containerView), LayoutContainer {
-
         fun bindViews(item: PersonalItems, listener: (PersonalItems) -> Unit) {
+            var actualDataIcons: Int = item.selectedIcon!!
+            var actualDataIconsLength: String = Integer.toString(actualDataIcons)
+            val hexData = item.selectedColor?.let { Integer.toHexString(it) }
+            val actualColor = hexData?.let { it -> BigInteger(it, 16) }
+
             tvDestination.text = item.destination
             tvItems.text = item.items
             if (item.selectedHour != null) {
@@ -40,7 +45,16 @@ class OutputAdapter(val ctx: Context?, var listData: List<PersonalItems>, val li
                 ivCircluar.imageResource = R.drawable.ic_cofee_bean
             } else if (!item.tags.isNullOrEmpty() && item.selectedIcon != null) {
                 val iconHelper: IconHelper = IconHelper.getInstance(ctx)
-                ivCircluar.setImageDrawable(iconHelper.getIcon(item.selectedIcon!!).getDrawable(ctx!!))
+                if (actualDataIconsLength.length > 4) {
+                    ivCircluar.setImageResource(item.selectedIcon!!)
+                    ivCircluar.setBackgroundColor(item.selectedColor!!)
+                } else if (actualDataIconsLength.length < 4) {
+                    ivCircluar.setImageDrawable(iconHelper.getIcon(item.selectedIcon!!).getDrawable(ctx!!))
+                    if (actualColor != null) {
+                        ivCircluar.setBackgroundColor(actualColor.toInt())
+                    }
+                }
+
             }
             itemView.setOnClickListener {
                 listener((item))

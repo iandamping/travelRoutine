@@ -50,6 +50,9 @@ class OutputFragment : Fragment(), OutputView {
     }
 
     override fun showData(data: List<PersonalItems>?) {
+        if (data?.size != 0) {
+            llEmptyData.visibility = View.GONE
+        }
         actualView?.rvInput?.layoutManager = LinearLayoutManager(ctx)
         actualView?.rvInput?.adapter = OutputAdapter(ctx, data!!) {
             startActivity(intentFor<InputDetail>(InputActivity.INPUT_ITEMS_ACTIVITY_KEY to it))

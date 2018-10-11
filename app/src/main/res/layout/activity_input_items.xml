@@ -127,6 +127,7 @@
                     android:id="@+id/ivPicksIcon"
                     android:layout_width="79dp"
                     android:layout_height="match_parent"
+                    android:visibility="gone"
                     android:src="@drawable/ic_style_gray_24dp" />
 
             </LinearLayout>

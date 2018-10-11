@@ -68,6 +68,7 @@ dependencies {
     //custom chrome tab
     implementation 'com.android.support:customtabs:28.0.0'
     implementation 'com.maltaisn:icondialog:2.0.2'
+    implementation 'com.jaredrummler:colorpicker:1.0.2'
     //places
 //    implementation 'com.google.android.gms:play-services-places:15.0.1'
 //    implementation 'com.google.android.gms:play-services-location:15.0.1'

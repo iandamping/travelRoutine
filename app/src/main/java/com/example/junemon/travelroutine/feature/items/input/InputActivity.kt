@@ -48,6 +48,7 @@ class InputActivity : AppCompatActivity(), InputView, IconDialog.Callback {
     private var actualSelectedHour: Int? = null
     private var actualSelectedMinute: Int? = null
     private var actualSelectedIconHelper: Int? = null
+    private var actualSelectedColorHelper: Int? = null
     private var actualTags: String? = null
     private var departDate: Date? = null
     private var getData: PersonalItems? = PersonalItems()
@@ -128,6 +129,7 @@ class InputActivity : AppCompatActivity(), InputView, IconDialog.Callback {
                 getData?.selectedMinute = actualSelectedMinute
                 getData?.tags = actualTags
                 getData?.selectedIcon = actualSelectedIconHelper
+                getData?.selectedColor = actualSelectedColorHelper
                 insertData(getData)
             }
 
@@ -175,7 +177,11 @@ class InputActivity : AppCompatActivity(), InputView, IconDialog.Callback {
 
     override fun showTag(data: List<PersonalTags>?) {
         val dataForSelector: MutableList<String> = mutableListOf()
-        Observable.fromIterable(data).subscribe { results -> dataForSelector.add(results.newTags!!) }
+        Observable.fromIterable(data).subscribe { results ->
+            dataForSelector.add(results.newTags!!)
+            actualSelectedIconHelper = results.newIcons
+            actualSelectedColorHelper = results.newColor
+        }
         selector(resources.getString(R.string.pick_tag), dataForSelector) { dialogInterface, i ->
             actualTags = dataForSelector[i]
             btnPickTag.text = dataForSelector[i]
@@ -196,15 +202,7 @@ class InputActivity : AppCompatActivity(), InputView, IconDialog.Callback {
 
     override fun onIconDialogIconsSelected(icons: Array<Icon>?) {
         selectedIcons = icons
-        actualSelectedIconHelper = selectedIcons?.get(0)?.id
-
-//        var iconHelper:IconHelper = IconHelper.getInstance(this)
-//
-//        ivPicksIcon.setImageDrawable(iconHelper.getIcon(220).getDrawable(this) )
-
         ivPicksIcon.setImageDrawable(selectedIcons?.get(0)?.getDrawable(this))
-//        ivPicksIcon.setImageResource(selectedIcons?.get(0)?.id!!)
-//        Log.d("tags", selectedIcons?.get(0)?.id.toString() + " : 4123")
     }
 
 
