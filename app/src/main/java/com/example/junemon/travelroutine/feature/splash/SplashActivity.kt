@@ -1,8 +1,6 @@
 package com.example.junemon.travelroutine.feature.splash
 
-import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
 import android.support.v4.view.PagerAdapter
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -11,7 +9,8 @@ import com.example.junemon.travelroutine.MainActivity
 import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.helper.animations.RevealAnimation
 import kotlinx.android.synthetic.main.activity_main_pager_splash.*
-import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.singleTop
 import org.jetbrains.anko.support.v4.onPageChangeListener
 
 
@@ -45,21 +44,19 @@ class SplashActivity : AppCompatActivity() {
             }
         }
         imBtnSplash.setOnClickListener { view ->
-            //            startRevealActivity(view)
-            startActivity<MainActivity>()
-            finish()
-
+            startRevealActivity(view)
         }
     }
 
     private fun startRevealActivity(v: View) {
         val revealX = v.right
         val revealY = v.bottom
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra(RevealAnimation.EXTRA_CIRCULAR_REVEAL_X, revealX)
-        intent.putExtra(RevealAnimation.EXTRA_CIRCULAR_REVEAL_Y, revealY)
-        ActivityCompat.startActivity(this, intent, null)
-        overridePendingTransition(0, 0);
+//        val intent = Intent(this, MainActivity::class.java)
+//        intent.putExtra(RevealAnimation.EXTRA_CIRCULAR_REVEAL_X, revealX)
+//        intent.putExtra(RevealAnimation.EXTRA_CIRCULAR_REVEAL_Y, revealY)
+//        ActivityCompat.startActivity(this, intent, null)
+        startActivity(intentFor<MainActivity>(RevealAnimation.EXTRA_CIRCULAR_REVEAL_X to revealX
+                , RevealAnimation.EXTRA_CIRCULAR_REVEAL_Y to revealY).singleTop())
         finish()
     }
 

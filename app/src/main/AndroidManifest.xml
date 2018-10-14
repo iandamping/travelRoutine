@@ -35,8 +35,7 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"
-            android:theme="@style/DayAppTheme"/>
+            android:theme="@style/DayAppTheme.NoActionBar"/>
         <activity
             android:name="com.example.junemon.travelroutine.feature.items.input.InputActivity"
             android:screenOrientation="portrait"
@@ -55,15 +54,17 @@
             android:name=".feature.settings.SettingsActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
+
         <activity android:name=".feature.tags.inputTags.InputTagActivity"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
             android:theme="@style/AppTheme"/>
 
         <receiver
             android:name=".helper.alarms.AlarmReceiver"
             android:enabled="false">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 

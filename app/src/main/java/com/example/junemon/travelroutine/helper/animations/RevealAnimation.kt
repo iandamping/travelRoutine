@@ -13,8 +13,8 @@ import android.view.animation.AccelerateInterpolator
 
 class RevealAnimation(private val mView: View, intent: Intent, private val mActivity: Activity) {
 
-    private var revealX: Int = 0
-    private var revealY: Int = 0
+    private var revealX: Int? = null
+    private var revealY: Int? = null
 
     init {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
@@ -28,7 +28,7 @@ class RevealAnimation(private val mView: View, intent: Intent, private val mActi
             if (viewTreeObserver.isAlive) {
                 viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                     override fun onGlobalLayout() {
-                        revealActivity(revealX, revealY)
+                        revealActivity(revealX!!, revealY!!)
                         mView.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     }
                 })
@@ -43,7 +43,7 @@ class RevealAnimation(private val mView: View, intent: Intent, private val mActi
             val finalRadius = Math.max(mView.width, mView.height) * 1.1F
 
             val circularReveal = ViewAnimationUtils.createCircularReveal(mView, x, y, 0f, finalRadius)
-            circularReveal.duration = 500
+            circularReveal.duration = 400
             circularReveal.interpolator = AccelerateInterpolator()
             mView.setVisibility(View.VISIBLE)
             circularReveal.start()
@@ -58,9 +58,9 @@ class RevealAnimation(private val mView: View, intent: Intent, private val mActi
         } else {
             val finalRadius = Math.max(mView.width, mView.height) * 1.1F
             val circularReveal = ViewAnimationUtils.createCircularReveal(
-                    mView, revealX, revealY, finalRadius, 0f)
+                    mView, revealX!!, revealY!!, finalRadius, 0f)
 
-            circularReveal.duration = 500
+            circularReveal.duration = 400
             circularReveal.addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     mView.visibility = View.INVISIBLE

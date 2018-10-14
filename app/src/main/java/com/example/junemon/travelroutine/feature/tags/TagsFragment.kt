@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalTags
 import com.example.junemon.travelroutine.feature.tags.inputTags.InputTagActivity
+import com.example.junemon.travelroutine.repositories.Tags.TagsRepositories
 import kotlinx.android.synthetic.main.activity_adding_tag.*
 import org.jetbrains.anko.singleTop
 import org.jetbrains.anko.support.v4.intentFor
@@ -55,11 +56,11 @@ class TagsFragment : Fragment(), TagsView {
 
 
     fun initiateFirst(ctx: Context?) {
-        val prefs = ctx?.getSharedPreferences(TagsPresenter.DEVICE_TOKEN, MODE_PRIVATE)
-        val pageNumber = prefs?.getInt(TagsPresenter.KEY, 0)
+        val prefs = ctx?.getSharedPreferences(TagsRepositories.DEVICE_TOKEN, MODE_PRIVATE)
+        val pageNumber = prefs?.getInt(TagsRepositories.KEY, 0)
 
         if (pageNumber == 0) {
-            presenter.initFirstItemTag(ctx)
+            TagsRepositories.initFirstItemTag(ctx)
         }
 
     }

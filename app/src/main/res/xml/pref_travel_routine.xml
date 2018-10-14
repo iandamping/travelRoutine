@@ -8,4 +8,10 @@
         android:summaryOn="@string/night_mode_enabled_true"
         android:title="@string/enabled_night_mode_label" />
 
+    <!--<EditTextPreference-->
+        <!--android:defaultValue="@string/pref_size_default"-->
+        <!--android:key="@string/pref_size_key"-->
+        <!--android:title="@string/pref_size_label"-->
+        <!--/>-->
+
 </PreferenceScreen>

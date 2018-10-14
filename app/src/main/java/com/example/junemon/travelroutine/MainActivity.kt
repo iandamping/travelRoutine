@@ -1,5 +1,6 @@
 package com.example.junemon.travelroutine
 
+import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
@@ -17,6 +18,7 @@ import com.example.junemon.travelroutine.feature.routine.output.OutputRoutineFra
 import com.example.junemon.travelroutine.feature.settings.SettingsActivity
 import com.example.junemon.travelroutine.feature.tags.TagsFragment
 import com.example.junemon.travelroutine.helper.animations.RevealAnimation
+import com.example.junemon.travelroutine.helper.networkchecker.LiveDataNetworkListener
 import com.example.junemon.travelroutine.helper.networkchecker.NetworkChangeListener
 import com.example.junemon.travelroutine.repositories.News.NewsRepositories
 import com.example.junemon.travelroutine.ui.MainPager
@@ -39,14 +41,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.item_drawer_layout)
-//        initAnimationView()
 
-        internetChecker()
         initNavView()
-        setupSharedPref()
-
         loadOutputItemsFragment(savedInstanceState)
         nav_view.setCheckedItem(R.id.NavInputMenuNav)
+
+
     }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
@@ -99,19 +99,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun internetChecker() {
-        networkChecker = NetworkChangeListener()
-        networkChecker.register(this)
-        if (networkChecker.isConnected(this) == false) {
-            alert("no Internet Connection") {
-                yesButton { }
-            }.show()
-        } else if (networkChecker.isConnected(this) == true) {
-            NewsRepositories.getAllNews(
-                    NewsRepositories.STATE_OF_PULLED, resources.getString(R.string.category_entertainment), resources.getString(R.string.category_news), resources.getString(R.string.country_news)
-                    , resources.getString(R.string.api_source_news), resources.getString(R.string.api_key_news))
+        val connectionLiveData = LiveDataNetworkListener(this)
+        connectionLiveData.observe(this, Observer { status ->
+            if (status!!) {
+                NewsRepositories.getAllNews(
+                        NewsRepositories.STATE_OF_PULLED, resources.getString(R.string.category_entertainment), resources.getString(R.string.category_news), resources.getString(R.string.country_news)
+                        , resources.getString(R.string.api_source_news), resources.getString(R.string.api_key_news))
 
-        }
-
+            } else if (!status) {
+                alert("no Internet Connection") {
+                    yesButton { }
+                }.show()
+            }
+        })
     }
 
     private fun initNavView() {
@@ -119,12 +119,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.white)
         toolbar_main.title = "Travel Routine"
         drawer_layout.addDrawerListener(toggle)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeButtonEnabled(true)
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        supportActionBar?.setHomeButtonEnabled(true)
 
         nav_view.setNavigationItemSelectedListener(this)
         fragment = TagsFragment()
         fragment.initiateFirst(this)
+        internetChecker()
+        setupSharedPref()
+        initAnimationView()
+
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -138,7 +142,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-
         if (toggle.onOptionsItemSelected(item)) {
             return true
         }
@@ -150,14 +153,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             initNightMode(p0?.getBoolean(getString(R.string.enabled_night_mode_key),
                     resources.getBoolean(R.bool.pref_night_mode))!!)
         }
+//        else if (p1.equals(R.string.pref_size_key)) {
+//            initTextSize(p0?.getString(getString(R.string.pref_size_key), "1.0")!!.toFloat())
+//        }
     }
 
     private fun setupSharedPref() {
         val sharedPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         initNightMode(sharedPref.getBoolean(getString(R.string.enabled_night_mode_key), resources.getBoolean(R.bool.pref_night_mode)))
+//        initTextSize(sharedPref.getString(getString(R.string.pref_size_key), "1.0")!!.toFloat())
         sharedPref.registerOnSharedPreferenceChangeListener(this)
 
     }
+
+//    private fun initTextSize(size: Float): Float = 50F * size
 
     private fun initNightMode(status: Boolean) {
         if (status) {
@@ -170,8 +179,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
-//            mRevealAnimation.unRevealActivity()
         } else {
+            mRevealAnimation.unRevealActivity()
             super.onBackPressed()
         }
     }
