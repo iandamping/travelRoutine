@@ -29,10 +29,6 @@ class OutputAdapter(val ctx: Context?, var listData: List<PersonalItems>, val li
 
     class ViewHolder(override val containerView: View, var ctx: Context?) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bindViews(item: PersonalItems, listener: (PersonalItems) -> Unit) {
-            var actualDataIcons: Int = item.selectedIcon!!
-            var actualDataIconsLength: String = Integer.toString(actualDataIcons)
-            val hexData = item.selectedColor?.let { Integer.toHexString(it) }
-            val actualColor = hexData?.let { it -> BigInteger(it, 16) }
 
             tvDestination.text = item.destination
             tvItems.text = item.items
@@ -44,6 +40,10 @@ class OutputAdapter(val ctx: Context?, var listData: List<PersonalItems>, val li
             if (item.tags == null) {
                 ivCircluar.imageResource = R.drawable.ic_cofee_bean
             } else if (!item.tags.isNullOrEmpty() && item.selectedIcon != null) {
+                var actualDataIcons: Int = item.selectedIcon!!
+                var actualDataIconsLength: String = Integer.toString(actualDataIcons)
+                val hexData = item.selectedColor?.let { Integer.toHexString(it) }
+                val actualColor = hexData?.let { it -> BigInteger(it, 16) }
                 val iconHelper: IconHelper = IconHelper.getInstance(ctx)
                 if (actualDataIconsLength.length > 4) {
                     ivCircluar.setImageResource(item.selectedIcon!!)

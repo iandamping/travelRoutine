@@ -112,11 +112,18 @@ class InputActivity : AppCompatActivity(), InputView, IconDialog.Callback {
         }
 
         btnSave.setOnClickListener {
-            if (etDestination?.text.isNullOrEmpty() && etBarang?.text.isNullOrEmpty() && etDepartDates?.text.isNullOrEmpty()) {
-                etDestination?.error = resources.getString(R.string.destination_cannot_be_empty)
-                etBarang?.error = resources.getString(R.string.items_cannot_be_empty)
-                etDepartDates.error = resources.getString(R.string.date_cannot_be_empty)
+            if (etDestination?.text.isNullOrEmpty()) {
                 etDestination.requestFocus()
+                etDestination?.error = resources.getString(R.string.destination_cannot_be_empty)
+            }
+            if (etBarang?.text.isNullOrEmpty()) {
+                etBarang.requestFocus()
+                etBarang?.error = resources.getString(R.string.items_cannot_be_empty)
+            }
+            if (etDepartDates?.text.isNullOrEmpty()) {
+                etDepartDates.requestFocus()
+                etDepartDates.error = resources.getString(R.string.date_cannot_be_empty)
+
             } else if (!etDestination?.text.isNullOrEmpty() && !etBarang?.text.isNullOrEmpty() && !etDepartDates?.text.isNullOrEmpty()) {
                 val dateExtract: String = etDepartDates.text.toString().trim()
                 destinantion = etDestination.text.toString().trim()
@@ -149,7 +156,10 @@ class InputActivity : AppCompatActivity(), InputView, IconDialog.Callback {
         KeyboardCloser.hideKeyboard(this)
         val datePicks = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, Year, MonthOfYear, Day ->
             onFocus.text = Editable.Factory.getInstance().newEditable(presenter.formatedDate(Year, MonthOfYear, Day))
-            Observable.just(onFocus.text.toString().trim()).subscribe({ results -> actualSelectedDate })
+            Observable.just(onFocus.text.toString().trim()).subscribe({ results ->
+                actualSelectedDate
+                etDepartDates.error = null
+            })
         }, years, month, days)
         datePicks.datePicker.minDate = System.currentTimeMillis() - 1000
         datePicks.show()

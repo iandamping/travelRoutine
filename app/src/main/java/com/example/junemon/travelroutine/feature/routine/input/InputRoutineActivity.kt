@@ -99,10 +99,22 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
             }
         }
         btnRoutineSave.setOnClickListener {
-            if (etRoutine?.text.isNullOrEmpty() && etRoutineDescription?.text.isNullOrEmpty() && etRoutineDate?.text.isNullOrEmpty()) {
+            //            if (etRoutine?.text.isNullOrEmpty() && etRoutineDescription?.text.isNullOrEmpty() && etRoutineDate?.text.isNullOrEmpty()) {
+//                etRoutine.error = resources.getString(R.string.routine_cannot_be_empty)
+//                etRoutineDescription.error = resources.getString(R.string.description_cannot_be_empty)
+//                etRoutineDate.error = resources.getString(R.string.date_cannot_be_empty)
+//            }
+            if (etRoutine?.text.isNullOrEmpty()) {
+                etRoutine.requestFocus()
                 etRoutine.error = resources.getString(R.string.routine_cannot_be_empty)
-                etRoutineDescription.error = resources.getString(R.string.description_cannot_be_empty)
-                etRoutineDate.error = resources.getString(R.string.date_cannot_be_empty)
+            }
+            if (etRoutineDescription?.text.isNullOrEmpty()) {
+                etRoutineDescription.requestFocus()
+                etRoutineDescription.error = resources.getString(R.string.routine_cannot_be_empty)
+            }
+            if (etRoutineDate?.text.isNullOrEmpty()) {
+                etRoutineDate.requestFocus()
+                etRoutineDate.error = resources.getString(R.string.routine_cannot_be_empty)
             } else if (!etRoutine?.text.isNullOrEmpty() && !etRoutineDescription?.text.isNullOrEmpty() && !etRoutineDate?.text.isNullOrEmpty()) {
                 val dateExtract: String = etRoutineDate.text.toString().trim()
                 routines = etRoutine.text.toString().trim()
@@ -129,7 +141,10 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
         KeyboardCloser.hideKeyboard(this)
         val datePicks = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, Year, MonthOfYear, Day ->
             onFocus.text = Editable.Factory.getInstance().newEditable(presenter.formatedDate(Year, MonthOfYear, Day))
-            Observable.just(onFocus.text.toString().trim()).subscribe({ results -> actualSelectedDate })
+            Observable.just(onFocus.text.toString().trim()).subscribe({ results ->
+                actualSelectedDate
+                etRoutineDate.error = null
+            })
         }, MainApplication.years, MainApplication.month, MainApplication.days)
         datePicks.datePicker.minDate = System.currentTimeMillis() - 1000
         datePicks.show()

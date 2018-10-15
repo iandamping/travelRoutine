@@ -61,6 +61,12 @@ class InputTagActivity : BaseActivity(), InputTagView, IconDialog.Callback, Colo
                     KeyboardCloser.hideKeyboard(this)
                 } else if (!etInputTags.text.isNullOrEmpty()) {
                     actualSelectedTag = etInputTags.text.toString().trim()
+                    if (actualSelectedColor == null) {
+                        actualSelectedColor = Color.WHITE
+                    }
+                    if (actualSelectedIcon == null) {
+                        actualSelectedIcon = R.drawable.ic_rowing_black_24dp
+                    }
                     savingAllData(actualSelectedTag, actualSelectedColor, actualSelectedIcon)
                 }
 
@@ -131,17 +137,4 @@ class InputTagActivity : BaseActivity(), InputTagView, IconDialog.Callback, Colo
         super.onDestroy()
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
-
-//    fun getRootView(): View? {
-//        val contentViewGroup = findViewById<View>(android.R.id.content) as ViewGroup
-//        var rootView: View? = null
-//
-//        if (contentViewGroup != null)
-//            rootView = contentViewGroup.getChildAt(0)
-//
-//        if (rootView == null)
-//            rootView = window.decorView.rootView
-//
-//        return rootView
-//    }
 }

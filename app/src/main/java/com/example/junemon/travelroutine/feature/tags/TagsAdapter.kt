@@ -28,12 +28,12 @@ class TagsAdapter(val ctx: Context?, var listData: List<PersonalTags>, val liste
 
     class ViewHolder(override val containerView: View, var ctx: Context?) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bindViewss(data: PersonalTags, listener: (PersonalTags) -> Unit) {
-            var actualDataIcons: Int = data.newIcons!!
-            var actualDataIconsLength: String = Integer.toString(actualDataIcons)
-            val hexData = data.newColor?.let { it -> Integer.toHexString(it) }
-            val actualColor = BigInteger(hexData, 16)
             tvTags.text = data.newTags
             if (data.newIcons != null) {
+                var actualDataIcons: Int = data.newIcons!!
+                var actualDataIconsLength: String = Integer.toString(actualDataIcons)
+                val hexData = data.newColor?.let { it -> Integer.toHexString(it) }
+                val actualColor = BigInteger(hexData, 16)
                 val iconHelper: IconHelper = IconHelper.getInstance(ctx)
                 if (actualDataIconsLength.length > 4) {
                     ivTagsOnly.setImageResource(data.newIcons!!)

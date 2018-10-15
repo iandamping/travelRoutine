@@ -30,11 +30,6 @@ class OutputRoutineAdapter(val ctx: Context?, var listData: List<PersonalRoutine
 
     class ViewHolders(override val containerView: View, var ctx: Context?) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bindViews(data: PersonalRoutines, listener: (PersonalRoutines) -> Unit) {
-            var actualDataIcons: Int = data.selectedIcon!!
-            var actualDataIconsLength: String = Integer.toString(actualDataIcons)
-            val hexData = data.selectedColor?.let { it -> Integer.toHexString(it) }
-            val actualColor = BigInteger(hexData, 16)
-
             tvRoutineDescription.text = data.description
             tvRoutines.text = data.routine
             if (data.selectedHour != null) {
@@ -48,6 +43,10 @@ class OutputRoutineAdapter(val ctx: Context?, var listData: List<PersonalRoutine
             if (data.tags == null) {
                 ivRoutineCircluar.imageResource = R.drawable.ic_cofee_bean
             } else if (!data.tags.isNullOrEmpty() && data.selectedIcon != null) {
+                var actualDataIcons: Int = data.selectedIcon!!
+                var actualDataIconsLength: String = Integer.toString(actualDataIcons)
+                val hexData = data.selectedColor?.let { it -> Integer.toHexString(it) }
+                val actualColor = BigInteger(hexData, 16)
                 val iconHelper: IconHelper = IconHelper.getInstance(ctx)
                 if (actualDataIconsLength.length > 4) {
                     ivRoutineCircluar.setImageResource(data.selectedIcon!!)
