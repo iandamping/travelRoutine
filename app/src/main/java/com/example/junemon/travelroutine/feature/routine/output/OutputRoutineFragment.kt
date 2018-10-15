@@ -11,6 +11,7 @@ import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalRoutines
 import com.example.junemon.travelroutine.feature.routine.input.InputRoutineActivity
 import com.example.junemon.travelroutine.feature.routine.input.InputRoutineDetail
+import kotlinx.android.synthetic.main.activity_output_routines.*
 import kotlinx.android.synthetic.main.activity_output_routines.view.*
 import org.jetbrains.anko.support.v4.intentFor
 
@@ -40,6 +41,9 @@ class OutputRoutineFragment : Fragment(), OutputRoutineView {
     }
 
     override fun showData(data: List<PersonalRoutines>?) {
+        if (data?.size != 0) {
+            llEmptyRoutine.visibility = View.GONE
+        }
         actualView?.rvInputRoutine?.layoutManager = LinearLayoutManager(ctx)
         actualView?.rvInputRoutine?.adapter = OutputRoutineAdapter(ctx, data!!) {
             startActivity(intentFor<InputRoutineDetail>(InputRoutineActivity.INPUT_ROUTINE_ITEM_KEYS to it))

@@ -19,7 +19,6 @@ import com.example.junemon.travelroutine.feature.settings.SettingsActivity
 import com.example.junemon.travelroutine.feature.tags.TagsFragment
 import com.example.junemon.travelroutine.helper.animations.RevealAnimation
 import com.example.junemon.travelroutine.helper.networkchecker.LiveDataNetworkListener
-import com.example.junemon.travelroutine.helper.networkchecker.NetworkChangeListener
 import com.example.junemon.travelroutine.repositories.News.NewsRepositories
 import com.example.junemon.travelroutine.ui.MainPager
 import kotlinx.android.synthetic.main.item_drawer_layout.*
@@ -29,7 +28,6 @@ import org.jetbrains.anko.yesButton
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, SharedPreferences.OnSharedPreferenceChangeListener {
-    private lateinit var networkChecker: NetworkChangeListener
     private lateinit var mRevealAnimation: RevealAnimation
     private lateinit var fragment: TagsFragment
     private lateinit var toggle: ActionBarDrawerToggle

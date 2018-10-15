@@ -1,6 +1,7 @@
 package com.example.junemon.travelroutine.feature.news.entertainment
 
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.item_news_entertainment_layout.*
 class NewsEntertainAdapter(val ctx: Context?, var listData: List<PersonalNewsEntertainment.Article>, var listener: (PersonalNewsEntertainment.Article) -> Unit)
     : RecyclerView.Adapter<NewsEntertainAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(ctx).inflate(R.layout.item_news_entertainment_layout, parent, false))
+        return ViewHolder(LayoutInflater.from(ctx).inflate(R.layout.item_news_entertainment_layout, parent, false), ctx)
     }
 
     override fun getItemCount(): Int = listData.size
@@ -23,13 +24,13 @@ class NewsEntertainAdapter(val ctx: Context?, var listData: List<PersonalNewsEnt
         holder.bindViews(listData.get(position), listener)
     }
 
-    class ViewHolder(override var containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+    class ViewHolder(override var containerView: View, var ctx: Context?) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bindViews(data: PersonalNewsEntertainment.Article, listener: (PersonalNewsEntertainment.Article) -> Unit) {
             tvEntertainmentAuthor.text = data.author
             tvEntertainmentDate.text = data.publishedAt
             tvEntertainmentTitle.text = data.title
             tvEntertainmentDesc.text = data.description
-            Picasso.get().load(data.urlToImage).into(ivEntertainmentImage)
+            Picasso.get().load(data.urlToImage).placeholder(ContextCompat.getDrawable(ctx!!, R.drawable.ic_default_image)!!).into(ivEntertainmentImage)
             itemView.setOnClickListener { listener((data)) }
         }
     }

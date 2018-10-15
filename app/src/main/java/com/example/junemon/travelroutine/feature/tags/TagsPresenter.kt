@@ -13,7 +13,7 @@ class TagsPresenter(var mView: TagsView) : BaseFragmentsPresenter {
     var ctx: Context? = null
 
     private var viewModel: GetPersonalTagRepo? = null
-    
+
     override fun onAttach(context: Context?) {
         this.ctx = context
     }

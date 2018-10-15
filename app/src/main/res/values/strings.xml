@@ -48,6 +48,9 @@
     <string name="pref_size_key" translatable="false">size</string>
     <string name="pref_size_default" translatable="false">1</string>
 
+    <string name="empty_routine">No Routine To Remind</string>
+    <string name="empty_item">No Item To Remind</string>
+
     <string-array name="icon_name">
         <item>sad</item>
         <item>happy</item>

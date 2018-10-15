@@ -4,11 +4,11 @@
         <item
             android:id="@+id/NavInputMenuNav"
             android:icon="@drawable/ic_add_circle_black_24dp"
-            android:title="Belongings" />
+            android:title="Items" />
         <item
             android:id="@+id/NavRoutineMenu"
             android:icon="@drawable/ic_markunread_mailbox_black_24dp"
-            android:title="Routines" />
+            android:title="Reminder" />
         <item
             android:id="@+id/NavNewsMenu"
             android:icon="@drawable/ic_books_white_24dp"

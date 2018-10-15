@@ -1,6 +1,7 @@
 package com.example.junemon.travelroutine.feature.news.bussines
 
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.item_news_bussines_layout.*
 class NewBussinesAdapter(val ctx: Context?, var listData: List<PersonalNewsBussines.Article>, val listener: (PersonalNewsBussines.Article) -> Unit)
     : RecyclerView.Adapter<NewBussinesAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(ctx).inflate(R.layout.item_news_bussines_layout, parent, false))
+        return ViewHolder(LayoutInflater.from(ctx).inflate(R.layout.item_news_bussines_layout, parent, false), ctx)
     }
 
     override fun getItemCount(): Int = listData.size
@@ -23,13 +24,13 @@ class NewBussinesAdapter(val ctx: Context?, var listData: List<PersonalNewsBussi
         holder.bindData(listData.get(position), listener)
     }
 
-    class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+    class ViewHolder(override val containerView: View, var ctx: Context?) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bindData(data: PersonalNewsBussines.Article, listener: (PersonalNewsBussines.Article) -> Unit) {
             tvBussinesAuthor.text = data.author
             tvBussinesDate.text = data.publishedAt
             tvBussinesTitle.text = data.title
             tvBussinesDesc.text = data.description
-            Picasso.get().load(data.urlToImage).into(ivBussinesImage)
+            Picasso.get().load(data.urlToImage).placeholder(ContextCompat.getDrawable(ctx!!, R.drawable.ic_default_image)!!).into(ivBussinesImage)
             itemView.setOnClickListener { listener((data)) }
         }
     }
