@@ -14,12 +14,6 @@ class MainPager : Fragment() {
     lateinit var vpMainPager: ViewPager
     lateinit var tabMainPager: TabLayout
 
-    fun newInstance(): MainPager {
-        val bundle = Bundle()
-        val fragment = MainPager()
-        fragment.setArguments(bundle)
-        return fragment
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
