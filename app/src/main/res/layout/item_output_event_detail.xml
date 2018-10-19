@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundcolor"
+    android:orientation="vertical"
+    app:cardBackgroundColor="?attr/backgroundcolor">
+
+    <ImageView
+        android:id="@+id/tvEventIcon"
+        android:layout_width="100dp"
+        android:transitionName="@string/image_testing_share"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_margin="@dimen/spacing_medium" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_medium"
+        app:cardBackgroundColor="?attr/cardbackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="Event"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="?attr/textcolor"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvSelectedEvent"
+                android:layout_width="match_parent"
+                android:transitionName="@string/txt_event_testing_share"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginRight="@dimen/spacing_large"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:textColor="?attr/textcolor"
+                android:textSize="@dimen/letter_large"
+                tools:text="event" />
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_medium"
+        android:layout_marginRight="@dimen/spacing_medium"
+        app:cardBackgroundColor="?attr/cardbackground">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="Date"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="?attr/textcolor"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/llAlarmEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/spacing_huge"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/ivAlarmsEventHours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:src="@drawable/ic_alarms_gray_24dp" />
+
+                <TextView
+                    android:id="@+id/tvAlarmEventHours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:gravity="center"
+                    android:textColor="?attr/textcolor"
+                    tools:text="19:30" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:text="Departure :"
+                        android:textColor="?attr/textcolor"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvEventDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:textColor="?attr/textcolor"
+                        tools:text="Departure" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/spacing_medium"
+        android:layout_weight="1"
+        app:cardBackgroundColor="?attr/cardbackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="Items"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="?attr/textcolor"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvEventDescription"
+                android:transitionName="@string/txt_event_testing_descr_share"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginRight="@dimen/spacing_large"
+                android:textColor="?attr/textcolor"
+                android:textSize="@dimen/letter_large"
+                tools:text="barang" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

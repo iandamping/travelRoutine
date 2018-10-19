@@ -39,6 +39,7 @@
 
                 <TextView
                     android:id="@+id/tvDestination"
+                    android:fontFamily="@font/poppins"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="testing"
@@ -49,6 +50,7 @@
 
                 <TextView
                     android:id="@+id/tvItems"
+                    android:fontFamily="@font/poppins"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_small"
@@ -73,6 +75,7 @@
 
                         <TextView
                             android:id="@+id/tvDateReminder"
+                            android:fontFamily="@font/poppins"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/spacing_small"
@@ -81,6 +84,7 @@
 
                         <TextView
                             android:id="@+id/tvTimer"
+                            android:fontFamily="@font/poppins"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/letter_small"

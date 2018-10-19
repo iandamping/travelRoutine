@@ -10,6 +10,10 @@
             android:icon="@drawable/ic_markunread_mailbox_black_24dp"
             android:title="Reminder" />
         <item
+            android:id="@+id/NavEventMenu"
+            android:icon="@drawable/ic_event"
+            android:title="Event" />
+        <item
             android:id="@+id/NavNewsMenu"
             android:icon="@drawable/ic_books_white_24dp"
             android:title="News" />

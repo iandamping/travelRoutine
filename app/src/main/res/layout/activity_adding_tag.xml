@@ -9,7 +9,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvNewTag"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layoutAnimation="@anim/layout_animation_fall_down"/>
 
 
     <android.support.design.widget.FloatingActionButton

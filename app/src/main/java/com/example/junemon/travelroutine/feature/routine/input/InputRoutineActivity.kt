@@ -99,11 +99,6 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
             }
         }
         btnRoutineSave.setOnClickListener {
-            //            if (etRoutine?.text.isNullOrEmpty() && etRoutineDescription?.text.isNullOrEmpty() && etRoutineDate?.text.isNullOrEmpty()) {
-//                etRoutine.error = resources.getString(R.string.routine_cannot_be_empty)
-//                etRoutineDescription.error = resources.getString(R.string.description_cannot_be_empty)
-//                etRoutineDate.error = resources.getString(R.string.date_cannot_be_empty)
-//            }
             if (etRoutine?.text.isNullOrEmpty()) {
                 etRoutine.requestFocus()
                 etRoutine.error = resources.getString(R.string.routine_cannot_be_empty)
@@ -180,17 +175,26 @@ class InputRoutineActivity : AppCompatActivity(), InputRoutineView {
     }
 
     override fun showTag(data: List<PersonalTags>?) {
+        var position: Int? = null
         val dataForSelector: MutableList<String> = mutableListOf()
-        Observable.fromIterable(data).subscribe { results ->
+        Observable.fromIterable(data).doOnComplete {
+            selector(resources.getString(R.string.pick_tag), dataForSelector) { dialogInterface, i ->
+                Observable.fromArray(dataForSelector).subscribe { results ->
+                    actualTags = results[i]
+                    btnPickRoutineTag.text = results[i]
+                    position = i
+                }
+                actualSelectedIconHelper = data?.get(position!!)?.newIcons
+                actualSelectedColorHelper = data?.get(position!!)?.newColor
+            }
+        }.subscribe { results ->
             dataForSelector.add(results.newTags!!)
-            actualSelectedIconHelper = results.newIcons
-            actualSelectedColorHelper = results.newColor
         }
-        selector(resources.getString(R.string.pick_tag), dataForSelector) { dialogInterface, i ->
-            actualTags = dataForSelector[i]
-            btnPickRoutineTag.text = dataForSelector[i]
-
-        }
+//        selector(resources.getString(R.string.pick_tag), dataForSelector) { dialogInterface, i ->
+//            actualTags = dataForSelector[i]
+//            btnPickRoutineTag.text = dataForSelector[i]
+//
+//        }
     }
 
 

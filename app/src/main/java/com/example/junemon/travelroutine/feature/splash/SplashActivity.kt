@@ -11,6 +11,7 @@ import com.example.junemon.travelroutine.helper.animations.RevealAnimation
 import kotlinx.android.synthetic.main.activity_main_pager_splash.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.singleTop
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.onPageChangeListener
 
 
@@ -44,7 +45,10 @@ class SplashActivity : AppCompatActivity() {
             }
         }
         imBtnSplash.setOnClickListener { view ->
-            startRevealActivity(view)
+//            startRevealActivity(view)
+            startActivity<MainActivity>()
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            finish()
         }
     }
 

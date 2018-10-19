@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.view.MenuItem
+import com.example.junemon.travelroutine.feature.event.output.OutputEventFragment
 import com.example.junemon.travelroutine.feature.items.output.OutputFragment
 import com.example.junemon.travelroutine.feature.routine.output.OutputRoutineFragment
 import com.example.junemon.travelroutine.feature.settings.SettingsActivity
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (p0.itemId) {
             R.id.NavInputMenuNav -> loadOutputItemsFragment(null)
             R.id.NavRoutineMenu -> loadOutputRoutinesFragment(null)
+            R.id.NavEventMenu -> loadOutputEventFragment(null)
             R.id.NavNewsMenu -> loadMainFragment(null)
             R.id.NavEnterPref -> startActivity<SettingsActivity>()
             R.id.NavAddTags -> loadTagsFragment(null)
@@ -63,7 +65,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun loadOutputItemsFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager
-                    .beginTransaction().setCustomAnimations(R.anim.exit_from_right, R.anim.enter_to_right, R.anim.exit_from_right, R.anim.enter_to_right)
+                    .beginTransaction()
+//                    .setCustomAnimations(R.anim.exit_from_right, R.anim.enter_to_right, R.anim.exit_from_right, R.anim.enter_to_right)
                     .replace(R.id.main_fragment_container, OutputFragment(), OutputFragment::class.java.simpleName)
                     .commit()
         }
@@ -72,8 +75,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun loadOutputRoutinesFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager
-                    .beginTransaction().setCustomAnimations(R.anim.exit_from_right, R.anim.enter_to_right, R.anim.exit_from_right, R.anim.enter_to_right)
+                    .beginTransaction()
+//                    .setCustomAnimations(R.anim.exit_from_right, R.anim.enter_to_right, R.anim.exit_from_right, R.anim.enter_to_right)
                     .replace(R.id.main_fragment_container, OutputRoutineFragment(), OutputRoutineFragment::class.java.simpleName)
+                    .commit()
+        }
+    }
+
+    private fun loadOutputEventFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                    .beginTransaction()
+//                    .setCustomAnimations(R.anim.exit_from_right, R.anim.enter_to_right, R.anim.exit_from_right, R.anim.enter_to_right)
+                    .replace(R.id.main_fragment_container, OutputEventFragment(), OutputEventFragment::class.java.simpleName)
                     .commit()
         }
     }
@@ -90,7 +104,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun loadTagsFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager
-                    .beginTransaction().setCustomAnimations(R.anim.exit_from_right, R.anim.enter_to_right, R.anim.exit_from_right, R.anim.enter_to_right)
+                    .beginTransaction()
+//                    .setCustomAnimations(R.anim.exit_from_right, R.anim.enter_to_right, R.anim.exit_from_right, R.anim.enter_to_right)
                     .replace(R.id.main_fragment_container, TagsFragment(), TagsFragment::class.java.simpleName)
                     .commit()
         }
@@ -125,7 +140,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         fragment.initiateFirst(this)
         internetChecker()
         setupSharedPref()
-        initAnimationView()
+//        initAnimationView()
 
     }
 
@@ -178,7 +193,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            mRevealAnimation.unRevealActivity()
+//            mRevealAnimation.unRevealActivity()
             super.onBackPressed()
         }
     }

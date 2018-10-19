@@ -19,8 +19,8 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <!--<meta-data-->
-            <!--android:name="com.google.android.geo.API_KEY"-->
-            <!--android:value="AIzaSyDdTEiRbvcX3_83ZpZhmqY1f0fI7gZ47kI" />-->
+        <!--android:name="com.google.android.geo.API_KEY"-->
+        <!--android:value="AIzaSyDdTEiRbvcX3_83ZpZhmqY1f0fI7gZ47kI" />-->
 
         <activity
             android:name=".feature.splash.SplashActivity"
@@ -35,7 +35,7 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/DayAppTheme.NoActionBar"/>
+            android:theme="@style/DayAppTheme.NoActionBar" />
         <activity
             android:name="com.example.junemon.travelroutine.feature.items.input.InputActivity"
             android:screenOrientation="portrait"
@@ -44,21 +44,28 @@
             android:name="com.example.junemon.travelroutine.feature.items.input.InputDetail"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".feature.event.input.InputEventActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".feature.routine.input.InputRoutineActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".feature.routine.input.InputRoutineDetail"
             android:screenOrientation="portrait" />
+        <activity android:name=".feature.event.input.InputEventDetail"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".feature.settings.SettingsActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".feature.tags.inputTags.InputTagActivity"
+        <activity
+            android:name=".feature.tags.inputTags.InputTagActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan" />
 
         <receiver
             android:name=".helper.alarms.AlarmReceiver"
@@ -75,6 +82,10 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"></action>
             </intent-filter>
         </receiver>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

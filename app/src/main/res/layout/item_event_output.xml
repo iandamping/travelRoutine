@@ -22,40 +22,43 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/ivRoutineCircluar"
+                android:id="@+id/ivEventIcon"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_gravity="center"
+                android:transitionName="@string/image_testing_share"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                />
+                android:layout_marginTop="16dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_toRightOf="@id/ivRoutineCircluar"
+                android:layout_toRightOf="@id/ivEventIcon"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvRoutines"
+                    android:id="@+id/tvOutputEvent"
+                    android:fontFamily="@font/poppins"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="testing"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="?attr/textcolor"
+                    android:transitionName="@string/txt_event_testing_share"
                     android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="?attr/textcolor"
                     android:textStyle="bold"
-                    tools:text="Routines" />
+                    tools:text="Event" />
 
                 <TextView
-                    android:textColor="?attr/textcolor"
-                    android:id="@+id/tvRoutineDescription"
+                    android:transitionName="@string/txt_event_testing_descr_share"
+                    android:id="@+id/tvOutputEventDescription"
                     android:layout_width="wrap_content"
-                    android:fontFamily="@font/poppins"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:layout_marginTop="@dimen/spacing_small"
                     android:layout_marginBottom="10dp"
+                    android:textColor="?attr/textcolor"
                     android:textSize="12sp"
                     tools:text="items" />
 
@@ -67,37 +70,36 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:id="@+id/llRoutineTimer"
+                        android:id="@+id/llEventTimer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:textColor="?attr/textcolor"
-                            android:id="@+id/tvDateRoutineReminder"
+                            android:id="@+id/tvDateEventReminder"
                             android:layout_width="wrap_content"
-                            android:visibility="gone"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
                             android:layout_marginRight="@dimen/spacing_small"
-                            tools:text="19/03/2018"/>
+                            android:textColor="?attr/textcolor"
+                            tools:text="19/03/2018" />
 
                         <TextView
-                            android:textColor="?attr/textcolor"
-                            android:id="@+id/tvRoutineTimer"
-                            android:fontFamily="@font/poppins"
+                            android:id="@+id/tvEventTimer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
                             android:layout_marginRight="@dimen/letter_small"
-                            android:visibility="gone"
+                            android:textColor="?attr/textcolor"
                             tools:text="13:90" />
 
                         <ImageView
-                            android:id="@+id/ivAlarmRoutineClock"
-                            android:visibility="gone"
+                            android:id="@+id/ivAlarmEventClock"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_alarm_blue_24dp"/>
+                            android:src="@drawable/ic_alarm_blue_24dp"
+                            android:visibility="gone" />
                     </LinearLayout>
 
 

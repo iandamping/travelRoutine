@@ -186,17 +186,30 @@ class InputActivity : AppCompatActivity(), InputView, IconDialog.Callback {
 
 
     override fun showTag(data: List<PersonalTags>?) {
+        var position: Int? = null
         val dataForSelector: MutableList<String> = mutableListOf()
-        Observable.fromIterable(data).subscribe { results ->
+        Observable.fromIterable(data).doOnComplete {
+            selector(resources.getString(R.string.pick_tag), dataForSelector) { dialogInterface, i ->
+                Observable.fromArray(dataForSelector).subscribe { results ->
+                    actualTags = results[i]
+                    btnPickTag.text = results[i]
+                    position = i
+                }
+                actualSelectedIconHelper = data?.get(position!!)?.newIcons
+                actualSelectedColorHelper = data?.get(position!!)?.newColor
+            }
+        }.subscribe { results ->
             dataForSelector.add(results.newTags!!)
-            actualSelectedIconHelper = results.newIcons
-            actualSelectedColorHelper = results.newColor
         }
-        selector(resources.getString(R.string.pick_tag), dataForSelector) { dialogInterface, i ->
-            actualTags = dataForSelector[i]
-            btnPickTag.text = dataForSelector[i]
-
-        }
+//        selector(resources.getString(R.string.pick_tag), dataForSelector) { dialogInterface, i ->
+//            Observable.fromArray(dataForSelector).subscribe { results ->
+//                actualTags = results[i]
+//                btnPickTag.text = results[i]
+//                position = i
+//            }
+//            actualSelectedIconHelper = data?.get(position!!)?.newIcons
+//            actualSelectedColorHelper = data?.get(position!!)?.newColor
+//        }
     }
 
 

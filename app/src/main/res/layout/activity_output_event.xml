@@ -6,7 +6,7 @@
     android:background="?attr/backgroundcolor">
 
     <LinearLayout
-        android:id="@+id/llEmptyData"
+        android:id="@+id/llEventEmptyData"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -17,16 +17,16 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginBottom="@dimen/spacing_medium"
-            android:src="@drawable/ic_luggage" />
+            android:src="@drawable/ic_event" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/empty_item" />
+            android:text="@string/empty_event" />
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floating_action_button"
+        android:id="@+id/fabEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -38,7 +38,7 @@
         app:rippleColor="?attr/buttoncolor" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvInput"
+        android:id="@+id/rvEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layoutAnimation="@anim/layout_animation_fall_down"

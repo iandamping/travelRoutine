@@ -50,6 +50,11 @@
 
     <string name="empty_routine">No Routine To Remind</string>
     <string name="empty_item">No Item To Remind</string>
+    <string name="empty_event">No Event To Remind</string>
+
+    <string name="image_testing_share">ImgTransition</string>
+    <string name="txt_event_testing_share">EventTransition</string>
+    <string name="txt_event_testing_descr_share">DescrTransition</string>
 
     <string-array name="icon_name">
         <item>sad</item>

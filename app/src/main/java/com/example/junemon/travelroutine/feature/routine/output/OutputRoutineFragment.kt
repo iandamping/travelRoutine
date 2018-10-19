@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import com.example.junemon.travelroutine.R
 import com.example.junemon.travelroutine.database.model.PersonalRoutines
 import com.example.junemon.travelroutine.feature.routine.input.InputRoutineActivity
@@ -19,6 +21,8 @@ class OutputRoutineFragment : Fragment(), OutputRoutineView {
     private var ctx: Context? = null
     lateinit var presenter: OutputRoutinePresenter
     lateinit var data: List<PersonalRoutines>
+    private var resId = R.anim.layout_animation_fall_down
+    lateinit var animation: LayoutAnimationController
     private var actualView: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +36,7 @@ class OutputRoutineFragment : Fragment(), OutputRoutineView {
         presenter = OutputRoutinePresenter(this)
         presenter.onAttach(ctx)
         presenter.getAllLiveData(this)
+        animation = AnimationUtils.loadLayoutAnimation(ctx, resId)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,11 +48,16 @@ class OutputRoutineFragment : Fragment(), OutputRoutineView {
     override fun showData(data: List<PersonalRoutines>?) {
         if (data?.size != 0) {
             llEmptyRoutine.visibility = View.GONE
+        } else if (data.size == 0) {
+            llEmptyRoutine.visibility = View.VISIBLE
         }
         actualView?.rvInputRoutine?.layoutManager = LinearLayoutManager(ctx)
+        actualView?.rvInputRoutine?.layoutAnimation = animation
         actualView?.rvInputRoutine?.adapter = OutputRoutineAdapter(ctx, data!!) {
+
             startActivity(intentFor<InputRoutineDetail>(InputRoutineActivity.INPUT_ROUTINE_ITEM_KEYS to it))
         }
+
         actualView?.rvInputRoutine?.adapter?.notifyDataSetChanged()
     }
 
