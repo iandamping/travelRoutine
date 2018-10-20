@@ -15,7 +15,8 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
-            app:tabMode="fixed"
+            app:tabGravity="center"
+            app:tabMode="scrollable"
             app:tabSelectedTextColor="#ffffff" />
     </android.support.design.widget.AppBarLayout>
 

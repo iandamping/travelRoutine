@@ -21,13 +21,17 @@
             android:id="@+id/NavAddTags"
             android:icon="@drawable/ic_style_black_24dp"
             android:title="Tags" />
+        <item
+            android:id="@+id/NavWeeklyRemind"
+            android:icon="@drawable/ic_schedule_black_24dp"
+            android:title="Weekly Remind"/>
     </group>
-    <item android:title="Preferences">
-        <menu>
-            <item
-                android:id="@+id/NavEnterPref"
-                android:icon="@drawable/ic_settings_black_24dp"
-                android:title="Settings" />
-        </menu>
-    </item>
+    <!--<item android:title="Preferences">-->
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:id="@+id/NavEnterPref"-->
+                <!--android:icon="@drawable/ic_settings_black_24dp"-->
+                <!--android:title="Settings" />-->
+        <!--</menu>-->
+    <!--</item>-->
 </menu>

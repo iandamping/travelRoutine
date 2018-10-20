@@ -22,6 +22,7 @@ import com.example.junemon.travelroutine.helper.animations.RevealAnimation
 import com.example.junemon.travelroutine.helper.networkchecker.LiveDataNetworkListener
 import com.example.junemon.travelroutine.repositories.News.NewsRepositories
 import com.example.junemon.travelroutine.ui.MainPager
+import com.example.junemon.travelroutine.ui.WeeklyRemindPager
 import kotlinx.android.synthetic.main.item_drawer_layout.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.startActivity
@@ -54,8 +55,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.NavRoutineMenu -> loadOutputRoutinesFragment(null)
             R.id.NavEventMenu -> loadOutputEventFragment(null)
             R.id.NavNewsMenu -> loadMainFragment(null)
-            R.id.NavEnterPref -> startActivity<SettingsActivity>()
+//            R.id.NavEnterPref -> startActivity<SettingsActivity>()
             R.id.NavAddTags -> loadTagsFragment(null)
+            R.id.NavWeeklyRemind -> loadWeeklyPagerFragment(null)
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
@@ -97,6 +99,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.main_fragment_container, MainPager(), MainPager::class.java.simpleName)
+                    .commit()
+        }
+    }
+
+    private fun loadWeeklyPagerFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.main_fragment_container, WeeklyRemindPager(), WeeklyRemindPager::class.java.simpleName)
                     .commit()
         }
     }
